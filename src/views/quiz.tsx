@@ -5,7 +5,6 @@ import { AnimatePresence } from "motion/react";
 import "./App.css";
 
 export default function Quiz() {
-  // 1. DUMMY DATA (Hårdkodad fråga för att testa) 
   const mockQuestion = {
     question: "Vilken färg får man om man blandar blått och gult?",
     correctAnswer: "Grön",
