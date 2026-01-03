@@ -2,7 +2,7 @@ import { useState } from "react";
 import { Container, Flex, Card, Text, Button } from "@radix-ui/themes";
 import { AnswerButton } from "../assets/AnswerButton";
 import { AnimatePresence } from "motion/react";
-import "./App.css";
+import "../App.css";
 
 export default function Quiz() {
   const mockQuestion = {
