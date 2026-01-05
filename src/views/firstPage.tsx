@@ -1,4 +1,4 @@
-function FirstPageComponent() {
+export default function FirstPage() {
   return (
     <div className="pageContainer">
       <div className="headLineContainer">

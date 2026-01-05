@@ -1,4 +1,4 @@
-function lastPageComponent() {
+export default function LastPage() {
   return (
     <div className="pageContainer">
       <div className="headlineContainer">
