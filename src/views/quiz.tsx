@@ -4,12 +4,27 @@ import { AnswerButton } from "../components/AnswerButton";
 import { AnimatePresence } from "motion/react";
 import "../App.css";
 
-export default function Quiz() {
-  type QuizQuestion = {
-    question: string;
-    correctAnswer: string;
-    allAnswers: string[];
+type ApiResponse = ApiQuestion[];
+
+interface ApiQuestion {
+  correctAnswer: string;
+  incorrectAnswers: string[];
+  tags: string[];
+  category: string;
+  difficulty: string;
+  question: {
+    text: string;
   };
+}
+
+interface QuizQuestion {
+  question: string;
+  correctAnswer: string;
+  allAnswers: string[];
+};
+
+export default function Quiz() {
+  
   const [question, setQuestion] = useState<QuizQuestion | null>(null);
   const [loading, setLoading] = useState(true);
   const [selectedAnswer, setSelectedAnswer] = useState<string | null>(null);
@@ -33,8 +48,8 @@ export default function Quiz() {
     const response = await fetch(
       "https://the-trivia-api.com/v2/questions?limit=1"
     );
-    const data = await response.json();
-    const q = data[0];
+    const data: ApiResponse = await response.json();
+    const q = data[0]!;
 
     setQuestion({
       question: q.question.text,
@@ -45,35 +60,36 @@ export default function Quiz() {
     });
     setLoading(false);
   };
+  
   useEffect(() => {
     fetchQuestion();
   }, []);
 
   if (loading || !question) {
     return (
-      <Container p="4" style={{ textAlign: "center", marginTop: "3rem" }}>
-        <Text size="5">Laddar fråga...</Text>
+      <Container p='4' style={{ textAlign: "center", marginTop: "3rem" }}>
+        <Text size='5'>Laddar fråga...</Text>
       </Container>
     );
   }
 
   return (
     <Container
-      p="4"
+      p='4'
       style={{ maxWidth: "95vw", marginTop: "2rem", marginBottom: "2rem" }}
     >
-      <Flex direction="column" gap="5">
+      <Flex direction='column' gap='5'>
         {/* Frågan */}
         <Card style={{ padding: "30px", textAlign: "center" }}>
-          <Text size="5" weight="bold">
+          <Text size='5' weight='bold'>
             {question.question}
           </Text>
         </Card>
 
         {/* Svarsalternativ */}
-        <Flex direction="column" gap="3">
+        <Flex direction='column' gap='3'>
           <AnimatePresence>
-            <Flex direction="column" gap="3">
+            <Flex direction='column' gap='3'>
               {question.allAnswers.map((answer, index) => {
                 // --- BESTÄM KNAPPENS TILLSTÅND ---
                 let buttonState:
@@ -117,7 +133,7 @@ export default function Quiz() {
         {/* Reset-knapp (visas bara när man svarat) */}
         {selectedAnswer && (
           <Button
-            variant="solid"
+            variant='solid'
             onClick={resetTest}
             style={{
               marginTop: "20px",
