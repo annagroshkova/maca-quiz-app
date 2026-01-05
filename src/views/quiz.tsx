@@ -1,61 +1,97 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { Container, Flex, Card, Text, Button } from "@radix-ui/themes";
 import { AnswerButton } from "../components/AnswerButton";
 import { AnimatePresence } from "motion/react";
 import "../App.css";
 
 export default function Quiz() {
-  const mockQuestion = {
-    question: "Vilken färg får man om man blandar blått och gult?",
-    correctAnswer: "Grön",
-    // Vi skriver alternativen manuellt här så vi slipper blanda-funktionen just nu
-    allAnswers: ["Lila", "Grön", "Orange", "Brun"] 
+  type QuizQuestion = {
+    question: string;
+    correctAnswer: string;
+    allAnswers: string[];
   };
-
-  // 2. STATE (Bara det absolut nödvändigaste)
+  const [question, setQuestion] = useState<QuizQuestion | null>(null);
+  const [loading, setLoading] = useState(true);
   const [selectedAnswer, setSelectedAnswer] = useState<string | null>(null);
 
   // 3. LOGIK
   const handleAnswerClick = (answer: string) => {
     // Om man redan har svarat, gör ingenting (lås knapparna)
     if (selectedAnswer) return;
-    
+
     setSelectedAnswer(answer);
   };
 
   // En enkel funktion för att nollställa testet
   const resetTest = () => {
-    setSelectedAnswer(null);
+    fetchQuestion();
   };
 
+  const fetchQuestion = async () => {
+    setLoading(true);
+    setSelectedAnswer(null);
+    const response = await fetch(
+      "https://the-trivia-api.com/v2/questions?limit=1"
+    );
+    const data = await response.json();
+    const q = data[0];
+
+    setQuestion({
+      question: q.question.text,
+      correctAnswer: q.correctAnswer,
+      allAnswers: [...q.incorrectAnswers, q.correctAnswer].sort(
+        () => Math.random() - 0.5
+      ),
+    });
+    setLoading(false);
+  };
+  useEffect(() => {
+    fetchQuestion();
+  }, []);
+
+  if (loading || !question) {
+    return (
+      <Container p="4" style={{ textAlign: "center", marginTop: "3rem" }}>
+        <Text size="5">Laddar fråga...</Text>
+      </Container>
+    );
+  }
+
   return (
-    <Container p="4" style={{ maxWidth: '95vw', marginTop: '2rem' ,marginBottom: '2rem'}}>
+    <Container
+      p="4"
+      style={{ maxWidth: "95vw", marginTop: "2rem", marginBottom: "2rem" }}
+    >
       <Flex direction="column" gap="5">
-        
         {/* Frågan */}
-        <Card  style={{ padding: '30px', textAlign: 'center' }}>
-          <Text size="5" weight="bold">{mockQuestion.question}</Text>
+        <Card style={{ padding: "30px", textAlign: "center" }}>
+          <Text size="5" weight="bold">
+            {question.question}
+          </Text>
         </Card>
 
         {/* Svarsalternativ */}
         <Flex direction="column" gap="3">
           <AnimatePresence>
             <Flex direction="column" gap="3">
-              {mockQuestion.allAnswers.map((answer, index) => {
-                
+              {question.allAnswers.map((answer, index) => {
                 // --- BESTÄM KNAPPENS TILLSTÅND ---
-                let buttonState: "idle" | "correct" | "incorrect" | "idle-round-over" = "idle";
-                
+                let buttonState:
+                  | "idle"
+                  | "correct"
+                  | "incorrect"
+                  | "idle-round-over" = "idle";
+
                 // Om användaren har valt ett svar (rundan är "över" för denna fråga)
                 if (selectedAnswer) {
                   // Fall 1: Användaren klickade på DENNA knapp
                   if (answer === selectedAnswer) {
-                    if (answer === mockQuestion.correctAnswer) {
+                    if (answer === question.correctAnswer) {
                       buttonState = "correct"; // Valde rätt -> Grön/Väx
                     } else {
                       buttonState = "incorrect"; // Valde fel -> Dyster ballong
                     }
-                  } 
+                  }
                   // Fall 2: Användaren klickade INTE på denna knapp
                   else {
                     // Vi avslöjar inte svaret. Alla andra blir gråa och backar.
@@ -80,15 +116,19 @@ export default function Quiz() {
 
         {/* Reset-knapp (visas bara när man svarat) */}
         {selectedAnswer && (
-          <Button 
-            variant="solid" 
+          <Button
+            variant="solid"
             onClick={resetTest}
-            style={{ marginTop: '20px', cursor: 'pointer', borderRadius: "9999px" ,padding: "1em 1.5em"}}
+            style={{
+              marginTop: "20px",
+              cursor: "pointer",
+              borderRadius: "9999px",
+              padding: "1em 1.5em",
+            }}
           >
-            Testa igen 
+            Testa igen
           </Button>
         )}
-
       </Flex>
     </Container>
   );
