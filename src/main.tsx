@@ -2,8 +2,8 @@ import { StrictMode } from 'react'
 import { createRoot } from 'react-dom/client'
 import './style.css'
 import App from './App'
-import "@radix-ui/themes/styles.css";
-import { Theme } from '@radix-ui/themes';
+import "@radix-ui/themes/styles.css"
+import { Theme } from '@radix-ui/themes'
 
 
 createRoot(document.getElementById('root')!).render(
@@ -11,5 +11,5 @@ createRoot(document.getElementById('root')!).render(
    
       <App />
 
-  </StrictMode>,
+  </StrictMode>
 ) 

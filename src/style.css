@@ -1,21 +1,21 @@
 @import url(./views/StartPage//StartPage.css);
+@import url(./components/SubmitButton/SubmitButton.css);
 
 body {
-    display: flex;
-    margin: 0;
-    padding: 2rem;
-    box-sizing: border-box;
-    min-height: 100dvh;
-        background: linear-gradient(
-        211deg,
-        rgba(253, 156, 133, 1) 0%,
-        rgba(148, 187, 233, 1) 100%
-    )
+  display: flex;
+  margin: 0;
+  padding: 2rem;
+  box-sizing: border-box;
+  min-height: 100dvh;
+  background: linear-gradient(
+    211deg,
+    rgb(255 222 204) 0%,
+    rgb(182 205 233) 100%
+  );
 }
 
 #root {
-    margin:  0 auto;
-    width: 100%;
-    max-width: 1200px;
-
+  margin: 0 auto;
+  width: 100%;
+  max-width: 1200px;
 }
