@@ -2,6 +2,7 @@ import { useState, useEffect } from "react";
 import { Container, Flex, Card, Text, Button } from "@radix-ui/themes";
 import { AnswerButton } from "../components/AnswerButton";
 import { AnimatePresence } from "motion/react";
+import { useNavigate } from "react-router-dom";
 import "../App.css";
 
 type ApiResponse = ApiQuestion[];
@@ -23,28 +24,36 @@ interface QuizQuestion {
   allAnswers: string[];
 };
 
+
 export default function Quiz() {
+  const navigate = useNavigate();
   
   const [question, setQuestion] = useState<QuizQuestion | null>(null);
   const [loading, setLoading] = useState(true);
   const [selectedAnswer, setSelectedAnswer] = useState<string | null>(null);
+  
+  const [lives, setLives] = useState(3);
 
-  // 3. LOGIK
   const handleAnswerClick = (answer: string) => {
     // Om man redan har svarat, gör ingenting (lås knapparna)
     if (selectedAnswer) return;
 
     setSelectedAnswer(answer);
+
+    if (answer !== question?.correctAnswer) {
+      setLives((lostLife) => lostLife - 1);
+    }
   };
 
-  // En enkel funktion för att nollställa testet
-  const resetTest = () => {
-    fetchQuestion();
-  };
+  // // En enkel funktion för att nollställa testet
+  // const resetTest = () => {
+  //   fetchQuestion();
+  // };
 
   const fetchQuestion = async () => {
     setLoading(true);
     setSelectedAnswer(null);
+    try {
     const response = await fetch(
       "https://the-trivia-api.com/v2/questions?limit=1"
     );
@@ -58,6 +67,9 @@ export default function Quiz() {
         () => Math.random() - 0.5
       ),
     });
+  } catch (error){
+      console.error("Error fetching question:", error);
+  }
     setLoading(false);
   };
   
@@ -65,13 +77,13 @@ export default function Quiz() {
     fetchQuestion();
   }, []);
 
-  if (loading || !question) {
-    return (
-      <Container p='4' style={{ textAlign: "center", marginTop: "3rem" }}>
-        <Text size='5'>Laddar fråga...</Text>
-      </Container>
-    );
-  }
+  const handleNextStep = () => {
+    if (lives === 0) {
+      navigate ("/gameover");
+    } else {
+      fetchQuestion();
+    }
+  };
 
   return (
     <Container
@@ -79,7 +91,25 @@ export default function Quiz() {
       style={{ maxWidth: "95vw", marginTop: "2rem", marginBottom: "2rem" }}
     >
       <Flex direction='column' gap='5'>
+        {/* Liv */}
+        <Flex justify="end" gap="3" style={{padding: "0 10px"}}>
+          {[1,2,3].map((heartIndex) => (
+            <Text
+              key={heartIndex}
+              size='6'
+              style={{cursor: "default", userSelect: "none"}}>
+              {heartIndex <= (3 - lives) ? "🖤" : "❤️"}
+            </Text>
+          ))}
+        </Flex>
+
         {/* Frågan */}
+        {loading || !question ? (
+          <Text size='5' weight='bold'>
+            Loading question...
+          </Text>
+        ) : (
+          <>
         <Card style={{ padding: "30px", textAlign: "center" }}>
           <Text size='5' weight='bold'>
             {question.question}
@@ -134,7 +164,8 @@ export default function Quiz() {
         {selectedAnswer && (
           <Button
             variant='solid'
-            onClick={resetTest}
+            color={lives === 0 ? "ruby" : "indigo"}
+            onClick={handleNextStep}
             style={{
               marginTop: "20px",
               cursor: "pointer",
@@ -142,8 +173,10 @@ export default function Quiz() {
               padding: "1em 1.5em",
             }}
           >
-            Testa igen
+            {lives === 0 ? "Game Over" : "Next Question"}
           </Button>
+        )}
+        </>
         )}
       </Flex>
     </Container>
