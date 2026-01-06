@@ -6,28 +6,32 @@ export default function StartPage() {
   const navigate = useNavigate();
   const [name, setName] = useState("");
 
-  const handleNameSubmit = (e: Event) => {
+  const handleNameSubmit = (e: React.FormEvent) => {
     e.preventDefault();
+    if (!name.trim()) {
+      return; //stoppar om det inte finns ett namn
+    }
     saveUserInfo({ name });
-    setName("")
+    setName("");
+    navigate("/quiz");
   };
 
-
   return (
-    <section className='startpage'>
-      <h1 className='startpage__headning'>Quizzie</h1>
-      <form className='startpage__form'>
-        <label htmlFor='name'>Skriv ditt namn</label>
+    <section className="startpage">
+      <h1 className="startpage__headning">Quizzie</h1>
+      <form className="startpage__form" onSubmit={handleNameSubmit}>
+        <label htmlFor="name">Enter your name to start!</label>
         <input
-          id='name'
-          type='text'
+          id="name"
+          type="text"
           value={name}
           onChange={(e) => setName(e.target.value)}
+          placeholder="Write your name..."
         ></input>
-        <button 
-        type='submit'
-        onClick={() => {handleNameSubmit; navigate("/quiz")}}
-        >Låt oss spela!</button>
+        {/* knapp disabled om det inte finns ett namn */}
+        <button type="submit" disabled={!name.trim()}>
+          Let's begin!
+        </button>
       </form>
     </section>
   );
