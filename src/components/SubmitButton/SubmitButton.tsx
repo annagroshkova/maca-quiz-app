@@ -5,7 +5,7 @@ interface SubmitButtonProps {
   disabled?: boolean
   
 }
-export default function SubmitButton ({ ...props}: SubmitButtonProps) {
+export default function SubmitButton (props: SubmitButtonProps) {
 
 
    return (

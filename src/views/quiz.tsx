@@ -4,7 +4,7 @@ import { AnswerButton } from "../components/AnswerButton";
 import { AnimatePresence } from "motion/react";
 import { useNavigate } from "react-router-dom";
 import "../App.css";
-import { getUserInfo, saveUserInfo } from "../store";
+import { getUserSettings, updateUserSettings } from "../userSettings";
 
 type ApiResponse = ApiQuestion[];
 
@@ -89,11 +89,10 @@ export default function Quiz() {
   };
 
   const finalizeGame = () => {
-    const user = getUserInfo();
+    const user = getUserSettings();
     const lastScore = score;
     const bestScore = Math.max(user.bestScore ?? 0, score);
-    saveUserInfo({
-      ...user,
+    updateUserSettings({
       lastScore,
       bestScore,
     });
@@ -101,20 +100,20 @@ export default function Quiz() {
 
   return (
     <Container
-      p="4"
+      p='4'
       style={{ maxWidth: "95vw", marginTop: "2rem", marginBottom: "2rem" }}
     >
-      <Flex direction="column" gap="5">
-        <Flex justify="between" align="center" style={{ padding: "0 10px" }}>
-          <Text size="5" weight="bold">
+      <Flex direction='column' gap='5'>
+        <Flex justify='between' align='center' style={{ padding: "0 10px" }}>
+          <Text size='5' weight='bold'>
             Score: {score}
           </Text>
 
-          <Flex gap="3">
+          <Flex gap='3'>
             {[1, 2, 3].map((heartIndex) => (
               <Text
                 key={heartIndex}
-                size="6"
+                size='6'
                 style={{ cursor: "default", userSelect: "none" }}
               >
                 {heartIndex <= 3 - lives ? "🖤" : "❤️"}
@@ -125,21 +124,21 @@ export default function Quiz() {
 
         {/* Frågan */}
         {loading || !question ? (
-          <Text size="5" weight="bold">
+          <Text size='5' weight='bold'>
             Loading question...
           </Text>
         ) : (
           <>
             <Card style={{ padding: "30px", textAlign: "center" }}>
-              <Text size="5" weight="bold">
+              <Text size='5' weight='bold'>
                 {question.question}
               </Text>
             </Card>
 
             {/* Svarsalternativ */}
-            <Flex direction="column" gap="3">
+            <Flex direction='column' gap='3'>
               <AnimatePresence>
-                <Flex direction="column" gap="3">
+                <Flex direction='column' gap='3'>
                   {question.allAnswers.map((answer, index) => {
                     // --- BESTÄM KNAPPENS TILLSTÅND ---
                     let buttonState:
@@ -183,7 +182,7 @@ export default function Quiz() {
             {/* Reset-knapp (visas bara när man svarat) */}
             {selectedAnswer && (
               <Button
-                variant="solid"
+                variant='solid'
                 color={lives === 0 ? "ruby" : "indigo"}
                 onClick={handleNextStep}
                 style={{
