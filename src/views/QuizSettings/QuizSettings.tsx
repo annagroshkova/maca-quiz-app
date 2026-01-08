@@ -10,14 +10,6 @@ export default function QuizSettings() {
   const user: UserSettings = getUserSettings();
   const greeting: string = `Greetings, ${user.name}! Choose your options`;
 
-  const categoryCards = categories.map((c) => {
-    <Category
-      text={c.quizSubject}
-      apiQuery={c.apiQuery}
-      imageUrl={`${c.apiQuery}.png`}
-    />;
-  });
-
   return (
     <section className='quiz-settings'>
       <p className='quiz-settings__greeting'>{greeting}</p>
