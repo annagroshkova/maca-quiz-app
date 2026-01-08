@@ -3,6 +3,11 @@ export interface Category {
   apiQuery: string;
 }
 
+export interface Level {
+  level: string;
+  apiQuery: "easy" | "medium" | "hard" | undefined;
+}
+
 export const categories: Category[] = [
   {
     quizSubject: "Music",
@@ -43,5 +48,24 @@ export const categories: Category[] = [
   {
     quizSubject: "General knowledge",
     apiQuery: "general_knowledge",
+  },
+];
+
+export const levels: Level[] = [
+  {
+    level: "Easy",
+    apiQuery: "easy",
+  },
+  {
+    level: "Medium",
+    apiQuery: "medium",
+  },
+  {
+    level: "Hard",
+    apiQuery: "hard",
+  },
+  {
+    level: "Mixed",
+    apiQuery: undefined,
   },
 ];

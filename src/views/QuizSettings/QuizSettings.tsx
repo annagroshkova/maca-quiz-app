@@ -1,30 +1,56 @@
+import { useState } from "react";
 import {
   type UserSettings,
   getUserSettings,
   updateUserSettings,
 } from "../../userSettings";
-import { categories } from "../../categoriesData";
-import Category from "../../components/Category/Category";
+import { categories, levels } from "../../data";    
+import RadioOption from "../../components/RadioOption/RadioOption";
 
 export default function QuizSettings() {
   const user: UserSettings = getUserSettings();
   const greeting: string = `Greetings, ${user.name}! Choose your options`;
+
+  const [category, setCategory] = useState<string | null>(null);
+  const [level, setLevel] = useState<
+    "easy" | "medium" | "hard" | undefined | null
+  >(null);
 
   return (
     <section className='quiz-settings'>
       <p className='quiz-settings__greeting'>{greeting}</p>
       <form className='quiz-settings__form'>
         <fieldset className='quiz-settings__categories'>
-          <legend>Select a subject</legend>
-          {categories.map((c) => (
-            <Category
-              key={c.apiQuery}
-              text={c.quizSubject}
-              apiQuery={c.apiQuery}
-              imageUrl={`${c.apiQuery}.png`}
+          <legend>Choose your level</legend>
+          {levels.map((l) => (
+            <RadioOption  
+              key={l.level}
+              name="level"
+              text={l.level}
+              value={l.apiQuery}
+              onChange={() => setLevel(l.apiQuery)}
+              checked={level === l.apiQuery}
             />
           ))}
         </fieldset>
+
+        <fieldset className='quiz-settings__categories'>
+          <legend>Select a subject</legend>
+          {categories.map((c) => (
+            <RadioOption
+              key={c.apiQuery}
+              name="category"
+              text={c.quizSubject}
+              value={c.apiQuery}
+              imageUrl={`${c.apiQuery}.png`}
+              onChange={() => setCategory(c.apiQuery)}
+              checked={category === c.apiQuery}
+            />
+          ))}
+        </fieldset>
+        <button type='submit' disabled={level === null && category === null}>
+          Let's begin!
+        </button>
       </form>
     </section>
   );
