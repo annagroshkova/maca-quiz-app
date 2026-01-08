@@ -1,5 +1,7 @@
 @import url(./views/StartPage//StartPage.css);
 @import url(./components/SubmitButton/SubmitButton.css);
+@import url(./views/UserProfile/UserProfile.css);
+@import url(./components/Avatar/Avatar.css);
 
 body {
   display: flex;
