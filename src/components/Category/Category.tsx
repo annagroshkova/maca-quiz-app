@@ -11,7 +11,7 @@ export default function Category({
 }: CategoryProps) {
   return (
     <label className="category">
-      <input type='radio' name={apiQuery} />
+      <input type="radio" name="category" value={apiQuery} />
       <div className='category__image-container'>
         <img className='category__image' src={imageUrl} alt={text} />
       </div>
