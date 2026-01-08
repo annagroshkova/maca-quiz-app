@@ -1,17 +1,20 @@
-import { type UserSettings, updateUserSettings, getUserSettings } from "../../userSettings";
+import {
+  type UserSettings,
+  updateUserSettings,
+  getUserSettings,
+} from "../../userSettings";
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 
-
 export default function StartPage() {
   const navigate = useNavigate();
-  const user: UserSettings  = getUserSettings()
-  console.log(user)
-  const [name, setName] = useState((user.name) ? user.name : "");
+  const user: UserSettings = getUserSettings();
+  console.log(user);
+  const [name, setName] = useState("");
 
-  if(name) {
-    navigate("/quiz-settings")
-  }
+  // if (user.name) {
+  //   navigate("/quiz-settings");
+  // }
 
   const handleNameSubmit = (e: React.FormEvent) => {
     e.preventDefault();
