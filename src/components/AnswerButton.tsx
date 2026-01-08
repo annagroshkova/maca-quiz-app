@@ -63,13 +63,13 @@ export const AnswerButton = ({ answerText, state, onClick, disabled = false, ind
 
         // --- IDLE ---
         idle: { 
-            opacity: 1, scale: 1, y: 0, x: 0, rotate: 0, filter: "grayscale(0%)",
+            opacity: 1, scale: 0.95, y: 0, x: 0, rotate: 0, filter: "grayscale(0%)",
             margin: "8px 0"
         },
         
         correct: {
-          scaleX: 1.05,
-          scaleY: 1.15,
+          scaleX: 1.0,
+          scaleY: 1.05,
           margin: "20px 0",
           opacity: 1, // <--- LÄGG TILL DENNA! Tvingar knappen att synas.
           y: 0,
@@ -77,7 +77,7 @@ export const AnswerButton = ({ answerText, state, onClick, disabled = false, ind
         },
         
         balloonPop: {
-          scale: 1,      
+          scale: 0.95,      
           margin: "20px 0",  
           y: 5,            
           rotate: -2,       
@@ -87,7 +87,7 @@ export const AnswerButton = ({ answerText, state, onClick, disabled = false, ind
         
         // --- ÖVRIGA (Backa undan men var synliga) ---
         stepBack: {
-          scale: 0.95, 
+          scale: 0.90, 
           opacity: 0.5, // Lite tydligare än förut så man ser att knappen finns
           filter: "grayscale(100%)", 
           transition: {  type: "spring", stiffness: 200, damping: 15  }
