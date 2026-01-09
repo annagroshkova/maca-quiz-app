@@ -27,6 +27,18 @@ interface QuizQuestion {
 }
 
 export default function Quiz() {
+  const baseUrl = "https://the-trivia-api.com/v2";
+  const user = getUserSettings();
+  const params = new URLSearchParams({
+    categories: user.category ?? "",
+    limit: "1",
+  });
+
+  if (user.level !== undefined) {
+    params.append("difficulties", user.level);
+  }
+
+  
   const navigate = useNavigate();
 
   const [question, setQuestion] = useState<QuizQuestion | null>(null);
@@ -58,8 +70,7 @@ export default function Quiz() {
     setSelectedAnswer(null);
     try {
       const response = await fetch(
-        "https://the-trivia-api.com/v2/questions?limit=1"
-      );
+        `${baseUrl}/questions?${params.toString()}`);
       const data: ApiResponse = await response.json();
       const q = data[0]!;
 
