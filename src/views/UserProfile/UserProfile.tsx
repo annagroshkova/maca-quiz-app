@@ -8,14 +8,13 @@ export default function UserProfile() {
   const user = getUserSettings();
   const navigate = useNavigate();
 
-  const [name, setName] = useState(user.name ?? "");
+  // const [name, setName] = useState(user.name ?? "");
   const [displayName, setDisplayName] = useState(user.name ?? "");
 
   const handleNameSubmit = (e: React.FormEvent) => {
     e.preventDefault();
-    if (!name) return;
-    updateUserSettings({ name });
-    setDisplayName(name);
+    if (!displayName) return;
+    updateUserSettings({ name: displayName });
   };
 
   const handleRetry = () => {
@@ -37,11 +36,11 @@ export default function UserProfile() {
         <input
           id="name"
           type="text"
-          value={name}
-          onChange={(e) => setName(e.target.value)}
+          value={displayName}
+          onChange={(e) => setDisplayName(e.target.value)}
           placeholder="Enter new name"
         />
-        <button type="submit" disabled={!name}>
+        <button type="submit" disabled={!displayName}>
           Save
         </button>
       </form>
