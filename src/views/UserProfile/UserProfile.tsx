@@ -21,11 +21,8 @@ export default function UserProfile() {
   const handleRetry = () => {
     navigate("/quiz");
   };
-  const handleCategory = () => {
-    navigate("/quiz");
-  };
-  const handleDifficulty = () => {
-    navigate("/quiz");
+  const handleSettings = () => {
+    navigate("/quiz-settings");
   };
 
   return (
@@ -49,8 +46,8 @@ export default function UserProfile() {
         </button>
       </form>
 
-      <SubmitButton onClick={handleCategory}>Change Category</SubmitButton>
-      <SubmitButton onClick={handleDifficulty}>Change Difficulty</SubmitButton>
+      <SubmitButton onClick={handleSettings}>Change Category</SubmitButton>
+      <SubmitButton onClick={handleSettings}>Change Difficulty</SubmitButton>
       <SubmitButton onClick={handleRetry} color="indigo">
         Try again!
       </SubmitButton>
