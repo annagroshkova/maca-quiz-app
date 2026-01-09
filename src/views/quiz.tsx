@@ -6,6 +6,7 @@ import { useNavigate } from "react-router-dom";
 import "../App.css";
 import { getUserSettings, updateUserSettings } from "../userSettings";
 import SubmitButton from "../components/SubmitButton/SubmitButton";
+import Header from "../components/Header/Header";
 
 type ApiResponse = ApiQuestion[];
 
@@ -38,7 +39,6 @@ export default function Quiz() {
     params.append("difficulties", user.level);
   }
 
-  
   const navigate = useNavigate();
 
   const [question, setQuestion] = useState<QuizQuestion | null>(null);
@@ -69,8 +69,7 @@ export default function Quiz() {
     setLoading(true);
     setSelectedAnswer(null);
     try {
-      const response = await fetch(
-        `${baseUrl}/questions?${params.toString()}`);
+      const response = await fetch(`${baseUrl}/questions?${params.toString()}`);
       const data: ApiResponse = await response.json();
       const q = data[0]!;
 
@@ -115,6 +114,7 @@ export default function Quiz() {
       p="4"
       style={{ maxWidth: "95vw", marginTop: "2rem", marginBottom: "2rem" }}
     >
+      <Header />
       <Flex direction="column" gap="5">
         <Flex justify="between" align="center" style={{ padding: "0 10px" }}>
           <Text size="5" weight="bold">
