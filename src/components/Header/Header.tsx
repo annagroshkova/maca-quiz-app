@@ -1,16 +1,16 @@
 import BackButton from "../BackButton/BackButton";
 import Avatar from "../Avatar/Avatar";
 import { Link } from "react-router-dom";
-import { createContext, useContext, useState } from "react";
-import { getUserSettings, updateUserSettings } from "../../userSettings";
+import { useUser } from "../../context/UserContext";
 
 export default function Header() {
+  const { user } = useUser();
   return (
     <header>
       <BackButton />
       <h1>Quizzie</h1>
       <Link to="/userProfile" style={{ textDecoration: "none" }}>
-        <Avatar name={} size={40} />
+        {user.name && <Avatar name={user.name} size={40} />}
       </Link>
     </header>
   );
