@@ -37,3 +37,9 @@ color: rgb(96, 96, 96);
   gap: 14px;
   align-items: stretch;
 }
+
+/* .levels-container {
+display: grid;
+grid-template-columns: repeat(4, 1fr);
+gap: 0;
+} */
