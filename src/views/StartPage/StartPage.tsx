@@ -30,20 +30,22 @@ export default function StartPage() {
   return (
     <section className='startpage'>
       <h1 className='startpage__headning'>Quizzie</h1>
-      <form className='startpage__form' onSubmit={handleNameSubmit}>
-        <label htmlFor='name'>Enter your name to start!</label>
-        <input
-          id='name'
-          type='text'
-          value={name}
-          onChange={(e) => setName(e.target.value.trim())}
-          placeholder='Write your name...'
-        ></input>
-        {/* knapp disabled om det inte finns ett namn */}
-        <button type='submit' disabled={!name}>
-          Let's begin!
-        </button>
-      </form>
+      <div className='startpage__form-container'>
+        <form className='startpage__form' onSubmit={handleNameSubmit}>
+          <label htmlFor='name'>Enter your name to start!</label>
+          <input
+            id='name'
+            type='text'
+            value={name}
+            onChange={(e) => setName(e.target.value.trim())}
+            placeholder='Write your name...'
+          ></input>
+          {/* knapp disabled om det inte finns ett namn */}
+          <button type='submit' disabled={!name}>
+            Let's begin!
+          </button>
+        </form>
+      </div>
     </section>
   );
 }
