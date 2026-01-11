@@ -19,6 +19,7 @@ export default function Avatar({ name, size = 48 }: AvatarProps) {
   return (
     <div
       className="Avatar"
+      aria-label={`User avatar for ${name}`}
       style={{
         width: size,
         height: size,
