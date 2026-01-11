@@ -7,6 +7,7 @@ import {
 } from "../../userSettings";
 import { categories, levels } from "../../data";
 import RadioOption from "../../components/RadioOption/RadioOption";
+import Header from "../../components/Header/Header";
 
 export default function QuizSettings() {
   const user: UserSettings = getUserSettings();
@@ -31,6 +32,8 @@ export default function QuizSettings() {
   };
 
   return (
+    <>
+    <Header />
     <section className='quiz-settings'>
       <p className='quiz-settings__greeting'>{greeting}</p>
       <form className='quiz-settings__form' onSubmit={handleSettingsSubmit}>
@@ -71,5 +74,6 @@ export default function QuizSettings() {
         </button>
       </form>
     </section>
+    </>
   );
 }
