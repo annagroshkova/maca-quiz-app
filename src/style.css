@@ -1,4 +1,6 @@
 @import url(./views/StartPage//StartPage.css);
+@import url(./views/QuizSettings/quizSettings.css);
+@import url(./components/RadioOption/RadioOption.css);
 @import url(./components/SubmitButton/SubmitButton.css);
 @import url(./views/UserProfile/UserProfile.css);
 @import url(./components/Avatar/Avatar.css);
@@ -6,7 +8,7 @@
 body {
   display: flex;
   margin: 0;
-  padding: 2rem;
+
   box-sizing: border-box;
   min-height: 100dvh;
   background: linear-gradient(
@@ -18,6 +20,9 @@ body {
 
 #root {
   margin: 0 auto;
+    padding: 30px 28px;
   width: 100%;
   max-width: 1200px;
+  min-height: 100dvh;
+  box-sizing: border-box;
 }

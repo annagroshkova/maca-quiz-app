@@ -1,15 +1,22 @@
 .startpage {
     display: flex;
     flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    min-height: 60vh;
+    text-align: center;
+    min-height: 100%;
 
 }
 
 .startpage__headning {
     color: #b60055;
-    margin-bottom: 40px;
+    margin-top: 30px;
+}
+
+.startpage__form-container {
+    display: flex;
+    align-items: center;
+    flex-grow: 10;
+    width: 100%;
+    justify-content: center;
 }
 
 .startpage__form {
@@ -17,6 +24,7 @@
     border-radius: 12px;
     box-shadow: 3px 8px 8px rgba(75, 30, 7, 0.1);
     width: 100%;
+    min-height: 60dvh;
     box-sizing: border-box;
     max-width: 800px;
     display: flex;
@@ -24,6 +32,7 @@
     align-items: center;
     gap: 25px;
     padding: 6rem 2rem;
+    margin-bottom: 60px;
 }
 
 .startpage__form > label {
@@ -43,10 +52,14 @@
     font-weight: 500;
 }
 
+.startpage__form > input::placeholder {
+    color: rgb(164, 164, 164);
+} 
+
 .startpage__form > button {
     width: 200px;
     height: 65px;
-    margin-top: 4rem;
+    margin-top: 3rem;
     padding: 1rem 1.5px;
     border: none;
     border-radius: 30px;
@@ -63,7 +76,7 @@
 }
 
 .startpage__form > button:disabled {
-    background-color: #e5e8f3;
-    color: rgba(0, 0, 0, 0.3);
+    background-color: #d7d7d7;
+    color: rgb(164, 164, 164);
 }
 

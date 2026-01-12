@@ -7,10 +7,11 @@ import {
 } from "../../userSettings";
 import { categories, levels } from "../../data";
 import RadioOption from "../../components/RadioOption/RadioOption";
+import Header from "../../components/Header/Header";
 
 export default function QuizSettings() {
   const user: UserSettings = getUserSettings();
-  const greeting: string = `Greetings, ${user.name}! Choose your options`;
+  const greeting: string = `Greetings, ${user.name}!`;
   const navigate = useNavigate();
 
   const [category, setCategory] = useState<string | null>(null);
@@ -31,41 +32,48 @@ export default function QuizSettings() {
   };
 
   return (
+    <>
+    <Header />
     <section className='quiz-settings'>
       <p className='quiz-settings__greeting'>{greeting}</p>
       <form className='quiz-settings__form' onSubmit={handleSettingsSubmit}>
-        <fieldset className='quiz-settings__categories'>
+        <fieldset className='quiz-settings__levels'>
           <legend>Choose your level</legend>
-          {levels.map((l) => (
-            <RadioOption
-              key={l.level}
-              name='level'
-              text={l.level}
-              value={l.apiQuery}
-              onChange={() => setLevel(l.apiQuery)}
-              checked={level === l.apiQuery}
-            />
-          ))}
+          <div className='levels-container'>
+            {levels.map((l) => (
+              <RadioOption
+                key={l.level}
+                name='level'
+                text={l.level}
+                value={l.apiQuery}
+                onChange={() => setLevel(l.apiQuery)}
+                checked={level === l.apiQuery}
+              />
+            ))}
+          </div>
         </fieldset>
 
         <fieldset className='quiz-settings__categories'>
           <legend>Select a subject</legend>
-          {categories.map((c) => (
-            <RadioOption
-              key={c.apiQuery}
-              name='category'
-              text={c.quizSubject}
-              value={c.apiQuery}
-              imageUrl={`${c.apiQuery}.png`}
-              onChange={() => setCategory(c.apiQuery)}
-              checked={category === c.apiQuery}
-            />
-          ))}
+          <div className='categories-container'>
+            {categories.map((c) => (
+              <RadioOption
+                key={c.apiQuery}
+                name='category'
+                text={c.quizSubject}
+                value={c.apiQuery}
+                imageUrl={`${c.apiQuery}.png`}
+                onChange={() => setCategory(c.apiQuery)}
+                checked={category === c.apiQuery}
+              />
+            ))}
+          </div>
         </fieldset>
         <button type='submit' disabled={level === null || category === null}>
           Let's begin!
         </button>
       </form>
     </section>
+    </>
   );
 }

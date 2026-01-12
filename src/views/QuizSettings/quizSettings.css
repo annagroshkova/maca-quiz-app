@@ -1,0 +1,45 @@
+.quiz-settings {
+  width: 100%;
+  box-sizing: border-box;
+  max-width: 800px;
+  margin: inherit;
+}
+
+.quiz-settings__form {
+  background-color: rgba(240, 240, 240, 0.9);
+  border-radius: 12px;
+  display: flex;
+  flex-direction: column;
+  gap: 30px;
+  padding: 28px 18px;
+}
+
+.quiz-settings__levels,
+.quiz-settings__categories {
+  border: none;
+  margin: 0;
+  padding: 0;
+}
+
+.quiz-settings__levels > legend,
+.quiz-settings__categories > legend {
+font-size: 16px;
+line-height: 16px;
+padding: 0;
+margin-bottom: 14px;
+color: rgb(96, 96, 96);
+} 
+
+.levels-container,
+.categories-container {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 14px;
+  align-items: stretch;
+}
+
+/* .levels-container {
+display: grid;
+grid-template-columns: repeat(4, 1fr);
+gap: 0;
+} */
