@@ -24,7 +24,7 @@ export default function StartPage() {
     }
     updateUserSettings({ name });
     setName("");
-    navigate("/quiz-settings");
+    navigate("/categories");
   };
 
   return (

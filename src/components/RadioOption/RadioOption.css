@@ -32,19 +32,19 @@
   color: white;
 }
 
-/* Keyboard focus */
+/* Keyboard focus
 .level:has(input[type="radio"]:focus-visible) {
   outline: 2px solid #2563eb;
   outline-offset: 2px;
-}
+} */
 
 .category {
-
   display: grid;
   grid-template-rows: auto fit-content;
   justify-items: center;
   width: 100%;
   aspect-ratio: 1 / 1;
+  gap: 10px;
   box-sizing: border-box;
 }
 
@@ -54,8 +54,8 @@
 }
 
 .category__image {
-  height: 100%;
-  object-fit: cover;
+  width: 100%;
+  object-fit: contain;
 }
 
 .category__text {

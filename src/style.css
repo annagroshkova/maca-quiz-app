@@ -1,11 +1,14 @@
 @import url(./views/StartPage//StartPage.css);
-@import url(./views/QuizSettings/quizSettings.css);
+/* @import url(./views/QuizSettings/quizSettings.css); */
+@import url(./views/Categories/Categories.css);
+@import url(./views/Levels/Levels.css);
 @import url(./components/RadioOption/RadioOption.css);
 @import url(./components/SubmitButton/SubmitButton.css);
 @import url(./views/UserProfile/UserProfile.css);
 @import url(./components/Avatar/Avatar.css);
 
 body {
+  font-family: 'Arial', sans-serif;
   display: flex;
   margin: 0;
 
@@ -20,7 +23,7 @@ body {
 
 #root {
   margin: 0 auto;
-    padding: 30px 28px;
+    padding: 0 28px 30px;
   width: 100%;
   max-width: 1200px;
   min-height: 100dvh;

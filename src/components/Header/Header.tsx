@@ -9,7 +9,7 @@ export default function Header() {
   return (
     <header className="header">
       <BackButton />
-      <h1>Quizzie</h1>
+      <h1 className="header__quiz-name">Quizzie</h1>
       <Link to="/userProfile" style={{ textDecoration: "none" }}>
         {user.name && <Avatar name={user.name} size={40} />}
       </Link>
