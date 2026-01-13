@@ -17,17 +17,17 @@ export default function Avatar({ name, size = 48 }: AvatarProps) {
   const backgroundColor = stringToColor(name);
 
   return (
-    <div
-      className="Avatar"
-      aria-label={`User avatar for ${name}`}
-      style={{
-        width: size,
-        height: size,
-        backgroundColor,
-        fontSize: size * 0.45,
-      }}
-    >
-      {initial}
+    <div className='avatar'>
+      <div
+        className='avatar__icon'
+        aria-label={`User avatar for ${name}`}
+        style={{
+          backgroundColor,
+          fontSize: size * 0.45,
+        }}
+      >
+        {initial}
+      </div>
     </div>
   );
 }

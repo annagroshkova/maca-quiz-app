@@ -1,5 +1,5 @@
 import { useState, useEffect } from "react";
-import { Container, Flex, Card, Text, Button } from "@radix-ui/themes";
+import { Container, Flex, Card, Text } from "@radix-ui/themes";
 import { AnswerButton } from "../components/AnswerButton";
 import { AnimatePresence } from "motion/react";
 import { useNavigate } from "react-router-dom";
@@ -8,6 +8,7 @@ import { getUserSettings, updateUserSettings } from "../userSettings";
 import SubmitButton from "../components/SubmitButton/SubmitButton";
 import Header from "../components/Header/Header";
 import { useQuiz } from "../context/QuizContext";
+import useQuizNavigation from "../hooks/useQuizNavigation";
 
 type ApiResponse = ApiQuestion[];
 
@@ -41,6 +42,7 @@ export default function Quiz() {
   }
 
   const navigate = useNavigate();
+  const { goToSettings } = useQuizNavigation()
   const [loading, setLoading] = useState(false);
 
   const {
@@ -115,21 +117,37 @@ export default function Quiz() {
 
   return (
     <Container
-      p="4"
+      p='4'
       style={{ maxWidth: "95vw", marginTop: "2rem", marginBottom: "2rem" }}
     >
-      <Header />
-      <Flex direction="column" gap="5">
-        <Flex justify="between" align="center" style={{ padding: "0 10px" }}>
-          <Text size="5" weight="bold">
+      <Header
+        backButton={true}
+        backButtonProps={{
+          onClick: () => {
+            setLives(3)
+            setScore(0)
+            goToSettings()
+          },
+          children: (
+            <img
+              src='go-back-icon-192-solid.svg'
+              alt='Go back icon'
+              style={{ height: "100%" }}
+            />
+          ),
+        }}
+      />
+      <Flex direction='column' gap='5'>
+        <Flex justify='between' align='center' style={{ padding: "0 10px" }}>
+          <Text size='5' weight='bold'>
             Score: {score}
           </Text>
 
-          <Flex gap="3">
+          <Flex gap='3'>
             {[1, 2, 3].map((heartIndex) => (
               <Text
                 key={heartIndex}
-                size="6"
+                size='6'
                 style={{ cursor: "default", userSelect: "none" }}
               >
                 {heartIndex <= 3 - lives ? "🖤" : "❤️"}
@@ -140,21 +158,21 @@ export default function Quiz() {
 
         {/* Frågan */}
         {loading || !question ? (
-          <Text size="5" weight="bold">
+          <Text size='5' weight='bold'>
             Loading question...
           </Text>
         ) : (
           <>
             <Card style={{ padding: "30px", textAlign: "center" }}>
-              <Text size="5" weight="bold">
+              <Text size='5' weight='bold'>
                 {question.question}
               </Text>
             </Card>
 
             {/* Svarsalternativ */}
-            <Flex direction="column" gap="3">
+            <Flex direction='column' gap='3'>
               <AnimatePresence>
-                <Flex direction="column" gap="3">
+                <Flex direction='column' gap='3'>
                   {question.allAnswers.map((answer, index) => {
                     // --- BESTÄM KNAPPENS TILLSTÅND ---
                     let buttonState:
@@ -196,12 +214,8 @@ export default function Quiz() {
             </Flex>
 
             {/* Reset-knapp (visas bara när man svarat) */}
-            <SubmitButton
-              onClick={handleNextStep}
-              disabled={!selectedAnswer}
-              color={lives === 0 ? "ruby" : "indigo"}
-            >
-              {lives === 0 ? "Game Over" : "Next Question"}
+            <SubmitButton onClick={handleNextStep} disabled={!selectedAnswer}>
+              <span>{lives === 0 ? "Game Over" : "Next Question"}</span>
             </SubmitButton>
           </>
         )}

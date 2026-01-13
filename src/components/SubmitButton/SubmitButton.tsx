@@ -1,9 +1,4 @@
-import React from "react";
 import "./SubmitButton.css";
-import { Button } from "@radix-ui/themes";
-import { motion, AnimatePresence, type Variants } from "motion/react";
-
-const MotionButton = motion(Button);
 
 interface SubmitButtonProps {
   children?: React.ReactNode;

@@ -1,5 +1,3 @@
-import { useNavigate } from "react-router-dom";
-
 // export default function BackButton({ fallback = "/" }) {
 //   const navigate = useNavigate();
 
@@ -25,7 +23,7 @@ interface BackButtonProps {
 export default function BackButton({ children, onClick }: BackButtonProps) {
 
   return (
-    <button className="backButton" onClick={onClick}>
+    <button className="back-button" onClick={onClick} style={{ height: "100%", border: "none", backgroundColor: "transparent", outline: "none" }}>
       {children}
     </button>
   );
