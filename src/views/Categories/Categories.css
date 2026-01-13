@@ -1,0 +1,55 @@
+.categories {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  max-width: 800px;
+  margin-bottom: 60px;
+  flex-grow: 10;
+}
+
+.categories__greeting {
+  font-weight: 600;
+  font-size: 1.4rem;
+  margin: 0 0 30px;
+
+}
+
+.categories__form {
+  background-color: rgba(240, 240, 240, 0.9);
+  border-radius: 12px;
+  display: flex;
+  flex-direction: column;
+  gap: 30px;
+  padding: 30px 18px;
+}
+
+.categories__fieldset {
+  border: none;
+  margin: 0;
+  padding: 0;
+}
+
+.categories__fieldset > legend {
+  font-size: 16px;
+  line-height: 16px;
+  padding: 0;
+  margin-bottom: 14px;
+  color: rgb(96, 96, 96);
+}
+
+.categories-container {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 14px;
+  overflow-y: auto;
+  scroll-snap-type: y mandatory;
+  scroll-behavior: smooth;
+}
+
+/* each card */
+.categories-container > .category {
+  scroll-snap-align: start;
+  scroll-snap-stop: always;
+}

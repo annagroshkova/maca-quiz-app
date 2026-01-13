@@ -1,7 +1,15 @@
 .header {
-    height: 56px;
-    padding: 10px 15px;
+    height: 45px;
+    padding: 25px 0;
     margin: 0;
     display: flex;
     justify-content: space-between;
+    align-items: center;
+}
+
+.header__quiz-name {
+    margin: 0;
+    color: #b60055;
+    font-size: 28px;
+    font-family: serif;
 }
