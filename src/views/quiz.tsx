@@ -1,5 +1,5 @@
 import { useState, useEffect } from "react";
-import { Container, Flex, Card, Text, Button } from "@radix-ui/themes";
+import { Container, Flex, Card, Text } from "@radix-ui/themes";
 import { AnswerButton } from "../components/AnswerButton";
 import { AnimatePresence } from "motion/react";
 import { useNavigate } from "react-router-dom";
@@ -25,6 +25,7 @@ interface QuizQuestion {
   question: string;
   correctAnswer: string;
   allAnswers: string[];
+  difficulty: string;
 }
 
 export default function Quiz() {
@@ -54,7 +55,13 @@ export default function Quiz() {
     setSelectedAnswer(answer);
 
     if (answer === question?.correctAnswer) {
-      setScore((prevScore) => prevScore + 1);
+      let scorePoint = 1;
+      if (question.difficulty === "medium") {
+        scorePoint = 2;
+      } else if (question.difficulty === "hard") {
+        scorePoint = 3;
+      }
+      setScore((prevScore) => prevScore + scorePoint);
     } else {
       setLives((lostLife) => lostLife - 1);
     }
@@ -79,6 +86,7 @@ export default function Quiz() {
         allAnswers: [...q.incorrectAnswers, q.correctAnswer].sort(
           () => Math.random() - 0.5
         ),
+        difficulty: q.difficulty,
       });
     } catch (error) {
       console.error("Error fetching question:", error);
