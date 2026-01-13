@@ -28,6 +28,10 @@ interface QuizQuestion {
   difficulty: string;
 }
 
+const maxAnswerLength = 150;
+const questionBatch = 10;
+const prefetchThreshold = 3;
+
 export default function Quiz() {
   const baseUrl = "https://the-trivia-api.com/v2";
   const user = getUserSettings();
@@ -43,13 +47,13 @@ export default function Quiz() {
   const navigate = useNavigate();
 
   const [question, setQuestion] = useState<QuizQuestion | null>(null);
-  const [loading, setLoading] = useState(true);
   const [selectedAnswer, setSelectedAnswer] = useState<string | null>(null);
   const [score, setScore] = useState(0);
   const [lives, setLives] = useState(3);
+  const [questionQueue, setQuestionQueue] = useState<QuizQuestion[]>([]);
+  const [isFetching, setIsFetching] = useState(false);
 
   const handleAnswerClick = (answer: string) => {
-    // Om man redan har svarat, gör ingenting (lås knapparna)
     if (selectedAnswer) return;
 
     setSelectedAnswer(answer);
@@ -67,43 +71,79 @@ export default function Quiz() {
     }
   };
 
-  // // En enkel funktion för att nollställa testet
-  // const resetTest = () => {
-  //   fetchQuestion();
-  // };
-
   const fetchQuestion = async () => {
-    setLoading(true);
-    setSelectedAnswer(null);
-    try {
-      const response = await fetch(`${baseUrl}/questions?${params.toString()}`);
-      const data: ApiResponse = await response.json();
-      const q = data[0]!;
+    if (isFetching) return;
+    setIsFetching(true);
 
-      setQuestion({
-        question: q.question.text,
-        correctAnswer: q.correctAnswer,
-        allAnswers: [...q.incorrectAnswers, q.correctAnswer].sort(
-          () => Math.random() - 0.5
-        ),
-        difficulty: q.difficulty,
+    try {
+      const currentParams = new URLSearchParams(params);
+      currentParams.set("limit", questionBatch.toString());
+
+      const response = await fetch(
+        `${baseUrl}/questions?${currentParams.toString()}`
+      );
+      const data: ApiResponse = await response.json();
+
+      const validQuestions: QuizQuestion[] = data
+        .map((q) => ({
+          question: q.question.text,
+          correctAnswer: q.correctAnswer,
+          allAnswers: [...q.incorrectAnswers, q.correctAnswer].sort(
+            () => Math.random() - 0.5
+          ),
+          difficulty: q.difficulty,
+        }))
+        .filter((q) => {
+          return !q.allAnswers.some((ans) => ans.length > maxAnswerLength);
+        });
+
+      if (validQuestions.length === 0) {
+        setIsFetching(false);
+        fetchQuestion();
+        return;
+      }
+
+      setQuestionQueue((prev) => {
+        const newQueue = [...prev, ...validQuestions];
+        return newQueue;
       });
     } catch (error) {
       console.error("Error fetching question:", error);
+    } finally {
+      setIsFetching(false);
     }
-    setLoading(false);
   };
 
   useEffect(() => {
     fetchQuestion();
   }, []);
 
+  useEffect(() => {
+    if (!question && questionQueue.length > 0) {
+      const [nextQ, ...rest] = questionQueue;
+      setQuestion(nextQ);
+      setQuestionQueue(rest);
+    }
+  }, [questionQueue, question]);
+
   const handleNextStep = () => {
     if (lives === 0) {
       finalizeGame();
-      navigate("/gameover");
+      setTimeout(() => navigate("/gameover"), 300);
     } else {
-      fetchQuestion();
+      setSelectedAnswer(null);
+
+      if (questionQueue.length > 0) {
+        const [nextQuestion, ...restQueue] = questionQueue;
+        setQuestion(nextQuestion);
+        setQuestionQueue(restQueue);
+
+        if (restQueue.length < prefetchThreshold) {
+          fetchQuestion();
+        }
+      } else {
+        fetchQuestion();
+      }
     }
   };
 
@@ -142,8 +182,7 @@ export default function Quiz() {
           </Flex>
         </Flex>
 
-        {/* Frågan */}
-        {loading || !question ? (
+        {!question ? (
           <Text size="5" weight="bold">
             Loading question...
           </Text>
@@ -155,43 +194,36 @@ export default function Quiz() {
               </Text>
             </Card>
 
-            {/* Svarsalternativ */}
             <Flex direction="column" gap="3">
               <AnimatePresence>
                 <Flex direction="column" gap="3">
                   {question.allAnswers.map((answer, index) => {
-                    // --- BESTÄM KNAPPENS TILLSTÅND ---
                     let buttonState:
                       | "idle"
                       | "correct"
                       | "incorrect"
                       | "idle-round-over" = "idle";
 
-                    // Om användaren har valt ett svar (rundan är "över" för denna fråga)
                     if (selectedAnswer) {
-                      // Fall 1: Användaren klickade på DENNA knapp
                       if (answer === selectedAnswer) {
                         if (answer === question.correctAnswer) {
-                          buttonState = "correct"; // Valde rätt -> Grön/Väx
+                          buttonState = "correct";
                         } else {
-                          buttonState = "incorrect"; // Valde fel -> Dyster ballong
+                          buttonState = "incorrect";
                         }
-                      }
-                      // Fall 2: Användaren klickade INTE på denna knapp
-                      else {
-                        // Vi avslöjar inte svaret. Alla andra blir gråa och backar.
+                      } else {
                         buttonState = "idle-round-over";
                       }
                     }
 
                     return (
                       <AnswerButton
-                        key={answer}
+                        key={`${question.question}-${answer}`}
                         index={index}
                         answerText={answer}
                         state={buttonState}
                         onClick={() => handleAnswerClick(answer)}
-                        disabled={!!selectedAnswer} // Inaktivera knapparna om vi valt ett svar
+                        disabled={!!selectedAnswer}
                       />
                     );
                   })}
@@ -199,7 +231,6 @@ export default function Quiz() {
               </AnimatePresence>
             </Flex>
 
-            {/* Reset-knapp (visas bara när man svarat) */}
             <SubmitButton
               onClick={handleNextStep}
               disabled={!selectedAnswer}
