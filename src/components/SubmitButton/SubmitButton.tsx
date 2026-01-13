@@ -6,12 +6,12 @@ import { motion, AnimatePresence, type Variants } from "motion/react";
 const MotionButton = motion(Button);
 
 interface SubmitButtonProps {
-  buttonText: string
+  children?: React.ReactNode;
   onClick?: () => void;
   disabled?: boolean;
 }
 export default function SubmitButton({
-  buttonText,
+  children,
   onClick,
   disabled,
 }: SubmitButtonProps) {
@@ -54,7 +54,7 @@ export default function SubmitButton({
       onClick={onClick}
       disabled={disabled}
     >
-      {buttonText}
+      {children}
     </button>
   );
 }

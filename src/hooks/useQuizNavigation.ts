@@ -1,13 +1,17 @@
 import { useNavigate } from "react-router-dom";
 import { useQuiz } from "../context/QuizContext";
 
-export function useQuizNavigation() {
+export default function useQuizNavigation() {
   const navigate = useNavigate();
   const { resetQuiz } = useQuiz();
 
   const restartQuiz = () => {
     resetQuiz();
-    navigate("/quiz-settings");
+    navigate("/categories");
+  };
+
+    const goToSettings = () => {
+    navigate("/categories");
   };
 
   const goToProfile = () => {
@@ -21,6 +25,7 @@ export function useQuizNavigation() {
   return {
     restartQuiz,
     goToProfile,
+    goToSettings,
     returnToQuiz,
   };
 }
