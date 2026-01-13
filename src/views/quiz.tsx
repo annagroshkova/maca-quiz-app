@@ -7,6 +7,7 @@ import "../App.css";
 import { getUserSettings, updateUserSettings } from "../userSettings";
 import SubmitButton from "../components/SubmitButton/SubmitButton";
 import Header from "../components/Header/Header";
+import { useQuiz } from "../context/QuizContext";
 
 type ApiResponse = ApiQuestion[];
 
@@ -21,7 +22,7 @@ interface ApiQuestion {
   };
 }
 
-interface QuizQuestion {
+export interface QuizQuestion {
   question: string;
   correctAnswer: string;
   allAnswers: string[];
@@ -40,12 +41,18 @@ export default function Quiz() {
   }
 
   const navigate = useNavigate();
+  const [loading, setLoading] = useState(false);
 
-  const [question, setQuestion] = useState<QuizQuestion | null>(null);
-  const [loading, setLoading] = useState(true);
-  const [selectedAnswer, setSelectedAnswer] = useState<string | null>(null);
-  const [score, setScore] = useState(0);
-  const [lives, setLives] = useState(3);
+  const {
+    question,
+    selectedAnswer,
+    score,
+    lives,
+    setQuestion,
+    setSelectedAnswer,
+    setScore,
+    setLives,
+  } = useQuiz();
 
   const handleAnswerClick = (answer: string) => {
     // Om man redan har svarat, gör ingenting (lås knapparna)
@@ -59,11 +66,6 @@ export default function Quiz() {
       setLives((lostLife) => lostLife - 1);
     }
   };
-
-  // // En enkel funktion för att nollställa testet
-  // const resetTest = () => {
-  //   fetchQuestion();
-  // };
 
   const fetchQuestion = async () => {
     setLoading(true);
@@ -87,8 +89,10 @@ export default function Quiz() {
   };
 
   useEffect(() => {
-    fetchQuestion();
-  }, []);
+    if (!question) {
+      fetchQuestion();
+    }
+  }, [question]);
 
   const handleNextStep = () => {
     if (lives === 0) {
