@@ -36,7 +36,8 @@ export default function Categories() {
             childrenArray[childrenArray.length - 1].offsetTop +
               childrenArray[childrenArray.length - 1].offsetHeight;
           const twoRowsHeight = thirdRowTop - firstRowTop;
-          el.style.maxHeight = `${twoRowsHeight}px`;
+          const scrollContainerHeight = twoRowsHeight + 40
+          el.style.maxHeight = `${scrollContainerHeight}px`;
         }
       };
 

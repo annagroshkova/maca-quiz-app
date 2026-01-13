@@ -39,7 +39,8 @@ export default function Levels() {
     <>
       <Header />
       <section className='levels'>
-        <div className='levels__category-container'>
+        <div className="levels__inner">
+                  <div className='levels__category-container'>
           {/* <div className='levels__image-container'> */}
           <img
             src={`${categoryObj.apiQuery}.png`}
@@ -69,6 +70,8 @@ export default function Levels() {
           </fieldset>
           <SubmitButton buttonText="Let's play!" disabled={level === null} />
         </form>
+        </div>
+
       </section>
     </>
   );
