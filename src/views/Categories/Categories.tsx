@@ -8,8 +8,10 @@ import {
 import { categories } from "../../data";
 import RadioOption from "../../components/RadioOption/RadioOption";
 import Header from "../../components/Header/Header";
+import SubmitButton from "../../components/SubmitButton/SubmitButton";
 
 export default function Categories() {
+
   function useTwoRowHeight(deps: unknown[] = []) {
     const ref = useRef<HTMLDivElement>(null);
 
@@ -88,9 +90,10 @@ export default function Categories() {
               ))}
             </div>
           </fieldset>
-          <button type='submit' disabled={category === null}>
+          <SubmitButton buttonText="Continue" disabled={category === null}/>
+          {/* <button type='submit' disabled={category === null}>
             Continue
-          </button>
+          </button> */}
         </form>
       </section>
     </>

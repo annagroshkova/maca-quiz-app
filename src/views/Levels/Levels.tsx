@@ -8,6 +8,7 @@ import {
 import { type Category, categories, levels } from "../../data";
 import RadioOption from "../../components/RadioOption/RadioOption";
 import Header from "../../components/Header/Header";
+import SubmitButton from "../../components/SubmitButton/SubmitButton";
 
 export default function Levels() {
   const user: UserSettings = getUserSettings();
@@ -40,11 +41,11 @@ export default function Levels() {
       <section className='levels'>
         <div className='levels__category-container'>
           {/* <div className='levels__image-container'> */}
-            <img
-              src={`${categoryObj.apiQuery}.png`}
-              alt={categoryObj.quizSubject}
-              className='levels__category-image'
-            />
+          <img
+            src={`${categoryObj.apiQuery}.png`}
+            alt={categoryObj.quizSubject}
+            className='levels__category-image'
+          />
           {/* </div> */}
 
           <p className='levels__category-name'>{categoryObj.quizSubject}</p>
@@ -66,9 +67,7 @@ export default function Levels() {
               ))}
             </div>
           </fieldset>
-          <button type='submit' disabled={level === null}>
-            Let's begin!
-          </button>
+          <SubmitButton buttonText="Let's play!" disabled={level === null} />
         </form>
       </section>
     </>

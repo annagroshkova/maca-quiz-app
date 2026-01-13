@@ -5,6 +5,7 @@
   box-sizing: border-box;
   max-width: 800px;
   margin: inherit;
+  padding: 30px 18px;
 }
 
 .levels__category-container {
@@ -24,12 +25,13 @@
 }
 
 .levels__form {
+    margin-top: 22px;
   background-color: rgba(240, 240, 240, 0.9);
   border-radius: 12px;
   display: flex;
   flex-direction: column;
-  gap: 30px;
-  padding: 28px 18px;
+  gap: 20px;
+
 }
 
 .levels__fieldset {
@@ -49,7 +51,7 @@
 
 .levels-container {
   display: grid;
-  grid-template-columns: repeat(2, 1fr);
+  grid-template-columns: 1fr;
   flex-direction: column;
   gap: 16px;
   align-items: stretch;
