@@ -7,7 +7,7 @@ export function useQuizNavigation() {
 
   const restartQuiz = () => {
     resetQuiz();
-    navigate("/quiz-settings");
+    navigate("/categories");
   };
 
   const goToProfile = () => {
@@ -18,9 +18,18 @@ export function useQuizNavigation() {
     navigate("/quiz");
   };
 
+  const goToLevels = () => {
+    navigate("/levels");
+  };
+  const goToCategory = () => {
+    navigate("/categories");
+  };
+
   return {
     restartQuiz,
     goToProfile,
     returnToQuiz,
+    goToCategory,
+    goToLevels,
   };
 }
