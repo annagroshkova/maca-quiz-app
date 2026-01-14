@@ -10,7 +10,7 @@ export default function useQuizNavigation() {
     navigate("/categories");
   };
 
-    const goToSettings = () => {
+  const goToSettings = () => {
     navigate("/categories");
   };
 
@@ -22,10 +22,19 @@ export default function useQuizNavigation() {
     navigate("/quiz");
   };
 
+  const goToLevels = () => {
+    navigate("/levels");
+  };
+  const goToCategory = () => {
+    navigate("/categories");
+  };
+
   return {
     restartQuiz,
     goToProfile,
     goToSettings,
     returnToQuiz,
+    goToCategory,
+    goToLevels,
   };
 }
