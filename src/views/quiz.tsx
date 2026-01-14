@@ -27,14 +27,18 @@ export interface QuizQuestion {
   question: string;
   correctAnswer: string;
   allAnswers: string[];
+  difficulty: string;
 }
+
+const maxAnswerLength = 150;
+const questionBatch = 10;
+const prefetchThreshold = 3;
 
 export default function Quiz() {
   const baseUrl = "https://the-trivia-api.com/v2";
   const user = getUserSettings();
   const params = new URLSearchParams({
     categories: user.category ?? "",
-    limit: "1",
   });
 
   if (user.level !== undefined) {
@@ -42,8 +46,8 @@ export default function Quiz() {
   }
 
   const navigate = useNavigate();
-  const { goToSettings } = useQuizNavigation()
-  const [loading, setLoading] = useState(false);
+  const { goToSettings } = useQuizNavigation();
+  const [questionQueue, setQuestionQueue] = useState<QuizQuestion[]>([]);
 
   const {
     question,
@@ -57,51 +61,90 @@ export default function Quiz() {
   } = useQuiz();
 
   const handleAnswerClick = (answer: string) => {
-    // Om man redan har svarat, gör ingenting (lås knapparna)
     if (selectedAnswer) return;
 
     setSelectedAnswer(answer);
 
     if (answer === question?.correctAnswer) {
-      setScore((prevScore) => prevScore + 1);
+      let scorePoint = 1;
+      if (question.difficulty === "medium") {
+        scorePoint = 2;
+      } else if (question.difficulty === "hard") {
+        scorePoint = 3;
+      }
+      setScore((prevScore) => prevScore + scorePoint);
     } else {
       setLives((lostLife) => lostLife - 1);
     }
   };
 
   const fetchQuestion = async () => {
-    setLoading(true);
-    setSelectedAnswer(null);
     try {
-      const response = await fetch(`${baseUrl}/questions?${params.toString()}`);
-      const data: ApiResponse = await response.json();
-      const q = data[0]!;
+      const currentParams = new URLSearchParams(params);
+      currentParams.set("limit", questionBatch.toString());
 
-      setQuestion({
-        question: q.question.text,
-        correctAnswer: q.correctAnswer,
-        allAnswers: [...q.incorrectAnswers, q.correctAnswer].sort(
-          () => Math.random() - 0.5
-        ),
+      const response = await fetch(
+        `${baseUrl}/questions?${currentParams.toString()}`
+      );
+      const data: ApiResponse = await response.json();
+
+      const validQuestions: QuizQuestion[] = data
+        .map((q) => ({
+          question: q.question.text,
+          correctAnswer: q.correctAnswer,
+          allAnswers: [...q.incorrectAnswers, q.correctAnswer].sort(
+            () => Math.random() - 0.5
+          ),
+          difficulty: q.difficulty,
+        }))
+        .filter((q) => {
+          return !q.allAnswers.some((ans) => ans.length > maxAnswerLength);
+        });
+
+      if (validQuestions.length === 0) {
+        fetchQuestion();
+        return;
+      }
+
+      setQuestionQueue((prev) => {
+        const newQueue = [...prev, ...validQuestions];
+        return newQueue;
       });
     } catch (error) {
       console.error("Error fetching question:", error);
     }
-    setLoading(false);
   };
 
   useEffect(() => {
-    if (!question) {
-      fetchQuestion();
+    fetchQuestion();
+  }, []);
+
+  useEffect(() => {
+    if (!question && questionQueue.length > 0) {
+      const [nextQ, ...rest] = questionQueue;
+      setQuestion(nextQ);
+      setQuestionQueue(rest);
     }
-  }, [question]);
+  }, [questionQueue, question]);
 
   const handleNextStep = () => {
     if (lives === 0) {
       finalizeGame();
-      navigate("/gameover");
+      setTimeout(() => navigate("/gameover"), 300);
     } else {
-      fetchQuestion();
+      setSelectedAnswer(null);
+
+      if (questionQueue.length > 0) {
+        const [nextQuestion, ...restQueue] = questionQueue;
+        setQuestion(nextQuestion);
+        setQuestionQueue(restQueue);
+
+        if (restQueue.length < prefetchThreshold) {
+          fetchQuestion();
+        }
+      } else {
+        fetchQuestion();
+      }
     }
   };
 
@@ -117,37 +160,37 @@ export default function Quiz() {
 
   return (
     <Container
-      p='4'
+      p="4"
       style={{ maxWidth: "95vw", marginTop: "2rem", marginBottom: "2rem" }}
     >
       <Header
         backButton={true}
         backButtonProps={{
           onClick: () => {
-            setLives(3)
-            setScore(0)
-            goToSettings()
+            setLives(3);
+            setScore(0);
+            goToSettings();
           },
           children: (
             <img
-              src='go-back-icon-192-solid.svg'
-              alt='Go back icon'
+              src="go-back-icon-192-solid.svg"
+              alt="Go back icon"
               style={{ height: "100%" }}
             />
           ),
         }}
       />
-      <Flex direction='column' gap='5'>
-        <Flex justify='between' align='center' style={{ padding: "0 10px" }}>
-          <Text size='5' weight='bold'>
+      <Flex direction="column" gap="5">
+        <Flex justify="between" align="center" style={{ padding: "0 10px" }}>
+          <Text size="5" weight="bold">
             Score: {score}
           </Text>
 
-          <Flex gap='3'>
+          <Flex gap="3">
             {[1, 2, 3].map((heartIndex) => (
               <Text
                 key={heartIndex}
-                size='6'
+                size="6"
                 style={{ cursor: "default", userSelect: "none" }}
               >
                 {heartIndex <= 3 - lives ? "🖤" : "❤️"}
@@ -156,56 +199,44 @@ export default function Quiz() {
           </Flex>
         </Flex>
 
-        {/* Frågan */}
-        {loading || !question ? (
-          <Text size='5' weight='bold'>
-            Loading question...
-          </Text>
-        ) : (
+        {question && (
           <>
             <Card style={{ padding: "30px", textAlign: "center" }}>
-              <Text size='5' weight='bold'>
+              <Text size="5" weight="bold">
                 {question.question}
               </Text>
             </Card>
 
-            {/* Svarsalternativ */}
-            <Flex direction='column' gap='3'>
+            <Flex direction="column" gap="3">
               <AnimatePresence>
-                <Flex direction='column' gap='3'>
+                <Flex direction="column" gap="3">
                   {question.allAnswers.map((answer, index) => {
-                    // --- BESTÄM KNAPPENS TILLSTÅND ---
                     let buttonState:
                       | "idle"
                       | "correct"
                       | "incorrect"
                       | "idle-round-over" = "idle";
 
-                    // Om användaren har valt ett svar (rundan är "över" för denna fråga)
                     if (selectedAnswer) {
-                      // Fall 1: Användaren klickade på DENNA knapp
                       if (answer === selectedAnswer) {
                         if (answer === question.correctAnswer) {
-                          buttonState = "correct"; // Valde rätt -> Grön/Väx
+                          buttonState = "correct";
                         } else {
-                          buttonState = "incorrect"; // Valde fel -> Dyster ballong
+                          buttonState = "incorrect";
                         }
-                      }
-                      // Fall 2: Användaren klickade INTE på denna knapp
-                      else {
-                        // Vi avslöjar inte svaret. Alla andra blir gråa och backar.
+                      } else {
                         buttonState = "idle-round-over";
                       }
                     }
 
                     return (
                       <AnswerButton
-                        key={answer}
+                        key={`${question.question}-${answer}`}
                         index={index}
                         answerText={answer}
                         state={buttonState}
                         onClick={() => handleAnswerClick(answer)}
-                        disabled={!!selectedAnswer} // Inaktivera knapparna om vi valt ett svar
+                        disabled={!!selectedAnswer}
                       />
                     );
                   })}
