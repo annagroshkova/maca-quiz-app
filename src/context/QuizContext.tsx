@@ -12,6 +12,8 @@ interface QuizState {
   setScore: React.Dispatch<React.SetStateAction<number>>;
   setLives: React.Dispatch<React.SetStateAction<number>>;
   resetQuiz: () => void;
+  usedQuestions: Set<string>;
+  setUsedQuestions: React.Dispatch<React.SetStateAction<Set<string>>>;
 }
 
 const QuizContext = createContext<QuizState | null>(null);
@@ -21,12 +23,14 @@ export function QuizProvider({ children }: { children: ReactNode }) {
   const [selectedAnswer, setSelectedAnswer] = useState<string | null>(null);
   const [score, setScore] = useState(0);
   const [lives, setLives] = useState(3);
+  const [usedQuestions, setUsedQuestions] = useState<Set<string>>(new Set());
 
   const resetQuiz = () => {
     setQuestion(null);
     setSelectedAnswer(null);
     setScore(0);
     setLives(3);
+    setUsedQuestions(new Set());
   };
   const value = useMemo(
     () => ({
@@ -39,8 +43,10 @@ export function QuizProvider({ children }: { children: ReactNode }) {
       setScore,
       setLives,
       resetQuiz,
+      usedQuestions,
+      setUsedQuestions,
     }),
-    [question, selectedAnswer, score, lives]
+    [question, selectedAnswer, score, lives, usedQuestions]
   );
 
   return <QuizContext.Provider value={value}>{children}</QuizContext.Provider>;
