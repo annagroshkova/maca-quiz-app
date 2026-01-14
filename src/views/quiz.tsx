@@ -7,6 +7,8 @@ import "../App.css";
 import { getUserSettings, updateUserSettings } from "../userSettings";
 import SubmitButton from "../components/SubmitButton/SubmitButton";
 import Header from "../components/Header/Header";
+import { useQuiz } from "../context/QuizContext";
+import useQuizNavigation from "../hooks/useQuizNavigation";
 
 type ApiResponse = ApiQuestion[];
 
@@ -21,7 +23,7 @@ interface ApiQuestion {
   };
 }
 
-interface QuizQuestion {
+export interface QuizQuestion {
   question: string;
   correctAnswer: string;
   allAnswers: string[];
@@ -44,12 +46,19 @@ export default function Quiz() {
   }
 
   const navigate = useNavigate();
+  const { goToSettings } = useQuizNavigation();
+  const [loading, setLoading] = useState(false);
 
-  const [question, setQuestion] = useState<QuizQuestion | null>(null);
-  const [selectedAnswer, setSelectedAnswer] = useState<string | null>(null);
-  const [score, setScore] = useState(0);
-  const [lives, setLives] = useState(3);
-  const [questionQueue, setQuestionQueue] = useState<QuizQuestion[]>([]);
+  const {
+    question,
+    selectedAnswer,
+    score,
+    lives,
+    setQuestion,
+    setSelectedAnswer,
+    setScore,
+    setLives,
+  } = useQuiz();
 
   const handleAnswerClick = (answer: string) => {
     if (selectedAnswer) return;
@@ -154,7 +163,23 @@ export default function Quiz() {
       p="4"
       style={{ maxWidth: "95vw", marginTop: "2rem", marginBottom: "2rem" }}
     >
-      <Header />
+      <Header
+        backButton={true}
+        backButtonProps={{
+          onClick: () => {
+            setLives(3);
+            setScore(0);
+            goToSettings();
+          },
+          children: (
+            <img
+              src="go-back-icon-192-solid.svg"
+              alt="Go back icon"
+              style={{ height: "100%" }}
+            />
+          ),
+        }}
+      />
       <Flex direction="column" gap="5">
         <Flex justify="between" align="center" style={{ padding: "0 10px" }}>
           <Text size="5" weight="bold">
@@ -219,12 +244,9 @@ export default function Quiz() {
               </AnimatePresence>
             </Flex>
 
-            <SubmitButton
-              onClick={handleNextStep}
-              disabled={!selectedAnswer}
-              color={lives === 0 ? "ruby" : "indigo"}
-            >
-              {lives === 0 ? "Game Over" : "Next Question"}
+            {/* Reset-knapp (visas bara när man svarat) */}
+            <SubmitButton onClick={handleNextStep} disabled={!selectedAnswer}>
+              <span>{lives === 0 ? "Game Over" : "Next Question"}</span>
             </SubmitButton>
           </>
         )}

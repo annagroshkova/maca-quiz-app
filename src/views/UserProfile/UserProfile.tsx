@@ -1,12 +1,13 @@
-import { useNavigate } from "react-router-dom";
 import { useUser } from "../../context/UserContext";
 import SubmitButton from "../../components/SubmitButton/SubmitButton";
 import { useState } from "react";
 import Avatar from "../../components/Avatar/Avatar";
+import useQuizNavigation  from "../../hooks/useQuizNavigation";
 
 export default function UserProfile() {
   const { user, setUserName } = useUser();
-  const navigate = useNavigate();
+
+  const { returnToQuiz } = useQuizNavigation();
 
   const [displayName, setDisplayName] = useState(user.name ?? "");
 
@@ -14,13 +15,6 @@ export default function UserProfile() {
     e.preventDefault();
     if (!displayName) return;
     setUserName(displayName);
-  };
-
-  const handleRetry = () => {
-    navigate("/quiz");
-  };
-  const handleSettings = () => {
-    navigate("/quiz-settings");
   };
 
   return (
@@ -43,11 +37,8 @@ export default function UserProfile() {
           Save
         </button>
       </form>
-
-      <SubmitButton onClick={handleSettings}>Change Category</SubmitButton>
-      <SubmitButton onClick={handleSettings}>Change Difficulty</SubmitButton>
-      <SubmitButton onClick={handleRetry} color="indigo">
-        Try again!
+      <SubmitButton onClick={returnToQuiz}>
+        Return
       </SubmitButton>
     </section>
   );
