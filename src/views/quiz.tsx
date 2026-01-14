@@ -47,7 +47,6 @@ export default function Quiz() {
 
   const navigate = useNavigate();
   const { goToSettings } = useQuizNavigation();
-  const [loading, setLoading] = useState(false);
   const [questionQueue, setQuestionQueue] = useState<QuizQuestion[]>([]);
 
   const {
