@@ -17,9 +17,16 @@ export const AnswerButton = ({
   disabled = false,
   index,
 }: AnswerButtonProps) => {
-  let color: "#fcfcfc" | "#00a366" | "#d10036" = "#fcfcfc";
-  if (state === "correct") color = "#00a366";
-  if (state === "incorrect") color = "#d10036";
+  let background: "#fcfcfc" | "#00a366" | "#d10036" = "#fcfcfc";
+  let color: "white" | "black" | "#4a4a4aff" = "black";
+  if (state === "correct") {
+    background = "#00a366";
+    color = "white";
+  }
+  if (state === "incorrect") {
+    background = "#d10036";
+    color = "white";
+  }
 
   // Om knappen är inaktiv (idle-round-over), gör den grå
   const isPassive = state === "idle-round-over";
@@ -96,7 +103,7 @@ export const AnswerButton = ({
         // --- ÖVRIGA (Backa undan men var synliga) ---
         stepBack: {
           scale: 0.9,
-          opacity: 0.5, // Lite tydligare än förut så man ser att knappen finns
+          opacity: 1, // Lite tydligare än förut så man ser att knappen finns
           filter: "grayscale(100%)",
           transition: { type: "spring", stiffness: 200, damping: 15 },
         },
@@ -109,8 +116,8 @@ export const AnswerButton = ({
         radius='full'
         onClick={handleClick}
         style={{
-          color: "white",
-          backgroundColor: isPassive ? "#8e8e8eff" : color,
+          color: isPassive ? "#4a4a4aff" : color,
+          backgroundColor: isPassive ? "#d7d7d7" : background,
           width: "100%",
           cursor: disabled ? "default" : "pointer",
           borderRadius: "9999px",

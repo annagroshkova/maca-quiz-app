@@ -161,6 +161,9 @@ export default function Quiz() {
       lastScore,
       bestScore,
     });
+    setLives(3);
+    setScore(0);
+    setSelectedAnswer(null)
   };
 
   return (
@@ -186,7 +189,7 @@ export default function Quiz() {
         <Flex className='quiz__inner'>
           <Flex justify='between' align='center' style={{ padding: "0 10px" }}>
             <Text size='5' weight='bold'>
-              Score: {score}
+              Score: <span className='quiz__score-number'>{score}</span>
             </Text>
 
             <Flex gap='3'>
@@ -209,7 +212,7 @@ export default function Quiz() {
                 </Text>
               </Card>
 
-              <Flex direction='column' gap='3'>
+              <Flex direction='column' className='quiz__answers-container'>
                 <AnimatePresence>
                   <Flex direction='column' gap='3'>
                     {question.allAnswers.map((answer, index) => {

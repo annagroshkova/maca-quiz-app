@@ -1,5 +1,4 @@
 @import url(./views/StartPage//StartPage.css);
-/* @import url(./views/QuizSettings/quizSettings.css); */
 @import url(./views/Categories/Categories.css);
 @import url(./views/Levels/Levels.css);
 @import url(./components/RadioOption/RadioOption.css);
@@ -39,7 +38,6 @@ body {
   max-width: 1200px;
   min-height: 100vh;
   box-sizing: border-box;
-  border: 1px solid red;
   display: flex;
   flex-direction: column;
 }
