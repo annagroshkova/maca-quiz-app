@@ -134,22 +134,22 @@ export default function Quiz() {
   const handleNextStep = () => {
     if (lives === 0) {
       finalizeGame();
-      setTimeout(() => navigate("/gameover"), 300);
-    } else {
-      setSelectedAnswer(null);
+      navigate("/gameover");
+    }
 
-      if (questionQueue.length > 0) {
-        const [nextQuestion, ...restQueue] = questionQueue;
-        setQuestion(nextQuestion);
-        setQuestionQueue(restQueue);
-        setUsedQuestions((prev) => new Set(prev).add(nextQuestion.question));
+    setSelectedAnswer(null);
 
-        if (restQueue.length < prefetchThreshold) {
-          fetchQuestion();
-        }
-      } else {
+    if (questionQueue.length > 0) {
+      const [nextQuestion, ...restQueue] = questionQueue;
+      setQuestion(nextQuestion);
+      setQuestionQueue(restQueue);
+      setUsedQuestions((prev) => new Set(prev).add(nextQuestion.question));
+
+      if (restQueue.length < prefetchThreshold) {
         fetchQuestion();
       }
+    } else {
+      fetchQuestion();
     }
   };
 
@@ -163,7 +163,6 @@ export default function Quiz() {
     });
     setLives(3);
     setScore(0);
-    setSelectedAnswer(null)
   };
 
   return (
