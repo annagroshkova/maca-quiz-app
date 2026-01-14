@@ -1,6 +1,6 @@
 import { createContext, useContext, useState, useMemo } from "react";
 import type { ReactNode } from "react";
-import type { QuizQuestion } from "../views/quiz";
+import type { QuizQuestion } from "../views/Quiz/Quiz";
 
 interface QuizState {
   question: QuizQuestion | null;

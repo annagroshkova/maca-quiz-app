@@ -1,14 +1,14 @@
 import { useState, useEffect } from "react";
-import { Container, Flex, Card, Text } from "@radix-ui/themes";
-import { AnswerButton } from "../components/AnswerButton";
+import { Flex, Card, Text } from "@radix-ui/themes";
+import { AnswerButton } from "../../components/AnswerButton";
 import { AnimatePresence } from "motion/react";
 import { useNavigate } from "react-router-dom";
-import "../App.css";
-import { getUserSettings, updateUserSettings } from "../userSettings";
-import SubmitButton from "../components/SubmitButton/SubmitButton";
-import Header from "../components/Header/Header";
-import { useQuiz } from "../context/QuizContext";
-import useQuizNavigation from "../hooks/useQuizNavigation";
+import { getUserSettings, updateUserSettings } from "../../userSettings";
+import SubmitButton from "../../components/SubmitButton/SubmitButton";
+import Header from "../../components/Header/Header";
+import { useQuiz } from "../../context/QuizContext";
+import useQuizNavigation from "../../hooks/useQuizNavigation";
+import "./Quiz.css";
 
 type ApiResponse = ApiQuestion[];
 
@@ -164,10 +164,7 @@ export default function Quiz() {
   };
 
   return (
-    <Container
-      p="4"
-      style={{ maxWidth: "95vw", marginTop: "2rem", marginBottom: "2rem" }}
-    >
+    <>
       <Header
         backButton={true}
         backButtonProps={{
@@ -178,84 +175,85 @@ export default function Quiz() {
           },
           children: (
             <img
-              src="go-back-icon-192-solid.svg"
-              alt="Go back icon"
+              src='go-back-icon-192-solid.svg'
+              alt='Go back icon'
               style={{ height: "100%" }}
             />
           ),
         }}
       />
-      <Flex direction="column" gap="5">
-        <Flex justify="between" align="center" style={{ padding: "0 10px" }}>
-          <Text size="5" weight="bold">
-            Score: {score}
-          </Text>
+      <section className='quiz'>
+        <Flex className='quiz__inner'>
+          <Flex justify='between' align='center' style={{ padding: "0 10px" }}>
+            <Text size='5' weight='bold'>
+              Score: {score}
+            </Text>
 
-          <Flex gap="3">
-            {[1, 2, 3].map((heartIndex) => (
-              <Text
-                key={heartIndex}
-                size="6"
-                style={{ cursor: "default", userSelect: "none" }}
-              >
-                {heartIndex <= 3 - lives ? "🖤" : "❤️"}
-              </Text>
-            ))}
-          </Flex>
-        </Flex>
-
-        {question && (
-          <>
-            <Card style={{ padding: "30px", textAlign: "center" }}>
-              <Text size="5" weight="bold">
-                {question.question}
-              </Text>
-            </Card>
-
-            <Flex direction="column" gap="3">
-              <AnimatePresence>
-                <Flex direction="column" gap="3">
-                  {question.allAnswers.map((answer, index) => {
-                    let buttonState:
-                      | "idle"
-                      | "correct"
-                      | "incorrect"
-                      | "idle-round-over" = "idle";
-
-                    if (selectedAnswer) {
-                      if (answer === selectedAnswer) {
-                        if (answer === question.correctAnswer) {
-                          buttonState = "correct";
-                        } else {
-                          buttonState = "incorrect";
-                        }
-                      } else {
-                        buttonState = "idle-round-over";
-                      }
-                    }
-
-                    return (
-                      <AnswerButton
-                        key={`${question.question}-${answer}`}
-                        index={index}
-                        answerText={answer}
-                        state={buttonState}
-                        onClick={() => handleAnswerClick(answer)}
-                        disabled={!!selectedAnswer}
-                      />
-                    );
-                  })}
-                </Flex>
-              </AnimatePresence>
+            <Flex gap='3'>
+              {[1, 2, 3].map((heartIndex) => (
+                <Text
+                  key={heartIndex}
+                  size='6'
+                  style={{ cursor: "default", userSelect: "none" }}
+                >
+                  {heartIndex <= 3 - lives ? "🖤" : "❤️"}
+                </Text>
+              ))}
             </Flex>
+          </Flex>
+          {question && (
+            <>
+              <Card className='quiz__question-container' style={{}}>
+                <Text size='5' weight='bold'>
+                  {question.question}
+                </Text>
+              </Card>
 
-            {/* Reset-knapp (visas bara när man svarat) */}
-            <SubmitButton onClick={handleNextStep} disabled={!selectedAnswer}>
-              <span>{lives === 0 ? "Game Over" : "Next Question"}</span>
-            </SubmitButton>
-          </>
-        )}
-      </Flex>
-    </Container>
+              <Flex direction='column' gap='3'>
+                <AnimatePresence>
+                  <Flex direction='column' gap='3'>
+                    {question.allAnswers.map((answer, index) => {
+                      let buttonState:
+                        | "idle"
+                        | "correct"
+                        | "incorrect"
+                        | "idle-round-over" = "idle";
+
+                      if (selectedAnswer) {
+                        if (answer === selectedAnswer) {
+                          if (answer === question.correctAnswer) {
+                            buttonState = "correct";
+                          } else {
+                            buttonState = "incorrect";
+                          }
+                        } else {
+                          buttonState = "idle-round-over";
+                        }
+                      }
+
+                      return (
+                        <AnswerButton
+                          key={`${question.question}-${answer}`}
+                          index={index}
+                          answerText={answer}
+                          state={buttonState}
+                          onClick={() => handleAnswerClick(answer)}
+                          disabled={!!selectedAnswer}
+                        />
+                      );
+                    })}
+                  </Flex>
+                </AnimatePresence>
+              </Flex>
+
+              {/* Reset-knapp (visas bara när man svarat) */}
+              <SubmitButton onClick={handleNextStep} disabled={!selectedAnswer}>
+                <span>{lives === 0 ? "Game Over" : "Next Question"}</span>
+              </SubmitButton>
+            </>
+          )}
+        </Flex>
+      </section>
+    </>
   );
 }

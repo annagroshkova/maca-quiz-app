@@ -1,0 +1,28 @@
+.quiz {
+  margin: 0;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  flex-grow: 10;
+}
+
+.quiz__inner {
+  display: flex;
+  flex-direction: column;
+  background-color: rgba(240, 240, 240, 0.9);
+  border-radius: 12px;
+  gap: 30px;
+  padding: 30px 18px;
+  margin-bottom: 30px;
+}
+
+.quiz__question-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 70px;
+  padding-inline: 20px;
+  text-align: center;
+  font-weight: 600;
+  font-size: 1.1rem;
+}

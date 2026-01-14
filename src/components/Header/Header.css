@@ -19,3 +19,7 @@
     height: 100%;
     aspect-ratio: 1/1;
 }
+
+.header .avatar__icon {
+    height: 100%;
+}
