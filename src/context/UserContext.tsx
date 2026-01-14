@@ -1,4 +1,4 @@
-import { createContext, useContext, useState } from "react";
+import { createContext, useContext, useState, useEffect } from "react";
 import { getUserSettings, updateUserSettings } from "../userSettings";
 
 interface User {
@@ -15,11 +15,32 @@ interface UserContextType {
 const UserContext = createContext<UserContextType | null>(null);
 
 export function UserProvider({ children }: { children: React.ReactNode }) {
-  const [user, setUser] = useState<User>(getUserSettings());
+  const [user, setUser] = useState<User>(getUserSettings() || {});
+  useEffect(() => {
+    const handleStorageChange = () => {
+      const freshData = getUserSettings();
+      if (!freshData) {
+        setUser({}); // Reset state if storage was cleared
+      }
+    };
+
+    window.addEventListener("storage", handleStorageChange);
+    return () => window.removeEventListener("storage", handleStorageChange);
+  }, []);
 
   const setUserName = (name: string) => {
-    updateUserSettings({ name });
-    setUser((prev) => ({ ...prev, name }));
+    const trimmedName = name.trim();
+    if (!trimmedName) return;
+
+    setUser((prevUser) => {
+      const updatedUser: User = {
+        name: trimmedName,
+        lastScore: user.lastScore ?? 0,
+        bestScore: user.bestScore ?? 0,
+      };
+      updateUserSettings(updatedUser);
+      return updatedUser;
+    });
   };
 
   return (

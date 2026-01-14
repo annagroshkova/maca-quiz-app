@@ -5,16 +5,12 @@ import {
 } from "../../userSettings";
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
+import { useUser } from "../../context/UserContext";
 
 export default function StartPage() {
   const navigate = useNavigate();
-  const user: UserSettings = getUserSettings();
-  console.log(user);
+  const { setUserName } = useUser();
   const [name, setName] = useState("");
-
-  // if (user.name) {
-  //   navigate("/quiz-settings");
-  // }
 
   const handleNameSubmit = (e: React.FormEvent) => {
     e.preventDefault();
@@ -22,26 +18,27 @@ export default function StartPage() {
     if (!name) {
       return; //stoppar om det inte finns ett namn
     }
-    updateUserSettings({ name });
+    setUserName(name);
+
     setName("");
     navigate("/categories");
   };
 
   return (
-    <section className='startpage'>
-      <h1 className='startpage__headning'>Quizzie</h1>
-      <div className='startpage__form-container'>
-        <form className='startpage__form' onSubmit={handleNameSubmit}>
-          <label htmlFor='name'>Enter your name to start!</label>
+    <section className="startpage">
+      <h1 className="startpage__headning">Quizzie</h1>
+      <div className="startpage__form-container">
+        <form className="startpage__form" onSubmit={handleNameSubmit}>
+          <label htmlFor="name">Enter your name to start!</label>
           <input
-            id='name'
-            type='text'
+            id="name"
+            type="text"
             value={name}
             onChange={(e) => setName(e.target.value.trim())}
-            placeholder='Write your name...'
+            placeholder="Write your name..."
           ></input>
           {/* knapp disabled om det inte finns ett namn */}
-          <button type='submit' disabled={!name}>
+          <button type="submit" disabled={!name}>
             <span>Let's beghin!</span>
           </button>
         </form>
