@@ -37,6 +37,7 @@ const prefetchThreshold = 3;
 export default function Quiz() {
   const baseUrl = "https://the-trivia-api.com/v2";
   const user = getUserSettings();
+  const { usedQuestions, setUsedQuestions } = useQuiz();
   const params = new URLSearchParams({
     categories: user.category ?? "",
   });
@@ -97,9 +98,10 @@ export default function Quiz() {
           ),
           difficulty: q.difficulty,
         }))
-        .filter((q) => {
-          return !q.allAnswers.some((ans) => ans.length > maxAnswerLength);
-        });
+        .filter(
+          (q) => !q.allAnswers.some((ans) => ans.length > maxAnswerLength)
+        )
+        .filter((q) => !usedQuestions.has(q.question));
 
       if (validQuestions.length === 0) {
         fetchQuestion();
@@ -124,6 +126,8 @@ export default function Quiz() {
       const [nextQ, ...rest] = questionQueue;
       setQuestion(nextQ);
       setQuestionQueue(rest);
+
+      setUsedQuestions((prev) => new Set(prev).add(nextQ.question));
     }
   }, [questionQueue, question]);
 
@@ -138,6 +142,7 @@ export default function Quiz() {
         const [nextQuestion, ...restQueue] = questionQueue;
         setQuestion(nextQuestion);
         setQuestionQueue(restQueue);
+        setUsedQuestions((prev) => new Set(prev).add(nextQuestion.question));
 
         if (restQueue.length < prefetchThreshold) {
           fetchQuestion();
