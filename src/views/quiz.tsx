@@ -37,7 +37,6 @@ export default function Quiz() {
   const user = getUserSettings();
   const params = new URLSearchParams({
     categories: user.category ?? "",
-    limit: "1",
   });
 
   if (user.level !== undefined) {
@@ -51,7 +50,6 @@ export default function Quiz() {
   const [score, setScore] = useState(0);
   const [lives, setLives] = useState(3);
   const [questionQueue, setQuestionQueue] = useState<QuizQuestion[]>([]);
-  const [isFetching, setIsFetching] = useState(false);
 
   const handleAnswerClick = (answer: string) => {
     if (selectedAnswer) return;
@@ -72,9 +70,6 @@ export default function Quiz() {
   };
 
   const fetchQuestion = async () => {
-    if (isFetching) return;
-    setIsFetching(true);
-
     try {
       const currentParams = new URLSearchParams(params);
       currentParams.set("limit", questionBatch.toString());
@@ -98,7 +93,6 @@ export default function Quiz() {
         });
 
       if (validQuestions.length === 0) {
-        setIsFetching(false);
         fetchQuestion();
         return;
       }
@@ -109,8 +103,6 @@ export default function Quiz() {
       });
     } catch (error) {
       console.error("Error fetching question:", error);
-    } finally {
-      setIsFetching(false);
     }
   };
 
@@ -182,11 +174,7 @@ export default function Quiz() {
           </Flex>
         </Flex>
 
-        {!question ? (
-          <Text size="5" weight="bold">
-            Loading question...
-          </Text>
-        ) : (
+        {question && (
           <>
             <Card style={{ padding: "30px", textAlign: "center" }}>
               <Text size="5" weight="bold">
