@@ -2,7 +2,7 @@ import { useUser } from "../../context/UserContext";
 import SubmitButton from "../../components/SubmitButton/SubmitButton";
 import { useState } from "react";
 import Avatar from "../../components/Avatar/Avatar";
-import { useQuizNavigation } from "../../hooks/useQuizNavigation";
+import useQuizNavigation  from "../../hooks/useQuizNavigation";
 
 export default function UserProfile() {
   const { user, setUserName } = useUser();
@@ -37,7 +37,7 @@ export default function UserProfile() {
           Save
         </button>
       </form>
-      <SubmitButton onClick={returnToQuiz} color="indigo">
+      <SubmitButton onClick={returnToQuiz}>
         Return
       </SubmitButton>
     </section>

@@ -11,7 +11,6 @@ import Header from "../../components/Header/Header";
 import SubmitButton from "../../components/SubmitButton/SubmitButton";
 
 export default function Categories() {
-
   function useTwoRowHeight(deps: unknown[] = []) {
     const ref = useRef<HTMLDivElement>(null);
 
@@ -36,7 +35,7 @@ export default function Categories() {
             childrenArray[childrenArray.length - 1].offsetTop +
               childrenArray[childrenArray.length - 1].offsetHeight;
           const twoRowsHeight = thirdRowTop - firstRowTop;
-          const scrollContainerHeight = twoRowsHeight + 40
+          const scrollContainerHeight = twoRowsHeight + 40;
           el.style.maxHeight = `${scrollContainerHeight}px`;
         }
       };
@@ -71,7 +70,7 @@ export default function Categories() {
 
   return (
     <>
-      <Header />
+      <Header backButton={false} />
       <section className='categories'>
         <p className='categories__greeting'>{greeting}</p>
         <form className='categories__form' onSubmit={handleCategoriesSubmit}>
@@ -91,10 +90,9 @@ export default function Categories() {
               ))}
             </div>
           </fieldset>
-          <SubmitButton buttonText="Continue" disabled={category === null}/>
-          {/* <button type='submit' disabled={category === null}>
-            Continue
-          </button> */}
+          <SubmitButton disabled={category === null}>
+            <span>Continue</span>
+          </SubmitButton>
         </form>
       </section>
     </>

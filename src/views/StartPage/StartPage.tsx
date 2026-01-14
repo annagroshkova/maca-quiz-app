@@ -42,7 +42,7 @@ export default function StartPage() {
           ></input>
           {/* knapp disabled om det inte finns ett namn */}
           <button type='submit' disabled={!name}>
-            Let's begin!
+            <span>Let's beghin!</span>
           </button>
         </form>
       </div>

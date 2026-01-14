@@ -1,10 +1,10 @@
 .header {
-    height: 45px;
+    height: 40px;
     padding: 25px 0;
     margin: 0;
     display: flex;
     justify-content: space-between;
-    align-items: center;
+    align-items: stretch;
 }
 
 .header__quiz-name {
@@ -12,4 +12,10 @@
     color: #b60055;
     font-size: 28px;
     font-family: serif;
+    align-self: center;
+}
+
+.header__placeholder {
+    height: 100%;
+    aspect-ratio: 1/1;
 }

@@ -1,4 +1,11 @@
-.Avatar {
+.avatar {
+  height: 100%;
+  padding: 1px 6px;
+}
+
+.avatar__icon {
+  height: 100%;
+  aspect-ratio: 1/1;
   display: flex;
   align-items: center;
   justify-content: center;

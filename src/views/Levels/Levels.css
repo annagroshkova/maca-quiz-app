@@ -1,13 +1,12 @@
 .levels {
-
-    display: flex;
+  display: flex;
   flex-direction: column;
   justify-content: center;
   flex-grow: 10;
 }
 
 .levels__inner {
-      background-color: rgba(240, 240, 240, 0.9);
+  background-color: rgba(240, 240, 240, 0.9);
   border-radius: 12px;
   width: 100%;
   box-sizing: border-box;
@@ -33,13 +32,12 @@
 }
 
 .levels__form {
-    margin-top: 22px;
+  margin-top: 22px;
   background-color: rgba(240, 240, 240, 0.9);
   border-radius: 12px;
   display: flex;
   flex-direction: column;
   gap: 20px;
-
 }
 
 .levels__fieldset {

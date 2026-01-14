@@ -1,5 +1,6 @@
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
+import useQuizNavigation from "../../hooks/useQuizNavigation";
 import {
   type UserSettings,
   getUserSettings,
@@ -13,6 +14,7 @@ import SubmitButton from "../../components/SubmitButton/SubmitButton";
 export default function Levels() {
   const user: UserSettings = getUserSettings();
   const navigate = useNavigate();
+  const { goToSettings } = useQuizNavigation();
 
   const [level, setLevel] = useState<
     "easy" | "medium" | "hard" | undefined | null
@@ -37,7 +39,12 @@ export default function Levels() {
 
   return (
     <>
-      <Header />
+      <Header
+              backButton={true}
+              backButtonProps={{
+                onClick: goToSettings,
+                children: <img src='go-back-icon-192-solid.svg' alt='Go back icon' style={{ height: "100%"}}/>,
+              }}/>
       <section className='levels'>
         <div className="levels__inner">
                   <div className='levels__category-container'>
@@ -68,7 +75,7 @@ export default function Levels() {
               ))}
             </div>
           </fieldset>
-          <SubmitButton buttonText="Let's play!" disabled={level === null} />
+          <SubmitButton disabled={level === null}><span>Let's play!</span></SubmitButton>
         </form>
         </div>
 
