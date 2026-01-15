@@ -50,6 +50,11 @@
     border: none;
     font-size: 1.4rem;
     font-weight: 500;
+    border-radius: 6px;
+}
+
+.startpage__form > input:focus {
+    outline: 2px solid #b60055;
 }
 
 .startpage__form > input::placeholder {
