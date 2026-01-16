@@ -5,7 +5,7 @@
   flex-direction: column;
   justify-content: center;
   max-width: 800px;
-  margin-bottom: 60px;
+  margin: 0 auto 60px;
 }
 
 .categories__greeting {
@@ -17,6 +17,7 @@
 
 .categories__form {
   background-color: rgba(240, 240, 240, 0.9);
+  box-shadow: 3px 8px 8px rgba(75, 30, 7, 0.1);
   border-radius: 12px;
   display: flex;
   flex-direction: column;

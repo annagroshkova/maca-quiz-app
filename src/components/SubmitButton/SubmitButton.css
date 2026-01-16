@@ -29,13 +29,13 @@
     font-size: 1.25rem;
     line-height: 1rem;
     color: white;
-    background-color: #382b76;
+    background-color: #564896;
     transition: background-color 0.1s ease-out;
     cursor: pointer;
 } 
 
 .submit-button:hover {
-    background-color: #1b1053;
+    background-color: #382b76;
 }
 
 .submit-button:disabled {

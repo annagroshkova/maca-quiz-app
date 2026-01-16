@@ -1,10 +1,10 @@
 @import url(./views/StartPage//StartPage.css);
-/* @import url(./views/QuizSettings/quizSettings.css); */
 @import url(./views/Categories/Categories.css);
 @import url(./views/Levels/Levels.css);
 @import url(./components/RadioOption/RadioOption.css);
 @import url(./components/SubmitButton/SubmitButton.css);
 @import url(./views/UserProfile/UserProfile.css);
+@import url(./views/Quiz/Quiz.css);
 @import url(./components/Avatar/Avatar.css);
 @import url(./components/SubmitButton/SubmitButton.css);
 
@@ -24,6 +24,7 @@ body {
   margin: 0;
   min-height: 100%;
   background: transparent;
+  color: rgb(19, 19, 19);
 
 }
 
@@ -37,7 +38,6 @@ body {
   max-width: 1200px;
   min-height: 100vh;
   box-sizing: border-box;
-  border: 1px solid red;
   display: flex;
   flex-direction: column;
 }
