@@ -7,6 +7,7 @@ import useQuizNavigation from "../../hooks/useQuizNavigation";
 export default function UserProfile() {
   const { user, setUserName } = useUser();
   const { returnToQuiz } = useQuizNavigation();
+  const { goToRules } = useQuizNavigation();
 
   const [displayName, setDisplayName] = useState(user.name ?? "");
 
@@ -40,6 +41,7 @@ export default function UserProfile() {
           Save
         </button>
       </form>
+      <SubmitButton onClick={goToRules}>Rules</SubmitButton>
       <SubmitButton onClick={returnToQuiz}>Return</SubmitButton>
     </section>
   );
