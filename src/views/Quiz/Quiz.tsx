@@ -9,6 +9,7 @@ import Header from "../../components/Header/Header";
 import { useQuiz } from "../../context/QuizContext";
 import useQuizNavigation from "../../hooks/useQuizNavigation";
 import "./Quiz.css";
+import MainWrapper from "../MainWrapper";
 
 type ApiResponse = ApiQuestion[];
 
@@ -186,7 +187,8 @@ export default function Quiz() {
           ),
         }}
       />
-      <section className='quiz'>
+      <MainWrapper>
+            
         <Flex className='quiz__inner'>
           <Flex justify='between' align='center' style={{ padding: "0 10px" }}>
             <Text size='5' weight='bold'>
@@ -257,7 +259,8 @@ export default function Quiz() {
             </>
           )}
         </Flex>
-      </section>
+      </MainWrapper>
+
     </>
   );
 }
