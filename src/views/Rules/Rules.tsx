@@ -1,15 +1,17 @@
 import { Card, Flex, Text } from "@radix-ui/themes";
 import Header from "../../components/Header/Header";
 import { useNavigate } from "react-router-dom";
+import useQuizNavigation from "../../hooks/useQuizNavigation";
 
 export default function Rules() {
   const navigate = useNavigate();
+  const { goBack } = useQuizNavigation();
   return (
     <>
       <Header
         backButton
         backButtonProps={{
-          onClick: () => navigate(-1),
+          onClick: () => goBack(),
           children: (
             <img
               src="go-back-icon-192-solid.svg"
