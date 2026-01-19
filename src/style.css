@@ -7,6 +7,7 @@
 @import url(./views/Quiz/Quiz.css);
 @import url(./components/Avatar/Avatar.css);
 @import url(./components/SubmitButton/SubmitButton.css);
+@import url(./views/Rules/Rules.css);
 
 @font-face {
   font-family: "SF Pro Display";
@@ -29,8 +30,6 @@
   font-weight: 600;
   font-style: normal;
 }
-
-
 
 html {
   min-height: 100%;
