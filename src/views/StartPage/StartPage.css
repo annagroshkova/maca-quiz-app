@@ -3,10 +3,10 @@
     flex-direction: column;
     text-align: center;
     min-height: 100%;
-
+    padding-inline: 22px;
 }
 
-.startpage__headning {
+.startpage__heading {
     color: #b60055;
     margin-top: 30px;
 }

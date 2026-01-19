@@ -3,7 +3,7 @@ import Avatar from "../Avatar/Avatar";
 import { Link } from "react-router-dom";
 import { useUser } from "../../context/UserContext";
 import "./Header.css";
-import type { ReactNode } from "react";
+import { useState, useEffect, type ReactNode } from "react";
 
 interface Props {
   backButton: boolean;
@@ -16,8 +16,19 @@ interface Props {
 export default function Header({ backButton, backButtonProps = {} }: Props) {
   const { onClick, children } = backButtonProps;
   const { user } = useUser();
+  const [isScrolled, setIsScrolled] = useState(false);
+
+  useEffect(() => {
+    const handleScroll = () => {
+      setIsScrolled(window.scrollY > 0);
+    };
+
+    window.addEventListener("scroll", handleScroll);
+    return () => window.removeEventListener("scroll", handleScroll);
+  }, []);
+
   return (
-    <header className='header'>
+    <header className={`header ${isScrolled ? "header--scrolled" : ""}`}>
       {backButton ? (
         <BackButton onClick={onClick} children={children} />
       ) : (
