@@ -9,6 +9,7 @@ import { categories } from "../../data";
 import RadioOption from "../../components/RadioOption/RadioOption";
 import Header from "../../components/Header/Header";
 import SubmitButton from "../../components/SubmitButton/SubmitButton";
+import MainWrapper from "../MainWrapper";
 
 export default function Categories() {
   function useTwoRowHeight(deps: unknown[] = []) {
@@ -71,7 +72,7 @@ export default function Categories() {
   return (
     <>
       <Header backButton={false} />
-      <section className='categories'>
+      <MainWrapper>
         <p className='categories__greeting'>{greeting}</p>
         <form className='categories__form' onSubmit={handleCategoriesSubmit}>
           <fieldset className='categories__fieldset'>
@@ -94,7 +95,7 @@ export default function Categories() {
             <span>Continue</span>
           </SubmitButton>
         </form>
-      </section>
+      </MainWrapper>
     </>
   );
 }

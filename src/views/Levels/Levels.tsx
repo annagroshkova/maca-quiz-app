@@ -10,6 +10,7 @@ import { type Category, categories, levels } from "../../data";
 import RadioOption from "../../components/RadioOption/RadioOption";
 import Header from "../../components/Header/Header";
 import SubmitButton from "../../components/SubmitButton/SubmitButton";
+import MainWrapper from "../MainWrapper";
 
 export default function Levels() {
   const user: UserSettings = getUserSettings();
@@ -45,8 +46,10 @@ export default function Levels() {
                 onClick: goToSettings,
                 children: <img src='go-back-icon-192-solid.svg' alt='Go back icon' style={{ height: "100%"}}/>,
               }}/>
-      <section className='levels'>
-        <div className="levels__inner">
+
+              <MainWrapper>
+              
+        <div className="levels">
                   <div className='levels__category-container'>
           {/* <div className='levels__image-container'> */}
           <img
@@ -79,7 +82,9 @@ export default function Levels() {
         </form>
         </div>
 
-      </section>
+
+              </MainWrapper>
+
     </>
   );
 }
