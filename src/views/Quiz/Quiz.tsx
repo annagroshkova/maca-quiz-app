@@ -176,6 +176,7 @@ export default function Quiz() {
     } else {
       fetchQuestion();
     }
+    console.log(usedQuestions);
   };
 
   const finalizeGame = () => {
