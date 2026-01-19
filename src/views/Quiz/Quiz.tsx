@@ -57,10 +57,16 @@ export default function Quiz() {
     selectedAnswer,
     score,
     lives,
+    correctAnswersStreak,
+    lastRewardedPointCount,
+    lastRewardedLifeCount,
     setQuestion,
     setSelectedAnswer,
     setScore,
     setLives,
+    setCorrectAnswersStreak,
+    setLastRewardedPointCount,
+    setLastRewardedLifeCount,
   } = useQuiz();
 
   const handleAnswerClick = (answer: string) => {
@@ -76,8 +82,26 @@ export default function Quiz() {
         scorePoint = 3;
       }
       setScore((prevScore) => prevScore + scorePoint);
+
+      setCorrectAnswersStreak((prevStreak) => {
+        let newStreak = prevStreak + 1;
+
+        const rewardLifeEarned = Math.floor(newStreak / 10);
+        if (rewardLifeEarned > lastRewardedLifeCount) {
+          setLives((prev) => prev + 1);
+          setLastRewardedLifeCount(rewardLifeEarned);
+        }
+        const rewardPointsEarned = Math.floor(newStreak / 5);
+        if (rewardPointsEarned > lastRewardedPointCount) {
+          setScore((prev) => prev + 10);
+          setLastRewardedPointCount(rewardPointsEarned);
+        }
+
+        return newStreak;
+      });
     } else {
       setLives((lostLife) => lostLife - 1);
+      setCorrectAnswersStreak(0);
     }
   };
 
@@ -87,7 +111,7 @@ export default function Quiz() {
       currentParams.set("limit", questionBatch.toString());
 
       const response = await fetch(
-        `${baseUrl}/questions?${currentParams.toString()}`
+        `${baseUrl}/questions?${currentParams.toString()}`,
       );
       const data: ApiResponse = await response.json();
 
@@ -96,12 +120,12 @@ export default function Quiz() {
           question: q.question.text,
           correctAnswer: q.correctAnswer,
           allAnswers: [...q.incorrectAnswers, q.correctAnswer].sort(
-            () => Math.random() - 0.5
+            () => Math.random() - 0.5,
           ),
           difficulty: q.difficulty,
         }))
         .filter(
-          (q) => !q.allAnswers.some((ans) => ans.length > maxAnswerLength)
+          (q) => !q.allAnswers.some((ans) => ans.length > maxAnswerLength),
         )
         .filter((q) => !usedQuestions.has(q.question));
 
@@ -153,6 +177,7 @@ export default function Quiz() {
     } else {
       fetchQuestion();
     }
+    console.log(usedQuestions);
   };
 
   const finalizeGame = () => {
@@ -180,8 +205,8 @@ export default function Quiz() {
           },
           children: (
             <img
-              src='go-back-icon-192-solid.svg'
-              alt='Go back icon'
+              src="go-back-icon-192-solid.svg"
+              alt="Go back icon"
               style={{ height: "100%" }}
             />
           ),
@@ -195,11 +220,11 @@ export default function Quiz() {
               Score: <span className='quiz__score-number'>{score}</span>
             </Text>
 
-            <Flex gap='3'>
+            <Flex gap="3">
               {[1, 2, 3].map((heartIndex) => (
                 <Text
                   key={heartIndex}
-                  size='6'
+                  size="6"
                   style={{ cursor: "default", userSelect: "none" }}
                 >
                   {heartIndex <= 3 - lives ? "🖤" : "❤️"}
@@ -209,15 +234,15 @@ export default function Quiz() {
           </Flex>
           {question && (
             <>
-              <Card className='quiz__question-container' style={{}}>
-                <Text size='5' weight='bold'>
+              <Card className="quiz__question-container" style={{}}>
+                <Text size="5" weight="bold">
                   {question.question}
                 </Text>
               </Card>
 
-              <Flex direction='column' className='quiz__answers-container'>
+              <Flex direction="column" className="quiz__answers-container">
                 <AnimatePresence>
-                  <Flex direction='column' gap='3'>
+                  <Flex direction="column" gap="3">
                     {question.allAnswers.map((answer, index) => {
                       let buttonState:
                         | "idle"

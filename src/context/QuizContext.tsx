@@ -7,13 +7,19 @@ interface QuizState {
   selectedAnswer: string | null;
   score: number;
   lives: number;
+  correctAnswersStreak: number;
+  lastRewardedPointCount: number;
+  lastRewardedLifeCount: number;
   setQuestion: (q: QuizQuestion | null) => void;
   setSelectedAnswer: (a: string | null) => void;
   setScore: React.Dispatch<React.SetStateAction<number>>;
   setLives: React.Dispatch<React.SetStateAction<number>>;
+  setCorrectAnswersStreak: React.Dispatch<React.SetStateAction<number>>;
   resetQuiz: () => void;
   usedQuestions: Set<string>;
   setUsedQuestions: React.Dispatch<React.SetStateAction<Set<string>>>;
+  setLastRewardedPointCount: React.Dispatch<React.SetStateAction<number>>;
+  setLastRewardedLifeCount: React.Dispatch<React.SetStateAction<number>>;
 }
 
 const QuizContext = createContext<QuizState | null>(null);
@@ -24,6 +30,9 @@ export function QuizProvider({ children }: { children: ReactNode }) {
   const [score, setScore] = useState(0);
   const [lives, setLives] = useState(3);
   const [usedQuestions, setUsedQuestions] = useState<Set<string>>(new Set());
+  const [correctAnswersStreak, setCorrectAnswersStreak] = useState(0);
+  const [lastRewardedPointCount, setLastRewardedPointCount] = useState(0);
+  const [lastRewardedLifeCount, setLastRewardedLifeCount] = useState(0);
 
   const resetQuiz = () => {
     setQuestion(null);
@@ -31,6 +40,9 @@ export function QuizProvider({ children }: { children: ReactNode }) {
     setScore(0);
     setLives(3);
     setUsedQuestions(new Set());
+    setCorrectAnswersStreak(0);
+    setLastRewardedPointCount(0);
+    setLastRewardedLifeCount(0);
   };
   const value = useMemo(
     () => ({
@@ -38,6 +50,9 @@ export function QuizProvider({ children }: { children: ReactNode }) {
       selectedAnswer,
       score,
       lives,
+      correctAnswersStreak,
+      lastRewardedPointCount,
+      lastRewardedLifeCount,
       setQuestion,
       setSelectedAnswer,
       setScore,
@@ -45,8 +60,20 @@ export function QuizProvider({ children }: { children: ReactNode }) {
       resetQuiz,
       usedQuestions,
       setUsedQuestions,
+      setCorrectAnswersStreak,
+      setLastRewardedPointCount,
+      setLastRewardedLifeCount,
     }),
-    [question, selectedAnswer, score, lives, usedQuestions]
+    [
+      question,
+      selectedAnswer,
+      score,
+      lives,
+      usedQuestions,
+      correctAnswersStreak,
+      lastRewardedPointCount,
+      lastRewardedLifeCount,
+    ],
   );
 
   return <QuizContext.Provider value={value}>{children}</QuizContext.Provider>;

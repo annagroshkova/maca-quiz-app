@@ -20,7 +20,7 @@ export function UserProvider({ children }: { children: React.ReactNode }) {
     const handleStorageChange = () => {
       const freshData = getUserSettings();
       if (!freshData) {
-        setUser({}); // Reset state if storage was cleared
+        setUser({});
       }
     };
 
