@@ -5,7 +5,7 @@ import StartPage from "./views/StartPage/StartPage";
 import Categories from "./views/Categories/Categories";
 import Levels from "./views/Levels/Levels";
 import Quiz from "./views/Quiz/Quiz";
-import GameOver from "./views/gameover";
+import GameOver from "./views/Gameover/Gameover";
 import UserProfile from "./views/UserProfile/UserProfile";
 
 export default function App(): ReactNode {

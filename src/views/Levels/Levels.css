@@ -10,7 +10,7 @@
 }
 
 .levels__category-container {
-  padding: 22px 0 0;
+  padding: 8px 0;
   display: grid;
   justify-items: center;
 }
@@ -39,6 +39,7 @@
   margin: 0 auto;
   padding: 0;
   width: 100%;
+  margin-bottom: 20px;
 }
 
 .levels__fieldset > legend {

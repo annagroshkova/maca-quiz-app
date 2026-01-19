@@ -1,0 +1,39 @@
+.gameover {
+      display: flex;
+  flex-direction: column;
+  align-items: center;
+  background-color: rgba(240, 240, 240, 0.9);
+  box-shadow: 3px 8px 8px rgba(75, 30, 7, 0.1);
+  border-radius: 12px;
+  gap: 40px;
+  padding: 45px 18px;
+  
+  
+}
+
+.gameover__heading {
+    margin: 5px 0;
+    color: #b60055;
+    font-size: 28px;
+}
+
+.gameover__score-container, .gameover__buttons-container {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    align-items: center;
+    justify-content: center;
+
+    
+}
+
+.gameover__score {
+    font-size: 1.2rem;
+    line-height: auto;
+    margin: 2px 0;
+}
+
+.gameover__score span {
+    font-weight: 600;
+}
+
