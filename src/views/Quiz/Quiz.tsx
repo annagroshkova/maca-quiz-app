@@ -48,6 +48,7 @@ export default function Quiz() {
 
   const navigate = useNavigate();
   const { goToSettings } = useQuizNavigation();
+  const { resetQuiz } = useQuiz();
   const [questionQueue, setQuestionQueue] = useState<QuizQuestion[]>([]);
 
   const {
@@ -173,6 +174,7 @@ export default function Quiz() {
           onClick: () => {
             setLives(3);
             setScore(0);
+            resetQuiz();
             goToSettings();
           },
           children: (

@@ -8,10 +8,33 @@
 @import url(./components/Avatar/Avatar.css);
 @import url(./components/SubmitButton/SubmitButton.css);
 
+@font-face {
+  font-family: "SF Pro Display";
+  src: url("../public/fonts/SF\ Pro\ Display\ Regular.woff2") format("woff2");
+  font-weight: 400;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: "SF Pro Display";
+  src: url("../public/fonts/SF\ Pro\ Display\ Medium.woff2") format("woff2");
+  font-weight: 500;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: "SF Pro Display";
+  src: url("../public/fonts/SF\ Pro\ Display\ Bold.woff2") format("woff2");
+  font-weight: 600;
+  font-style: normal;
+}
+
+
 
 html {
   min-height: 100%;
-background: linear-gradient(
+  background: linear-gradient(
     211deg,
     rgb(255 222 204) 0%,
     rgb(182 205 233) 100%
@@ -19,13 +42,12 @@ background: linear-gradient(
 }
 
 body {
-  font-family: 'Arial', sans-serif;
+  font-family: "SF Pro Display", "Arial", sans-serif;
   display: flex;
   margin: 0;
   min-height: 100%;
   background: transparent;
   color: rgb(19, 19, 19);
-
 }
 
 #root {

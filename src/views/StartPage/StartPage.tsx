@@ -14,11 +14,12 @@ export default function StartPage() {
 
   const handleNameSubmit = (e: React.FormEvent) => {
     e.preventDefault();
+    const trimmedName = name.trim();
 
-    if (!name) {
+    if (!trimmedName) {
       return; //stoppar om det inte finns ett namn
     }
-    setUserName(name);
+    setUserName(trimmedName);
 
     setName("");
     navigate("/categories");
@@ -34,12 +35,12 @@ export default function StartPage() {
             id="name"
             type="text"
             value={name}
-            onChange={(e) => setName(e.target.value.trim())}
+            onChange={(e) => setName(e.target.value)}
             placeholder="Write your name..."
           ></input>
           {/* knapp disabled om det inte finns ett namn */}
-          <button type="submit" disabled={!name}>
-            <span>Let's beghin!</span>
+          <button type="submit" disabled={!name.trim()}>
+            <span>Let's begin!</span>
           </button>
         </form>
       </div>
