@@ -1,27 +1,36 @@
 .header {
-    height: 40px;
-    padding: 25px 0;
-    margin: 0 auto;
-    display: flex;
-    justify-content: space-between;
-    align-items: stretch;
-    width: 100%;
-    max-width: 950px;
+  position: sticky;
+  top: 0;
+  height: 40px;
+  padding: 25px 0;
+  margin: 0 auto;
+  display: flex;
+  justify-content: space-between;
+  align-items: stretch;
+  width: 100%;
+  max-width: 950px;
+  background-color: transparent;
+  transition: background-color 0.3s ease;
 }
 
 .header__quiz-name {
-    margin: 0;
-    color: #b60055;
-    font-size: 28px;
-    font-family: serif;
-    align-self: center;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  margin: 0;
+  color: #b60055;
+  font-size: 28px;
+  font-family: serif;
+  align-self: center;
 }
 
 .header__placeholder {
-    height: 100%;
-    aspect-ratio: 1/1;
+  height: 100%;
+  width: 100px;
+  aspect-ratio: 1/1;
 }
 
 .header .avatar__icon {
-    height: 100%;
+  height: 100%;
 }
