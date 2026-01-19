@@ -7,17 +7,19 @@ import Levels from "./views/Levels/Levels";
 import Quiz from "./views/Quiz/Quiz";
 import GameOver from "./views/Gameover/Gameover";
 import UserProfile from "./views/UserProfile/UserProfile";
+import Rules from "./views/Rules/Rules";
 
 export default function App(): ReactNode {
   return (
     <BrowserRouter>
       <Routes>
-        <Route path='/' element={<StartPage />} />
-        <Route path='/categories' element={<Categories />} />
-        <Route path='/levels' element={<Levels />} />
-        <Route path='/quiz' element={<Quiz />} />
-        <Route path='/userProfile' element={<UserProfile />} />
-        <Route path='/gameover' element={<GameOver />} />
+        <Route path="/" element={<StartPage />} />
+        <Route path="/categories" element={<Categories />} />
+        <Route path="/levels" element={<Levels />} />
+        <Route path="/quiz" element={<Quiz />} />
+        <Route path="/userProfile" element={<UserProfile />} />
+        <Route path="/gameover" element={<GameOver />} />
+        <Route path="/rules" element={<Rules />} />
       </Routes>
     </BrowserRouter>
   );

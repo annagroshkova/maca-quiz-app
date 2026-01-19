@@ -8,6 +8,7 @@
 @import url(./components/Avatar/Avatar.css);
 @import url(./components/SubmitButton/SubmitButton.css);
 @import url(./views/Gameover/Gameover.css);
+@import url(./views/Rules/Rules.css);
 
 @font-face {
   font-family: "SF Pro Display";
@@ -32,8 +33,6 @@
   font-style: normal;
   font-display: swap;
 }
-
-
 
 html {
   min-height: 100%;

@@ -28,6 +28,16 @@ export default function useQuizNavigation() {
   const goToCategory = () => {
     navigate("/categories");
   };
+  const goToRules = () => {
+    navigate("/rules");
+  };
+  const goBack = (fallback: string = "/") => {
+    if (globalThis.history.length > 1) {
+      navigate(-1);
+    } else {
+      navigate(fallback);
+    }
+  };
 
   return {
     restartQuiz,
@@ -36,5 +46,7 @@ export default function useQuizNavigation() {
     returnToQuiz,
     goToCategory,
     goToLevels,
+    goBack,
+    goToRules,
   };
 }
