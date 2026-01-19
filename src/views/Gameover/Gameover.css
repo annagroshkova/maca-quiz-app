@@ -15,6 +15,8 @@
     margin: 5px 0;
     color: #b60055;
     font-size: 28px;
+    font-weight: 600;
+    letter-spacing: 1px;
 }
 
 .gameover__score-container, .gameover__buttons-container {

@@ -37,7 +37,7 @@ export default function Header({ backButton, backButtonProps = {} }: Props) {
 
       <h1 className='header__quiz-name'>Quizzie</h1>
       <Link to='/userProfile' style={{ textDecoration: "none" }}>
-        {user.name && <Avatar name={user.name} size={40} />}
+        {user.name && <Avatar name={user.name} style={{ height: "100%" }} />}
       </Link>
     </header>
   );

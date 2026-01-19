@@ -1,6 +1,7 @@
 interface AvatarProps {
   name: string;
   size?: number;
+  style: React.CSSProperties;
 }
 
 function stringToColor(str: string): string {
@@ -11,13 +12,13 @@ function stringToColor(str: string): string {
   return `hsl(${hash % 360}, 70%, 50%)`;
 }
 
-export default function Avatar({ name, size = 48 }: AvatarProps) {
+export default function Avatar({ name, size=48, style }: AvatarProps) {
   const initial = name.charAt(0).toUpperCase();
 
   const backgroundColor = stringToColor(name);
 
   return (
-    <div className='avatar'>
+    <div className='avatar' style={style}>
       <div
         className='avatar__icon'
         aria-label={`User avatar for ${name}`}

@@ -23,7 +23,7 @@ export default function UserProfile() {
 
   return (
     <section className="startpage">
-      {user.name ? <Avatar name={user.name} size={96} /> : null}
+      {user.name ? <Avatar name={user.name} size={96} style={{ width: "100%", maxWidth: "200px"}}/> : null}
       <h1 className="startpage__headning">{user.name}</h1>
       <h3 className="scoreDisplay">Last Score: {user.lastScore}</h3>
       <h3 className="scoreDisplay">Best Score: {user.bestScore}</h3>
