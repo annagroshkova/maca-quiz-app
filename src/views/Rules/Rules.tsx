@@ -39,6 +39,8 @@ export default function Rules() {
                 borderRadius: "12px",
                 backgroundColor: "#fcfcfc",
                 padding: "12px",
+                width: "500px",
+                height: "400px",
               }}
             >
               <h3 className="rulesSmallHeadline">How to Play</h3>
@@ -66,6 +68,8 @@ export default function Rules() {
                 borderRadius: "12px",
                 backgroundColor: "#fcfcfc",
                 padding: "12px",
+                width: "500px",
+                height: "400px",
               }}
             >
               <h3 className="rulesSmallHeadline">Rewards</h3>
@@ -88,6 +92,7 @@ export default function Rules() {
                 borderRadius: "12px",
                 backgroundColor: "#fcfcfc",
                 padding: "12px",
+                width: "500px",
               }}
             >
               <h3 className="rulesSmallHeadline">Tips & Tricks</h3>
