@@ -19,6 +19,13 @@
   top: 100px;
   z-index: 10;
 }
+.userColors {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 10px;
+  justify-items: center;
+  margin: 20px 0;
+}
 .userColors button:hover {
   transform: scale(1.1);
   transition: transform 0.15s;
@@ -35,7 +42,7 @@
   margin-bottom: 30px;
   margin-top: 200px;
 
-  width: 100%;
+  width: 80%;
 }
 .userWrapper {
   display: flex;
@@ -91,6 +98,10 @@
     flex-direction: row;
   }
   .userWrapper {
+    flex-direction: row;
+  }
+  .userColors {
+    display: flex;
     flex-direction: row;
   }
 }
