@@ -1,10 +1,9 @@
-import { useUser } from "../../context/UserContext";
+import { useUser, avatarColors } from "../../context/UserContext";
 import SubmitButton from "../../components/SubmitButton/SubmitButton";
 import { useState, useEffect } from "react";
 import Avatar from "../../components/Avatar/Avatar";
 import useQuizNavigation from "../../hooks/useQuizNavigation";
 import Header from "../../components/Header/Header";
-import { avatarColors } from "../../context/UserContext";
 
 export default function UserProfile() {
   const { user, setUserName, setUserBgColor } = useUser();

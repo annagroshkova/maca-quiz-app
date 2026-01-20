@@ -58,15 +58,16 @@ export default function Quiz() {
     score,
     lives,
     correctAnswersStreak,
-    lastRewardedPointCount,
+
     lastRewardedLifeCount,
     setQuestion,
     setSelectedAnswer,
     setScore,
     setLives,
     setCorrectAnswersStreak,
-    setLastRewardedPointCount,
+
     setLastRewardedLifeCount,
+    modifierHotStreak,
   } = useQuiz();
 
   const handleAnswerClick = (answer: string) => {
@@ -75,26 +76,25 @@ export default function Quiz() {
     setSelectedAnswer(answer);
 
     if (answer === question?.correctAnswer) {
-      let scorePoint = 1;
-      if (question.difficulty === "medium") {
-        scorePoint = 2;
-      } else if (question.difficulty === "hard") {
-        scorePoint = 3;
-      }
-      setScore((prevScore) => prevScore + scorePoint);
-
       setCorrectAnswersStreak((prevStreak) => {
         let newStreak = prevStreak + 1;
 
+        let scorePoint = 1;
+        if (question.difficulty === "medium") {
+          scorePoint = 2;
+        } else if (question.difficulty === "hard") {
+          scorePoint = 3;
+        }
+
+        if (modifierHotStreak && newStreak >= 5) {
+          const multiplier = Math.pow(2, Math.floor(newStreak / 5));
+          scorePoint *= multiplier;
+        }
+        setScore((prevScore) => prevScore + scorePoint);
         const rewardLifeEarned = Math.floor(newStreak / 10);
         if (rewardLifeEarned > lastRewardedLifeCount) {
           setLives((prev) => prev + 1);
           setLastRewardedLifeCount(rewardLifeEarned);
-        }
-        const rewardPointsEarned = Math.floor(newStreak / 5);
-        if (rewardPointsEarned > lastRewardedPointCount) {
-          setScore((prev) => prev + 10);
-          setLastRewardedPointCount(rewardPointsEarned);
         }
 
         return newStreak;
@@ -213,11 +213,10 @@ export default function Quiz() {
         }}
       />
       <MainWrapper>
-            
-        <Flex className='quiz__inner'>
-          <Flex justify='between' align='center' style={{ padding: "0 10px" }}>
-            <Text size='5' weight='bold'>
-              Score: <span className='quiz__score-number'>{score}</span>
+        <Flex className="quiz__inner">
+          <Flex justify="between" align="center" style={{ padding: "0 10px" }}>
+            <Text size="5" weight="bold">
+              Score: <span className="quiz__score-number">{score}</span>
             </Text>
 
             <Flex gap="3">
@@ -285,7 +284,6 @@ export default function Quiz() {
           )}
         </Flex>
       </MainWrapper>
-
     </>
   );
 }
