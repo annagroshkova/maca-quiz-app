@@ -4,6 +4,7 @@ export interface UserSettings {
   bestScore?: number;
   category?: string;
   level?: string;
+  bgColor: string;
 }
 
 const key = "userSettings";
@@ -15,7 +16,7 @@ export function updateUserSettings(part: Partial<UserSettings>): void {
     JSON.stringify({
       ...userSettings,
       ...part,
-    })
+    }),
   );
 }
 

@@ -4,47 +4,19 @@ interface SubmitButtonProps {
   children?: React.ReactNode;
   onClick?: () => void;
   disabled?: boolean;
+  bgColor?: string;
 }
 export default function SubmitButton({
   children,
   onClick,
   disabled,
+  bgColor,
 }: SubmitButtonProps) {
-  // const buttonVariants: Variants = {
-  //   hidden: {
-  //     scale: 0.5,
-  //     opacity: 0,
-  //     y: 10,
-  //   },
-  //   visible: {
-  //     scale: 0.95,
-  //     opacity: 1,
-  //     y: 0,
-  //     transition: {
-  //       type: "spring",
-  //       stiffness: 200,
-  //       damping: 35,
-  //     },
-  //   },
-  //   exit: {
-  //     scale: 0.5,
-  //     opacity: 0,
-  //     transition: { duration: 0.4 },
-  //   },
-  //   hover: {
-  //     scale: 1.0,
-  //     filter: "brightness(0.9)",
-  //   },
-  //   tap: {
-  //     scale: 0.9,
-  //     filter: "brightness(0.8)",
-  //   },
-  // };
-
   return (
     <button
-      className='submit-button'
-      type='submit'
+      style={{ backgroundColor: bgColor || "#6c63ff" }}
+      className="submit-button"
+      type="submit"
       // props
       onClick={onClick}
       disabled={disabled}

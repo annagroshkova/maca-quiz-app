@@ -4,13 +4,20 @@ import { useState, useEffect } from "react";
 import Avatar from "../../components/Avatar/Avatar";
 import useQuizNavigation from "../../hooks/useQuizNavigation";
 import Header from "../../components/Header/Header";
+import { avatarColors } from "../../context/UserContext";
 
 export default function UserProfile() {
-  const { user, setUserName } = useUser();
+  const { user, setUserName, setUserBgColor } = useUser();
+  const [selectedColor, setSelectedColor] = useState(user.bgColor);
   const { returnToQuiz } = useQuizNavigation();
   const { goToRules } = useQuizNavigation();
 
   const [displayName, setDisplayName] = useState(user.name ?? "");
+
+  const handleColorSelect = (color: string) => {
+    setSelectedColor(color);
+    setUserBgColor(color);
+  };
 
   useEffect(() => {
     setDisplayName(user.name ?? "");
@@ -22,13 +29,36 @@ export default function UserProfile() {
     setUserName(displayName.trim());
   };
 
+  const handleColorClick = (color: string) => {
+    setUserBgColor(color);
+  };
+
   return (
     <section className="startpage">
       <header></header>
       <div className="userContainer">
-        {user.name ? <Avatar name={user.name} size={200} /> : null}
+        {user.name ? (
+          <Avatar name={user.name} size={200} bgColor={user.bgColor} />
+        ) : null}
         <div className="userInner">
           <h1 className="startpage__headning">{user.name}</h1>
+          <div className="userColors">
+            {avatarColors.map((color) => (
+              <button
+                key={color}
+                style={{
+                  backgroundColor: color,
+                  width: "50px",
+                  height: "50px",
+                  borderRadius: "50%",
+                  cursor: "pointer",
+                  border: "none",
+                  margin: "5px",
+                }}
+                onClick={() => handleColorClick(color)}
+              />
+            ))}
+          </div>
           <div className="userWrapper">
             <div className="userScore">
               <h3 className="scoreDisplay">Last Score: {user.lastScore}</h3>
@@ -53,7 +83,10 @@ export default function UserProfile() {
               </button>
             </form>
           </div>
-          <SubmitButton onClick={goToRules}>Rules</SubmitButton>
+
+          <SubmitButton bgColor="#e68ca7" onClick={goToRules}>
+            Rules
+          </SubmitButton>
         </div>
         <div className="userButtons">
           <SubmitButton onClick={returnToQuiz}>Return</SubmitButton>
