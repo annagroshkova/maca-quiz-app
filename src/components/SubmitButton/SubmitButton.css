@@ -15,30 +15,30 @@
 /* Klick mörkning */
 /* .submit-button:active {
     filter: brightness(0.8);
-} */ 
+} */
 
 .submit-button {
   align-self: center;
-    width: 230px;
-    height: 58px;
-    margin: 6px;
-    padding: 14px;
-    border: none;
-    border-radius: 30px;
-    box-shadow: 2px 2px 8px rgba(0, 0, 0, 0.1);
-    font-size: 1.25rem;
-    line-height: 1rem;
-    color: white;
-    background-color: #564896;
-    transition: background-color 0.1s ease-out;
-    cursor: pointer;
-} 
+  width: 230px;
+  height: 58px;
+  margin: 6px;
+  padding: 14px;
+  border: none;
+  border-radius: 30px;
+  box-shadow: 2px 2px 8px rgba(0, 0, 0, 0.1);
+  font-size: 1.25rem;
+  line-height: 1rem;
+  color: white;
+  background-color: #7366d0;
+  transition: background-color 0.1s ease-out;
+  cursor: pointer;
+}
 
 .submit-button:hover {
-    background-color: #382b76;
+  background-color: #382b76;
 }
 
 .submit-button:disabled {
-    background-color: #d7d7d7;
-    color: rgb(164, 164, 164);
+  background-color: #d8d3f9;
+  color: #f3f1ff;
 }

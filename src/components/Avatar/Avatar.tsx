@@ -17,9 +17,9 @@ export default function Avatar({ name, size = 48 }: AvatarProps) {
   const backgroundColor = stringToColor(name);
 
   return (
-    <div className='avatar'>
+    <div className="avatar" style={{ width: size, height: size }}>
       <div
-        className='avatar__icon'
+        className="avatar__icon"
         aria-label={`User avatar for ${name}`}
         style={{
           backgroundColor,

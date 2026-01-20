@@ -17,14 +17,14 @@ export const AnswerButton = ({
   disabled = false,
   index,
 }: AnswerButtonProps) => {
-  let background: "#fcfcfc" | "#00a366" | "#d10036" = "#fcfcfc";
+  let background: "#fcfcfc" | "#8BD9A7" | "#FFB7C5" = "#fcfcfc";
   let color: "white" | "black" | "#4a4a4aff" = "black";
   if (state === "correct") {
-    background = "#00a366";
+    background = "#8BD9A7";
     color = "white";
   }
   if (state === "incorrect") {
-    background = "#d10036";
+    background = "#FFB7C5";
     color = "white";
   }
 
@@ -50,10 +50,10 @@ export const AnswerButton = ({
         // Rätt svar läggs överst (z-index 10) så det kan växa över de andra utan att klippas
         zIndex: state === "correct" ? 10 : 1,
       }}
-      initial='entrance'
+      initial="entrance"
       animate={variantToUse}
       // Vi behåller exit, men den körs BARA när listan byts ut (nästa fråga)
-      exit='exitPoof'
+      exit="exitPoof"
       transition={{ delay: index * 0.05 }}
       variants={{
         // --- ENTRANCE ---
@@ -110,10 +110,10 @@ export const AnswerButton = ({
       }}
     >
       <Button
-        size='4'
-        variant='solid'
+        size="4"
+        variant="solid"
         // color={isPassive ? 'gray' : color}
-        radius='full'
+        radius="full"
         onClick={handleClick}
         style={{
           color: isPassive ? "#4a4a4aff" : color,
