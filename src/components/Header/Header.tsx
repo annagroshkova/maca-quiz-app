@@ -32,12 +32,14 @@ export default function Header({ backButton, backButtonProps = {} }: Props) {
       {backButton ? (
         <BackButton onClick={onClick} children={children} />
       ) : (
-        <div className='header__placeholder'></div>
+        <div className="header__placeholder"></div>
       )}
 
-      <h1 className='header__quiz-name'>Quizzie</h1>
-      <Link to='/userProfile' style={{ textDecoration: "none" }}>
-        {user.name && <Avatar name={user.name} size={40} />}
+      <h1 className="header__quiz-name">Quizzie</h1>
+      <Link to="/userProfile" style={{ textDecoration: "none" }}>
+        {user.name && (
+          <Avatar name={user.name} size={40} bgColor={user.bgColor} />
+        )}
       </Link>
     </header>
   );

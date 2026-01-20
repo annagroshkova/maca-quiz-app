@@ -8,16 +8,10 @@ import { avatarColors } from "../../context/UserContext";
 
 export default function UserProfile() {
   const { user, setUserName, setUserBgColor } = useUser();
-  const [selectedColor, setSelectedColor] = useState(user.bgColor);
   const { returnToQuiz } = useQuizNavigation();
   const { goToRules } = useQuizNavigation();
 
   const [displayName, setDisplayName] = useState(user.name ?? "");
-
-  const handleColorSelect = (color: string) => {
-    setSelectedColor(color);
-    setUserBgColor(color);
-  };
 
   useEffect(() => {
     setDisplayName(user.name ?? "");

@@ -28,8 +28,14 @@ export function UserProvider({ children }: { children: React.ReactNode }) {
   const [user, setUser] = useState<User>(() => {
     const savedUser = getUserSettings() || {};
     if (!savedUser.bgColor) {
-      savedUser.bgColor =
+      const randomColor =
         avatarColors[Math.floor(Math.random() * avatarColors.length)];
+
+      const updatedUser = {
+        ...savedUser,
+        bgColor: randomColor,
+      };
+      return updatedUser;
     }
     return savedUser;
   });
@@ -51,9 +57,10 @@ export function UserProvider({ children }: { children: React.ReactNode }) {
 
     setUser((prevUser) => {
       const updatedUser: User = {
+        ...prevUser,
         name: trimmedName,
-        lastScore: user.lastScore ?? 0,
-        bestScore: user.bestScore ?? 0,
+        lastScore: prevUser.lastScore ?? 0,
+        bestScore: prevUser.bestScore ?? 0,
       };
       updateUserSettings(updatedUser);
       return updatedUser;
