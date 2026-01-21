@@ -2,12 +2,12 @@
   box-sizing: border-box;
   position: sticky;
   top: 0;
-  height: 94px;
-  padding: 25px 22px;
+  height: 100px;
+  padding: 10px 10px;
   margin: 0 auto;
   display: flex;
   justify-content: space-between;
-  align-items: stretch;
+  align-items: center;
   width: 100%;
   max-width: 950px;
   background-color: transparent;
@@ -15,7 +15,11 @@
 }
 
 .header--scrolled {
-  background-color: #faddce;
+  background: linear-gradient(
+    211deg,
+    rgb(255 222 204) 0%,
+    rgb(182 205 233) 100%
+  );
   box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
 }
 
@@ -39,4 +43,7 @@
 
 .header .avatar__icon {
   height: 100%;
+}
+.headerGameLogo{
+  height:100%;
 }

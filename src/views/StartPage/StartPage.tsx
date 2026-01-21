@@ -27,7 +27,9 @@ export default function StartPage() {
 
   return (
     <section className="startpage">
-      <h1 className="startpage__heading">Quizzie</h1>
+      <h1 className="startpage__heading">
+        <img className="gameLogo" alt="MindPop logo" src="/mindpoplogo.png" />
+      </h1>
       <div className="startpage__form-container">
         <form className="startpage__form" onSubmit={handleNameSubmit}>
           <label htmlFor="name">Enter your name to start</label>

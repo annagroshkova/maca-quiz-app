@@ -35,7 +35,11 @@ export default function Header({ backButton, backButtonProps = {} }: Props) {
         <div className="header__placeholder"></div>
       )}
 
-      <h1 className="header__quiz-name">Quizzie</h1>
+      <img
+        className="headerGameLogo"
+        alt="MindPop Logo"
+        src="/mindpoplogo.png"
+      />
       <Link to="/userProfile" style={{ textDecoration: "none" }}>
         {user.name && (
           <Avatar name={user.name} size={40} bgColor={user.bgColor} />

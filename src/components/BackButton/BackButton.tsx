@@ -21,9 +21,17 @@ interface BackButtonProps {
 }
 
 export default function BackButton({ children, onClick }: BackButtonProps) {
-
   return (
-    <button className="back-button" onClick={onClick} style={{ height: "100%", border: "none", backgroundColor: "transparent", outline: "none" }}>
+    <button
+      className="back-button"
+      onClick={onClick}
+      style={{
+        height: "40px",
+        border: "none",
+        backgroundColor: "transparent",
+        outline: "none",
+      }}
+    >
       {children}
     </button>
   );

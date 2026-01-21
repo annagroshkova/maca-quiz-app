@@ -36,8 +36,9 @@
 }
 
 .startpage__form > label {
-    font-size: 1.15rem;
-    color:rgb(45, 45, 45)
+    font-size: 1.3rem;
+    color:#6158B8;
+    font-weight:700;
 }
 
 .startpage__form > input {
@@ -51,15 +52,25 @@
     font-size: 1.4rem;
     font-weight: 500;
     border-radius: 6px;
+    background-color:white;
 }
 
 .startpage__form > input:focus {
-    outline: 2px solid #b60055;
+    outline: 2px solid #E68CA7;
 }
 
 .startpage__form > input::placeholder {
     color: rgb(164, 164, 164);
 } 
+
+.startpage__form > input:-webkit-autofill,
+.startpage__form > input:-webkit-autofill:hover,
+.startpage__form > input:-webkit-autofill:focus {
+    -webkit-box-shadow: 0 0 0 1000px white inset;
+    box-shadow: 0 0 0 1000px white inset;
+    -webkit-text-fill-color: #000;
+    outline: 2px solid #E68CA7;
+}
 
 .startpage__form > button {
     width: 200px;
@@ -71,17 +82,20 @@
     box-shadow: 2px 2px 8px rgba(0, 0, 0, 0.1);
     font-size: 1.25rem;
     color: white;
-    background-color: #382b76;
+    background-color: #6158B8;
     transition: background-color 0.1s ease-out;
     cursor: pointer;
 } 
 
 .startpage__form > button:hover {
-    background-color: #1b1053;
+    background-color: #382B76;
 }
 
 .startpage__form > button:disabled {
-    background-color: #d7d7d7;
-    color: rgb(164, 164, 164);
+    background-color: #D8D3F9;
+    color: #F3F1FF;
 }
 
+.gameLogo{
+    width: 400px;
+}

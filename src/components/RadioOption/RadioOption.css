@@ -25,13 +25,13 @@
 
 .level:hover,
 category:hover {
-  border-color: #888;
+  border-color: #e9b0c1;
 }
 
 /* Checked state */
 .level:has(input[type="radio"]:checked),
 .category:has(input[type="radio"]:checked) {
-  border-color: #b60055;
+  border-color: #E68CA7;
 }
 
 .category {
