@@ -91,16 +91,15 @@ export default function Quiz() {
           const multiplier = Math.pow(2, Math.floor(newStreak / 5));
           scorePoint *= multiplier;
         }
-        setScore((prevScore) => prevScore + scorePoint);
 
-        if( modifierSurvivor ) {
-          if (newStreak > 0 && newStreak % 3 === 0) {
-            setLives((prev) =>{
-              if (prev < 3) return prev + 1;
-              return prev;
-            });
-          }
-        }
+
+        setScore((prevScore) => prevScore + scorePoint);
+        if (modifierSurvivor) {
+  if (newStreak > 0 && newStreak % 3 === 0) {
+    setLives((prev) => (prev < 3 ? prev + 1 : prev));
+  }
+}
+
         // const rewardLifeEarned = Math.floor(newStreak / 10);
         // if (rewardLifeEarned > lastRewardedLifeCount) {
         //   setLives((prev) => prev + 1);
