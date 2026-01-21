@@ -59,15 +59,16 @@ export default function Quiz() {
     lives,
     correctAnswersStreak,
 
-    lastRewardedLifeCount,
+    // lastRewardedLifeCount,
     setQuestion,
     setSelectedAnswer,
     setScore,
     setLives,
     setCorrectAnswersStreak,
 
-    setLastRewardedLifeCount,
+    // setLastRewardedLifeCount,
     modifierHotStreak,
+    modifierSurvivor,
   } = useQuiz();
 
   const handleAnswerClick = (answer: string) => {
@@ -91,11 +92,20 @@ export default function Quiz() {
           scorePoint *= multiplier;
         }
         setScore((prevScore) => prevScore + scorePoint);
-        const rewardLifeEarned = Math.floor(newStreak / 10);
-        if (rewardLifeEarned > lastRewardedLifeCount) {
-          setLives((prev) => prev + 1);
-          setLastRewardedLifeCount(rewardLifeEarned);
+
+        if( modifierSurvivor ) {
+          if (newStreak > 0 && newStreak % 3 === 0) {
+            setLives((prev) =>{
+              if (prev < 3) return prev + 1;
+              return prev;
+            });
+          }
         }
+        // const rewardLifeEarned = Math.floor(newStreak / 10);
+        // if (rewardLifeEarned > lastRewardedLifeCount) {
+        //   setLives((prev) => prev + 1);
+        //   setLastRewardedLifeCount(rewardLifeEarned);
+        // }
 
         return newStreak;
       });

@@ -18,6 +18,7 @@ export default function Levels() {
   const navigate = useNavigate();
   const { goToSettings } = useQuizNavigation();
   const { modifierHotStreak, setModifierHotStreak } = useQuiz();
+  const { modifierSurvivor, setModifierSurvivor } = useQuiz();
 
   const [level, setLevel] = useState<
     "easy" | "medium" | "hard" | undefined | null
@@ -77,6 +78,13 @@ export default function Levels() {
               onClick={() => setModifierHotStreak(!modifierHotStreak)}
             >
               Hot Streak
+            </button>
+            <button
+              type="button"
+              className={`modifierButton ${modifierSurvivor ? "active" : ""}`}
+              onClick={() => setModifierSurvivor(!modifierSurvivor)}
+            >
+              Survivor
             </button>
           </div>
 

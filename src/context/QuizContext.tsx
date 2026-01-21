@@ -9,8 +9,10 @@ interface QuizState {
   lives: number;
   correctAnswersStreak: number;
   lastRewardedPointCount: number;
-  lastRewardedLifeCount: number;
+  // lastRewardedLifeCount: number;
   modifierHotStreak: boolean;
+  modifierSurvivor: boolean;
+
   setQuestion: (q: QuizQuestion | null) => void;
   setSelectedAnswer: (a: string | null) => void;
   setScore: React.Dispatch<React.SetStateAction<number>>;
@@ -20,8 +22,9 @@ interface QuizState {
   usedQuestions: Set<string>;
   setUsedQuestions: React.Dispatch<React.SetStateAction<Set<string>>>;
   setLastRewardedPointCount: React.Dispatch<React.SetStateAction<number>>;
-  setLastRewardedLifeCount: React.Dispatch<React.SetStateAction<number>>;
+  // setLastRewardedLifeCount: React.Dispatch<React.SetStateAction<number>>;
   setModifierHotStreak: (value: boolean) => void;
+  setModifierSurvivor: (value: boolean) => void;
 }
 
 const QuizContext = createContext<QuizState | null>(null);
@@ -34,8 +37,9 @@ export function QuizProvider({ children }: { children: ReactNode }) {
   const [usedQuestions, setUsedQuestions] = useState<Set<string>>(new Set());
   const [correctAnswersStreak, setCorrectAnswersStreak] = useState(0);
   const [lastRewardedPointCount, setLastRewardedPointCount] = useState(0);
-  const [lastRewardedLifeCount, setLastRewardedLifeCount] = useState(0);
+  // const [lastRewardedLifeCount, setLastRewardedLifeCount] = useState(0);
   const [modifierHotStreak, setModifierHotStreak] = useState<boolean>(false);
+  const [modifierSurvivor, setModifierSurvivor] = useState<boolean>(false);
 
   const resetQuiz = () => {
     setQuestion(null);
@@ -45,7 +49,7 @@ export function QuizProvider({ children }: { children: ReactNode }) {
     setUsedQuestions(new Set());
     setCorrectAnswersStreak(0);
     setLastRewardedPointCount(0);
-    setLastRewardedLifeCount(0);
+    // setLastRewardedLifeCount(0);
   };
   const value = useMemo(
     () => ({
@@ -55,8 +59,9 @@ export function QuizProvider({ children }: { children: ReactNode }) {
       lives,
       correctAnswersStreak,
       lastRewardedPointCount,
-      lastRewardedLifeCount,
+      // lastRewardedLifeCount,
       modifierHotStreak,
+      modifierSurvivor,
       setQuestion,
       setSelectedAnswer,
       setScore,
@@ -66,8 +71,9 @@ export function QuizProvider({ children }: { children: ReactNode }) {
       setUsedQuestions,
       setCorrectAnswersStreak,
       setLastRewardedPointCount,
-      setLastRewardedLifeCount,
+      // setLastRewardedLifeCount,
       setModifierHotStreak,
+      setModifierSurvivor,
     }),
     [
       question,
@@ -77,8 +83,9 @@ export function QuizProvider({ children }: { children: ReactNode }) {
       usedQuestions,
       correctAnswersStreak,
       lastRewardedPointCount,
-      lastRewardedLifeCount,
+      // lastRewardedLifeCount,
       modifierHotStreak,
+      modifierSurvivor,
     ],
   );
 
