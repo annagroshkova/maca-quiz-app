@@ -4,18 +4,20 @@ interface SubmitButtonProps {
   children?: React.ReactNode;
   onClick?: () => void;
   disabled?: boolean;
-  bgColor?: string;
+  variant?: "default" | "game-over";
 }
 export default function SubmitButton({
   children,
   onClick,
   disabled,
-  bgColor,
+  variant = "default",
 }: SubmitButtonProps) {
+  const className = `submit-button ${
+    variant === "game-over" ? "submit-button--game-over" : ""
+  }`;
   return (
     <button
-      style={{ backgroundColor: bgColor || "#6c63ff" }}
-      className="submit-button"
+      className={className}
       type="submit"
       // props
       onClick={onClick}

@@ -48,6 +48,7 @@ export default function UserProfile() {
                   border: "none",
                   margin: "5px",
                 }}
+                aria-label={`Select color ${color}`}
                 onClick={() => handleColorClick(color)}
               />
             ))}
@@ -77,7 +78,7 @@ export default function UserProfile() {
             </form>
           </div>
 
-          <SubmitButton bgColor="#e68ca7" onClick={goToRules}>
+          <SubmitButton variant="default" onClick={goToRules}>
             Rules
           </SubmitButton>
         </div>
