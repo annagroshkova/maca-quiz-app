@@ -92,13 +92,12 @@ export default function Quiz() {
           scorePoint *= multiplier;
         }
 
-
         setScore((prevScore) => prevScore + scorePoint);
         if (modifierSurvivor) {
-  if (newStreak > 0 && newStreak % 3 === 0) {
-    setLives((prev) => (prev < 3 ? prev + 1 : prev));
-  }
-}
+          if (newStreak > 0 && newStreak % 3 === 0) {
+            setLives((prev) => (prev < 3 ? prev + 1 : prev));
+          }
+        }
 
         // const rewardLifeEarned = Math.floor(newStreak / 10);
         // if (rewardLifeEarned > lastRewardedLifeCount) {
@@ -224,20 +223,35 @@ export default function Quiz() {
       <MainWrapper>
         <Flex className="quiz__inner">
           <Flex justify="between" align="center" style={{ padding: "0 10px" }}>
-            <Text size="5" weight="bold">
-              Score: <span className="quiz__score-number">{score}</span>
-            </Text>
+            <Flex direction="column">
+              <Text size="5" weight="bold">
+                SCORE
+              </Text>
+              <Flex justify="center" align="center">
+                <img
+                  className="scoreLifeIcon"
+                  alt="Star Icon"
+                  src="/star.png"
+                />
+                <div className="quiz__score-number">{score}</div>
+              </Flex>
+            </Flex>
 
-            <Flex gap="3">
-              {[1, 2, 3].map((heartIndex) => (
-                <Text
-                  key={heartIndex}
-                  size="6"
-                  style={{ cursor: "default", userSelect: "none" }}
-                >
-                  {heartIndex <= 3 - lives ? "🖤" : "❤️"}
-                </Text>
-              ))}
+            <Flex direction="column">
+              <Text size="5" weight="bold" align="right">
+                LIFE
+              </Text>
+              <Flex>
+                {[1, 2, 3].map((heartIndex) => (
+                  <Text
+                    key={heartIndex}
+                    size="6"
+                    style={{ cursor: "default", userSelect: "none" }}
+                  >
+                    {heartIndex <= 3 - lives ? "🖤" : "❤️"}
+                  </Text>
+                ))}
+              </Flex>
             </Flex>
           </Flex>
           {question && (
@@ -284,7 +298,29 @@ export default function Quiz() {
                   </Flex>
                 </AnimatePresence>
               </Flex>
-
+              <Flex justify="center">
+                <button className="powerUpButton">
+                  <img
+                    className="powerUpIcon"
+                    alt="Shield Icon"
+                    src="/shield.png"
+                  />
+                </button>
+                <button className="powerUpButton">
+                  <img
+                    className="powerUpIcon"
+                    alt="Skip Icon"
+                    src="/next.png"
+                  />
+                </button>
+                <button className="powerUpButton">
+                  <img
+                    className="powerUpIcon"
+                    alt="Hint Icon"
+                    src="/hint.png"
+                  />
+                </button>
+              </Flex>
               {/* Reset-knapp (visas bara när man svarat) */}
               <SubmitButton onClick={handleNextStep} disabled={!selectedAnswer}>
                 <span>{lives === 0 ? "Game Over" : "Next Question"}</span>
