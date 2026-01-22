@@ -16,6 +16,7 @@
 }
 
 .startpage__form-container {
+    min-height: 60dvh;
     display: flex;
     align-items: center;
     flex-grow: 10;
