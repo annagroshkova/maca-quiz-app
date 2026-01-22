@@ -4,7 +4,7 @@
   flex-direction: column;
   justify-content: center;
   flex-grow: 1;
-  width: clamp(300px, 95%, 800px);
+  width: clamp(18.75rem, 95%, 50rem);
 }
 
 .quiz__inner {
@@ -13,9 +13,16 @@
   background-color: rgba(240, 240, 240, 0.85);
   -webkit-backdrop-filter: blur(12px);
   backdrop-filter: blur(12px);
+
   box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
+
   border: 1px solid rgba(255, 255, 255, 0.5);
-  border-radius: 3rem;
+  border-radius: clamp(2rem, 4vh, 3rem);
+
+  transition:
+    padding 0.3s ease,
+    gap 0.3s ease;
+
   gap: clamp(1rem, 3vw, 2rem);
   padding: 0;
   overflow: hidden;
@@ -27,80 +34,79 @@
   font-size: clamp(1.1rem, 1.5vw, 1.3rem);
 }
 
-
 .quiz__question-container {
   display: flex;
   justify-content: center;
   align-items: center;
-  min-height: clamp(70px, 10vh, 100px);
-  padding-inline: clamp(1rem, 5vw, 2rem);
-  
+
+  min-height: clamp(4.375rem, 10vh, 6.25rem);
+
+  max-width: min(37.5rem, 35ch);
+
+  width: 100%;
+  align-self: center;
+
+  /* Text */
   text-align: center;
   font-weight: 700;
-
-  text-wrap: balance; 
-  max-width: 35ch; 
-  
-  align-self: center;
   font-size: clamp(1.1rem, 2vw, 1.6rem);
   line-height: 1.3;
+  text-wrap: balance;
+
+  padding-inline: clamp(1rem, 5vw, 2rem);
+  margin-top: clamp(1rem, 3vh, 2.5rem);
+  margin-bottom: clamp(1rem, 3vh, 2.5rem);
 }
 
 .quiz__answers-container {
   gap: clamp(0.8rem, 1.5vw, 1.25rem);
   align-items: stretch;
+  transition: gap 0.3s ease;
 }
 
 .quiz__content {
   flex: 1;
-
-  padding: 
-    clamp(1.8rem, 5vw, 2rem) 
-    clamp(1.8rem, 5vw, 2rem)
-    clamp(1.8rem, 5vw, 2rem) 
-    clamp(1.8rem, 5vw, 2rem);
+  padding: clamp(1.8rem, 5vw, 2rem) clamp(1.8rem, 5vw, 2rem)
+    clamp(1.8rem, 5vw, 2rem) clamp(1.8rem, 5vw, 2rem);
 
   display: flex;
   flex-direction: column;
   justify-content: space-between;
+
+  transition: padding 0.3s ease;
 }
 
 .quiz__footer {
-  padding: 
-    0 
-    clamp(1rem, 2vw, 2rem) 
-    clamp(1rem, 3vw, 2rem)
+  padding: 0 clamp(1rem, 2vw, 2rem) clamp(1rem, 3vw, 2rem)
     clamp(1rem, 2vw, 2rem);
-    
+
   width: 100%;
   box-sizing: border-box;
   display: flex;
   justify-content: center;
 }
 
-/* MOBILE/SMALL  */
-@media (max-height: 740px) {
-  .quiz__inner {
-    border-radius: 2rem; 
-  }
-
+/* --- COMPACT MODE --- */
+@media (max-height: 46.25em) {
   .quiz__content {
     padding: 1.25rem;
   }
 
   .quiz__answers-container {
-    gap: 8px; 
+    gap: 0.5rem;
   }
-  
+
   .answer-button {
-    min-height: 48px; 
+    min-height: 3rem;
     padding: 0.2rem 1rem;
   }
-  
+
   .quiz__question-container {
-    min-height: 48px;
+    min-height: 3rem;
     font-size: 1.1rem;
-    padding-top: 0; 
+    padding-top: 0;
     padding-bottom: 0;
+    margin-top: 1rem;
+    margin-bottom: 1rem;
   }
 }
