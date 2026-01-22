@@ -1,16 +1,13 @@
 .header {
-  box-sizing: border-box;
   position: sticky;
   top: 0;
+  z-index: 1000;
   height: 100px;
-  padding: 10px 10px;
-  margin: 0 auto;
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
   width: 100%;
-  max-width: 950px;
+  margin: 0 auto;
+  padding: 22px;
   background-color: transparent;
+  box-sizing: border-box;
   transition: background-color 0.15s ease, box-shadow 0.15s ease;
 }
 
@@ -23,27 +20,28 @@
   box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
 }
 
-.header__quiz-name {
-  position: absolute;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
-  margin: 0;
-  color: #b60055;
-  font-size: 28px;
-  font-family: serif;
-  align-self: center;
+.header__inner {
+  position: relative;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin: 0 auto;
+  max-width: 950px;
+  height: 100%;
 }
 
 .header__placeholder {
   height: 100%;
-  width: 100px;
   aspect-ratio: 1/1;
 }
 
 .header .avatar__icon {
   height: 100%;
 }
-.headerGameLogo{
-  height:100%;
+.header__gamelogo {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  height: 100%;
 }

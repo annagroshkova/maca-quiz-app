@@ -7,8 +7,12 @@
 }
 
 .startpage__heading {
-    color: #b60055;
     margin-top: 30px;
+}
+
+.startpage__gamelogo {
+    width: 45vw;
+    max-width: 350px;
 }
 
 .startpage__form-container {
@@ -30,6 +34,7 @@
     display: flex;
     flex-direction: column;
     align-items: center;
+    justify-content: center;
     gap: 25px;
     padding: 6rem 2rem;
     margin-bottom: 60px;

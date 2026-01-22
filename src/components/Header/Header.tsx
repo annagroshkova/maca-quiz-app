@@ -29,14 +29,15 @@ export default function Header({ backButton, backButtonProps = {} }: Props) {
 
   return (
     <header className={`header ${isScrolled ? "header--scrolled" : ""}`}>
-      {backButton ? (
+      <div className="header__inner">
+              {backButton ? (
         <BackButton onClick={onClick} children={children} />
       ) : (
         <div className="header__placeholder"></div>
       )}
 
       <img
-        className="headerGameLogo"
+        className="header__gamelogo"
         alt="MindPop Logo"
         src="/mindpoplogo.png"
       />
@@ -45,6 +46,8 @@ export default function Header({ backButton, backButtonProps = {} }: Props) {
           <Avatar name={user.name} size={40} bgColor={user.bgColor} />
         )}
       </Link>
+      </div>
+
     </header>
   );
 }
