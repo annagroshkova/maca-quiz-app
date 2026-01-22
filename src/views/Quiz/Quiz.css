@@ -53,6 +53,7 @@
 }
 .powerUpButton{
   border:none;
+  background:none;
 }
 .powerUpIcon{
   height: 40px;
