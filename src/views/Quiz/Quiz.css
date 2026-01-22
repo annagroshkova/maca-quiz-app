@@ -42,3 +42,19 @@
   align-items: stretch;
   
 }
+
+.scoreLifeIcon{
+  height: 35px;
+  width: 35px;
+}
+.scoreText{
+  display:flex;
+
+}
+.powerUpButton{
+  border:none;
+}
+.powerUpIcon{
+  height: 40px;
+  width: 40px;
+}
