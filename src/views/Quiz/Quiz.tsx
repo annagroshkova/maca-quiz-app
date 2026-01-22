@@ -260,7 +260,11 @@ export default function Quiz() {
                 <div className="quiz__score-number">{score}</div>
               </Flex>
             </Flex>
-
+                        {modifierTimeLimit && (
+              <Text size="5" weight="bold">
+                <span className="quiz__score-number">{timeLeft}</span>
+              </Text>
+            )}
             <Flex direction="column">
               <Text size="5" weight="bold" align="right">
                 LIFE
