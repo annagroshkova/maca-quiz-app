@@ -1,7 +1,7 @@
-import { useState, useEffect } from "react";
+import { useState, useEffect} from "react";
 import { Flex, Card, Text } from "@radix-ui/themes";
-import { AnswerButton } from "../../components/AnswerButton";
-import { AnimatePresence } from "motion/react";
+import { AnswerButton } from "../../components/AnswerButton/AnswerButton";
+import { AnimatePresence, motion } from "motion/react";
 import { useNavigate } from "react-router-dom";
 import { getUserSettings, updateUserSettings } from "../../userSettings";
 import SubmitButton from "../../components/SubmitButton/SubmitButton";
@@ -51,13 +51,14 @@ export default function Quiz() {
   const { goToSettings } = useQuizNavigation();
   const { resetQuiz } = useQuiz();
   const [questionQueue, setQuestionQueue] = useState<QuizQuestion[]>([]);
+  const [timeLeft, setTimeLeft] = useState<number>(10);
 
   const {
     question,
     selectedAnswer,
     score,
     lives,
-    correctAnswersStreak,
+    //correctAnswersStreak,
 
     // lastRewardedLifeCount,
     setQuestion,
@@ -69,7 +70,30 @@ export default function Quiz() {
     // setLastRewardedLifeCount,
     modifierHotStreak,
     modifierSurvivor,
+    modifierTimeLimit,
   } = useQuiz();
+
+  useEffect(() => {
+    if (!modifierTimeLimit || !question || selectedAnswer) return;
+
+    setTimeLeft(10);
+    const timer = setInterval(() => {
+      setTimeLeft((prev) => {
+        if (prev <= 0) return 0;
+        return prev - 1;
+      });
+    }, 1000);
+
+    return () => clearInterval(timer);
+  }, [modifierTimeLimit, question, selectedAnswer]);
+
+  useEffect(() => {
+    if (timeLeft === 0 && question && modifierTimeLimit) {
+      setSelectedAnswer("TIMEOUT");
+      setLives((prev) => prev - 1);
+      setCorrectAnswersStreak(0);
+    }
+  }, [timeLeft]);
 
   const handleAnswerClick = (answer: string) => {
     if (selectedAnswer) return;
@@ -257,9 +281,9 @@ export default function Quiz() {
           {question && (
             <>
               <Card className="quiz__question-container" style={{}}>
-                <Text size="5" weight="bold">
-                  {question.question}
-                </Text>
+                  <Text size="5" weight="bold">
+                    {question.question}
+                  </Text>
               </Card>
 
               <Flex direction="column" className="quiz__answers-container">
@@ -322,11 +346,28 @@ export default function Quiz() {
                 </button>
               </Flex>
               {/* Reset-knapp (visas bara när man svarat) */}
-              <SubmitButton onClick={handleNextStep} disabled={!selectedAnswer}>
-                <span>{lives === 0 ? "Game Over" : "Next Question"}</span>
-              </SubmitButton>
+              <AnimatePresence>
+                {(selectedAnswer || timeLeft === 0) && (
+                  <motion.div
+                    initial={{ opacity: 0, height: 0, y: 20 }}
+                    animate={{ opacity: 1, height: "auto", y: 0 }}
+                    exit={{ opacity: 0, height: 0, y: 20 }}
+                    transition={{ duration: 0.3 }}
+                    style={{ overflow: "hidden" }}
+                  >
+                    <div className="quiz__footer">
+                      <SubmitButton onClick={handleNextStep} variant={lives === 0 ? "game-over" : "default"}>
+                        <span>
+                          {lives === 0 ? "Game Over" : "Next Question"}
+                        </span>
+                      </SubmitButton>
+                    </div>
+                  </motion.div>
+                )}
+              </AnimatePresence>
             </>
           )}
+          </div>
         </Flex>
       </MainWrapper>
     </>

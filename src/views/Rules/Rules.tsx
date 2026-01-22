@@ -40,7 +40,7 @@ export default function Rules() {
                 backgroundColor: "#fcfcfc",
                 padding: "12px",
                 width: "500px",
-                height: "400px",
+                height: "auto",
               }}
             >
               <h3 className="rulesSmallHeadline">How to Play</h3>
@@ -69,7 +69,7 @@ export default function Rules() {
                 backgroundColor: "#fcfcfc",
                 padding: "12px",
                 width: "500px",
-                height: "400px",
+                height: "auto",
               }}
             >
               <h3 className="rulesSmallHeadline">Rewards</h3>

@@ -3,7 +3,6 @@ import SubmitButton from "../../components/SubmitButton/SubmitButton";
 import { useState, useEffect } from "react";
 import Avatar from "../../components/Avatar/Avatar";
 import useQuizNavigation from "../../hooks/useQuizNavigation";
-import Header from "../../components/Header/Header";
 
 export default function UserProfile() {
   const { user, setUserName, setUserBgColor } = useUser();
@@ -48,6 +47,7 @@ export default function UserProfile() {
                   border: "none",
                   margin: "5px",
                 }}
+                aria-label={`Select color ${color}`}
                 onClick={() => handleColorClick(color)}
               />
             ))}
@@ -77,7 +77,7 @@ export default function UserProfile() {
             </form>
           </div>
 
-          <SubmitButton bgColor="#e68ca7" onClick={goToRules}>
+          <SubmitButton variant="default" onClick={goToRules}>
             Rules
           </SubmitButton>
         </div>
