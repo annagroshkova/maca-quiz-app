@@ -271,11 +271,9 @@ export default function Quiz() {
           {question && (
             <>
               <Card className="quiz__question-container" style={{}}>
-                <div className="quiz__question-text">
                   <Text size="5" weight="bold">
                     {question.question}
                   </Text>
-                </div>
               </Card>
 
               <Flex direction="column" className="quiz__answers-container">
