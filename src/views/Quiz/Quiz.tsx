@@ -1,4 +1,4 @@
-import { useState, useEffect} from "react";
+import { useState, useEffect } from "react";
 import { Flex, Card, Text } from "@radix-ui/themes";
 import { AnswerButton } from "../../components/AnswerButton/AnswerButton";
 import { AnimatePresence, motion } from "motion/react";
@@ -246,7 +246,7 @@ export default function Quiz() {
       />
       <MainWrapper>
         <Flex className="quiz__inner">
-          <Flex justify="between" align="center" style={{ padding: "0 10px" }}>
+          <Flex justify="between" align="center" className="quiz__header">
             <Flex direction="column">
               <Text size="5" weight="bold">
                 SCORE
@@ -260,7 +260,7 @@ export default function Quiz() {
                 <div className="quiz__score-number">{score}</div>
               </Flex>
             </Flex>
-                        {modifierTimeLimit && (
+            {modifierTimeLimit && (
               <Text size="5" weight="bold">
                 <span className="quiz__score-number">{timeLeft}</span>
               </Text>
@@ -274,7 +274,7 @@ export default function Quiz() {
                   <Text
                     key={heartIndex}
                     size="6"
-                    style={{ cursor: "default", userSelect: "none" }}
+                    className="life-heart"
                   >
                     {heartIndex <= 3 - lives ? "🖤" : "❤️"}
                   </Text>
@@ -285,9 +285,9 @@ export default function Quiz() {
           {question && (
             <>
               <Card className="quiz__question-container" style={{}}>
-                  <Text size="5" weight="bold">
-                    {question.question}
-                  </Text>
+                <Text size="5" weight="bold">
+                  {question.question}
+                </Text>
               </Card>
 
               <Flex direction="column" className="quiz__answers-container">
@@ -326,7 +326,7 @@ export default function Quiz() {
                   </Flex>
                 </AnimatePresence>
               </Flex>
-              <Flex justify="center">
+              <Flex justify="center" gap="5" align="center" className="quiz__powerups">
                 <button className="powerUpButton">
                   <img
                     className="powerUpIcon"
@@ -360,7 +360,10 @@ export default function Quiz() {
                     style={{ overflow: "hidden" }}
                   >
                     <div className="quiz__footer">
-                      <SubmitButton onClick={handleNextStep} variant={lives === 0 ? "game-over" : "default"}>
+                      <SubmitButton
+                        onClick={handleNextStep}
+                        variant={lives === 0 ? "game-over" : "default"}
+                      >
                         <span>
                           {lives === 0 ? "Game Over" : "Next Question"}
                         </span>
