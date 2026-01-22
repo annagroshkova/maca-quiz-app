@@ -34,28 +34,34 @@
 }
 
 :root {
-  --bg-gradient-start: rgb(255, 222, 204);
+  /*--bg-gradient-start: rgb(255, 222, 204);
   --bg-gradient-end: rgb(182, 205, 233);
-  --text-color: rgb(19, 19, 19);
-  
+  --text-color: rgb(19, 19, 19);*/
+
   --app-max-width: 800px;
   --header-height: 60px;
-  
-  --font-primary: "SF Pro Display", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+
+  --font-primary:
+    "SF Pro Display", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto,
+    Helvetica, Arial, sans-serif;
 }
 
-*, *::before, *::after {
+*,
+*::before,
+*::after {
   box-sizing: border-box;
 }
 
 html {
-  height: 100%;
-  background: linear-gradient(
-    211deg,
-    var(--bg-gradient-start) 0%,
-    var(--bg-gradient-end) 100%
-  );
-  overflow-x: hidden; 
+  min-height: 100%;
+  /* background: linear-gradient(
+  //   211deg,
+  //   var(--bg-gradient-start) 0%,
+  //   var(--bg-gradient-end) 100%
+   ); */
+  background-attachment: fixed;
+  background-repeat: no-repeat;
+  overflow-x: hidden;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
@@ -64,7 +70,7 @@ body {
   font-family: var(--font-primary);
   color: var(--text-color);
   margin: 0;
-  min-height: 100dvh; 
+  min-height: 100dvh;
   background: transparent;
   display: flex;
   flex-direction: column;
@@ -72,7 +78,7 @@ body {
 
 #root {
   width: 100%;
-  min-height: 100dvh; 
+  min-height: 100dvh;
   display: flex;
   flex-direction: column;
   padding-top: env(safe-area-inset-top);
@@ -84,8 +90,8 @@ body {
 .main {
   width: 100%;
   max-width: var(--app-max-width);
-  margin: 0 auto; 
-  flex: 1; 
+  margin: 0 auto;
+  flex: 1;
   display: flex;
   flex-direction: column;
   justify-content: flex-start;

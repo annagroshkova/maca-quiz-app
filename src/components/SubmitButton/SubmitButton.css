@@ -10,7 +10,7 @@
   min-height: clamp(50px, 7vh, 60px);
 
   /* MARGIN & PADDING */
-  margin: clamp(0.6rem, 1.5vw, 1rem);
+  margin: clamp(0.4rem, 0.6vw, 1rem);
   padding: clamp(0.8rem, 1.5vw, 1rem) clamp(1.2rem, 3vw, 2rem);
 
   /* Visuellt */

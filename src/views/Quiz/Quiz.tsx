@@ -326,6 +326,7 @@ export default function Quiz() {
                   </Flex>
                 </AnimatePresence>
               </Flex>
+              {(!selectedAnswer) && (
               <Flex justify="center" gap="5" align="center" className="quiz__powerups">
                 <button className="powerUpButton">
                   <img
@@ -349,6 +350,7 @@ export default function Quiz() {
                   />
                 </button>
               </Flex>
+              )}
               {/* Reset-knapp (visas bara när man svarat) */}
               <AnimatePresence>
                 {(selectedAnswer || timeLeft === 0) && (

@@ -8,10 +8,12 @@ import Quiz from "./views/Quiz/Quiz";
 import GameOver from "./views/Gameover/Gameover";
 import UserProfile from "./views/UserProfile/UserProfile";
 import Rules from "./views/Rules/Rules";
+import BackgroundAnimated from "./components/BackgroundAnimated/BackgroundAnimated";
 
 export default function App(): ReactNode {
   return (
     <BrowserRouter>
+    <BackgroundAnimated />
       <Routes>
         <Route path="/" element={<StartPage />} />
         <Route path="/categories" element={<Categories />} />
