@@ -1,6 +1,7 @@
 import "@radix-ui/themes/styles.css";
 import { Button } from "@radix-ui/themes";
 import { motion } from "motion/react";
+import "./AnswerButton.css";
 
 interface AnswerButtonProps {
   answerText: string;
