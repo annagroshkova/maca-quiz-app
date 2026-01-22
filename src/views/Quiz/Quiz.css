@@ -4,34 +4,29 @@
   flex-direction: column;
   justify-content: center;
   flex-grow: 10;
-  width: 100%;
-
   width: clamp(300px, 95%, 800px);
 }
 
 .quiz__inner {
   display: flex;
   flex-direction: column;
-
   background-color: rgba(240, 240, 240, 0.85);
   -webkit-backdrop-filter: blur(12px);
   backdrop-filter: blur(12px);
-
   box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
   border: 1px solid rgba(255, 255, 255, 0.5);
   border-radius: 3rem;
-
   gap: clamp(1rem, 3vw, 2rem);
-
   padding: 0;
   overflow: hidden;
+  height: 100%;
 }
 
 .quiz__score-number {
   font-weight: 700;
-
   font-size: clamp(1.1rem, 1.5vw, 1.3rem);
 }
+
 .quiz__question-text {
   padding: clamp(2rem, 1vw, 1rem) clamp(1rem, 3vw, 2rem);
   text-align: center;
@@ -41,11 +36,8 @@
   display: flex;
   justify-content: center;
   align-items: center;
-
   min-height: clamp(70px, 10vh, 100px);
-
   padding-inline: clamp(1rem, 5vw, 1rem);
-
   text-align: center;
   font-weight: 700;
   max-width: 600px;
@@ -61,8 +53,12 @@
 
 .quiz__content {
   flex: 1;
-  padding: clamp(1.5rem, 4vw, 2.5rem) clamp(1.8rem, 5vw, 2rem)
-    clamp(2rem, 1vw, 0.8rem) clamp(1.8rem, 5vw, 2rem);
+
+  padding: 
+    clamp(1.8rem, 5vw, 2rem) 
+    clamp(1.8rem, 5vw, 2rem)
+    clamp(1.8rem, 5vw, 2rem) 
+    clamp(1.8rem, 5vw, 2rem);
 
   display: flex;
   flex-direction: column;
@@ -70,11 +66,38 @@
 }
 
 .quiz__footer {
-  padding: 0 clamp(1rem, 2vw, 2rem) clamp(0.5rem, 2vw, 1.5rem)
-    clamp(1rem, 2vw, 2rem),
+  /* Upp (0) | Höger | Ner | Vänster */
+  padding: 
+    0 
+    clamp(1rem, 2vw, 2rem) 
+    clamp(1rem, 3vw, 2rem)
     clamp(1rem, 2vw, 2rem);
+    
   width: 100%;
   box-sizing: border-box;
   display: flex;
   justify-content: center;
+}
+
+
+@media (max-height: 740px) {
+  
+  .quiz__content {
+    padding-top: 1rem;
+    padding-bottom: 0.5rem;
+  }
+
+  .quiz__answers-container {
+    gap: 8px; 
+  }
+  
+  .answer-button {
+    min-height: 50px; 
+    padding: 0.5rem 1rem;
+  }
+  
+  .quiz__question-container {
+    min-height: 60px;
+    font-size: 1.1rem;
+  }
 }
