@@ -81,6 +81,9 @@
 
 
 @media (max-height: 740px) {
+  .quiz__inner {
+    border-radius: 2rem; 
+  }
   
   .quiz__answers-container {
     gap: 8px; 
@@ -88,11 +91,13 @@
   
   .answer-button {
     min-height: 50px; 
-    padding: 0.5rem 1rem;
+    padding: 0.2rem 1rem;
   }
   
   .quiz__question-container {
-    min-height: 60px;
+    min-height: 48px;
     font-size: 1.1rem;
+    padding-top: 0; 
+    padding-bottom: 0;
   }
 }
