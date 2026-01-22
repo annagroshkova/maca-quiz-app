@@ -1,4 +1,4 @@
-import { useState, useEffect, use } from "react";
+import { useState, useEffect} from "react";
 import { Flex, Card, Text } from "@radix-ui/themes";
 import { AnswerButton } from "../../components/AnswerButton/AnswerButton";
 import { AnimatePresence, motion } from "motion/react";

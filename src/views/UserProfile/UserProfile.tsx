@@ -3,7 +3,6 @@ import SubmitButton from "../../components/SubmitButton/SubmitButton";
 import { useState, useEffect } from "react";
 import Avatar from "../../components/Avatar/Avatar";
 import useQuizNavigation from "../../hooks/useQuizNavigation";
-import Header from "../../components/Header/Header";
 
 export default function UserProfile() {
   const { user, setUserName, setUserBgColor } = useUser();
