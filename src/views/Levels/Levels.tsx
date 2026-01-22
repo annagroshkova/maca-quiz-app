@@ -71,7 +71,7 @@ export default function Levels() {
             <p className="levels__category-name">{categoryObj.quizSubject}</p>
           </div>
 
-          <div className="modifierContainer">
+          <div className="levels__modifiers-container">
             <button
               type="button"
               className={`modifierButton ${modifierHotStreak ? "active" : ""}`}
