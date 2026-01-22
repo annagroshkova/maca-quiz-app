@@ -367,7 +367,6 @@ export default function Quiz() {
               </AnimatePresence>
             </>
           )}
-          </div>
         </Flex>
       </MainWrapper>
     </>
