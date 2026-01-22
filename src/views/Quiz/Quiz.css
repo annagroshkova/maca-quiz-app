@@ -28,6 +28,12 @@
   overflow: hidden;
   height: 100%;
 }
+.quiz__header {
+  padding-inline: clamp(1.5rem, 4vw, 2rem);
+  padding-top: clamp(1.5rem, 3vh, 2.5rem);
+  padding-bottom: 0.5rem;
+  width: 100%;
+}
 
 .quiz__score-number {
   font-weight: 700;
@@ -86,6 +92,33 @@
   justify-content: center;
 }
 
+
+.life-heart {
+  cursor: default;
+  -webkit-user-select: none;
+  user-select: none;
+}
+.quiz__powerups {
+  margin-top: 1.5rem;
+  margin-bottom: 0.5rem; 
+}
+.scoreLifeIcon{
+  height: 35px;
+  width: 35px;
+}
+.scoreText{
+  display:flex;
+
+}
+.powerUpButton{
+  border:none;
+  background:none;
+}
+.powerUpIcon{
+  height: 40px;
+  width: 40px;
+}
+
 /* --- COMPACT MODE --- */
 @media (max-height: 46.25em) {
   .quiz__content {
@@ -112,19 +145,3 @@
 }
 
 
-.scoreLifeIcon{
-  height: 35px;
-  width: 35px;
-}
-.scoreText{
-  display:flex;
-
-}
-.powerUpButton{
-  border:none;
-  background:none;
-}
-.powerUpIcon{
-  height: 40px;
-  width: 40px;
-}
