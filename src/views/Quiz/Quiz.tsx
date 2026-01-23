@@ -115,6 +115,12 @@ export default function Quiz() {
     setPowerUpHintActive(false);
   }, [question]);
 
+  useEffect(() => {
+    setQuestion(null);
+    setQuestionQueue([]);
+    setUsedQuestions(new Set());
+  }, [user.category, user.level]);
+
   const activateHint = () => {
     if (!question) return;
     if (powerUpHintUsed || powerUpHintActive) return;
@@ -278,9 +284,8 @@ export default function Quiz() {
         backButton={true}
         backButtonProps={{
           onClick: () => {
-            setLives(3);
-            setScore(0);
             resetQuiz();
+            setQuestionQueue([]);
             goToSettings();
           },
           children: (
