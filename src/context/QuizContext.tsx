@@ -13,6 +13,8 @@ interface QuizState {
   modifierHotStreak: boolean;
   modifierSurvivor: boolean;
   modifierTimeLimit: boolean;
+  powerUpShield: boolean;
+  powerUpHint: boolean;
 
   setQuestion: (q: QuizQuestion | null) => void;
   setSelectedAnswer: (a: string | null) => void;
@@ -27,6 +29,8 @@ interface QuizState {
   setModifierHotStreak: (value: boolean) => void;
   setModifierSurvivor: (value: boolean) => void;
   setModifierTimeLimit: (value: boolean) => void;
+  setPowerUpShield: (value: boolean) => void;
+  setPowerUpHint: (value: boolean) => void;
 }
 
 const QuizContext = createContext<QuizState | null>(null);
@@ -43,6 +47,8 @@ export function QuizProvider({ children }: { children: ReactNode }) {
   const [modifierHotStreak, setModifierHotStreak] = useState<boolean>(false);
   const [modifierSurvivor, setModifierSurvivor] = useState<boolean>(false);
   const [modifierTimeLimit, setModifierTimeLimit] = useState<boolean>(false);
+  const [powerUpShield, setPowerUpShield] = useState<boolean>(false);
+  const [powerUpHint, setPowerUpHint] = useState<boolean>(false);
 
   const resetQuiz = () => {
     setQuestion(null);
@@ -53,6 +59,11 @@ export function QuizProvider({ children }: { children: ReactNode }) {
     setCorrectAnswersStreak(0);
     setLastRewardedPointCount(0);
     // setLastRewardedLifeCount(0);
+    setModifierHotStreak(false);
+    setModifierSurvivor(false);
+    setModifierTimeLimit(false);
+    setPowerUpHint(false);
+    setPowerUpShield(false);
   };
   const value = useMemo(
     () => ({
@@ -66,6 +77,8 @@ export function QuizProvider({ children }: { children: ReactNode }) {
       modifierHotStreak,
       modifierSurvivor,
       modifierTimeLimit,
+      powerUpHint,
+      powerUpShield,
       setQuestion,
       setSelectedAnswer,
       setScore,
@@ -79,6 +92,8 @@ export function QuizProvider({ children }: { children: ReactNode }) {
       setModifierHotStreak,
       setModifierSurvivor,
       setModifierTimeLimit,
+      setPowerUpHint,
+      setPowerUpShield,
     }),
     [
       question,
@@ -92,6 +107,8 @@ export function QuizProvider({ children }: { children: ReactNode }) {
       modifierHotStreak,
       modifierSurvivor,
       modifierTimeLimit,
+      powerUpHint,
+      powerUpShield,
     ],
   );
 
