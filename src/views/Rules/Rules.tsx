@@ -25,11 +25,11 @@ export default function Rules() {
 
         <Flex className="rulesInner">
           <div className="rulesChallenge">
-            <Text align="center">
+            <h3 className="rulesChallengeText">
               Test your knowledge across different topics! Answer questions
               correctly to score points, earn streak rewards, and keep your
               lives. Can you get the highest score?
-            </Text>
+            </h3>
           </div>
 
           <div className="ruleCardContainer">
