@@ -49,11 +49,6 @@ export const AnswerButton = ({
     if (!disabled) onClick();
   };
 
-  let variantToUse = "idle";
-  if (state === "correct") variantToUse = "correct";
-  if (state === "incorrect") variantToUse = "balloonPop";
-  if (state === "idle-round-over") variantToUse = "stepBack";
-
   return (
     <motion.div
       className={`answer-button-wrapper ${state === "correct" ? "highlighted" : ""}`}
