@@ -10,7 +10,7 @@ import { useQuiz } from "../../context/QuizContext";
 import useQuizNavigation from "../../hooks/useQuizNavigation";
 import "./Quiz.css";
 import MainWrapper from "../MainWrapper";
-import { s } from "framer-motion/client";
+
 
 type ApiResponse = ApiQuestion[];
 
