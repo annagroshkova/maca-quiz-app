@@ -19,6 +19,8 @@ export default function Levels() {
   const { goToSettings } = useQuizNavigation();
   const { modifierHotStreak, setModifierHotStreak } = useQuiz();
   const { modifierSurvivor, setModifierSurvivor } = useQuiz();
+  const { modifierTimeLimit, setModifierTimeLimit } = useQuiz();
+
 
   const [level, setLevel] = useState<
     "easy" | "medium" | "hard" | undefined | null
@@ -71,7 +73,7 @@ export default function Levels() {
             <p className="levels__category-name">{categoryObj.quizSubject}</p>
           </div>
 
-          <div className="modifierContainer">
+          <div className="levels__modifiers-container">
             <button
               type="button"
               className={`modifierButton ${modifierHotStreak ? "active" : ""}`}
@@ -85,6 +87,13 @@ export default function Levels() {
               onClick={() => setModifierSurvivor(!modifierSurvivor)}
             >
               Survivor
+            </button>
+            <button
+              type="button"
+              className={`modifierButton ${modifierTimeLimit ? "active" : ""}`}
+              onClick={() => setModifierTimeLimit(!modifierTimeLimit)}
+            >
+              Time Limit
             </button>
           </div>
 

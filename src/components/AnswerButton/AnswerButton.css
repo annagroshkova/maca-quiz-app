@@ -1,0 +1,94 @@
+.answer-button-wrapper {
+  width: 100%;
+  position: relative;
+  margin: 0.35rem 0;
+  z-index: 1;
+}
+
+.answer-button-wrapper.highlighted {
+  z-index: 10;
+}
+
+.answer-button {
+  position: relative;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  width: 95%; 
+  margin: 0 auto;
+  min-height: clamp(3.1rem, 6.5vh, 4rem);
+  padding: clamp(0.4rem, 1.5vw, 2rem);
+
+  border: none;
+  border-radius: 9999px;
+  cursor: pointer;
+  background-color: #6158b8; 
+  color: white;
+
+
+  font-family: inherit;
+  font-size: clamp(0.95rem, 1.8vw, 1.15rem);
+  font-weight: 600;
+  line-height: 1.25;
+
+  box-shadow:
+    inset 0 0 0 0 rgba(255, 255, 255, 0),
+    inset 0 0 0 0 rgba(255, 255, 255, 0),
+    0 0 0 0 rgba(115, 102, 208, 0),
+    inset 0 0 0 0.1rem rgba(255, 255, 255, 0.6);
+
+  transition:
+    background-color 0.3s ease,
+    transform 0.3s cubic-bezier(0.34, 1.56, 0.64, 1),
+    box-shadow 0.3s ease;
+
+  -webkit-user-select: none;
+  user-select: none;
+  -webkit-tap-highlight-color: transparent;
+}
+
+.answer-button:not(:disabled):hover {
+  background-color: #7a6ed6;
+  transform: scale(1.05);
+  box-shadow: 
+    inset 0 0 0 0.2rem rgba(255, 255, 255, 0.6),
+    inset 0 0 2rem 0.2rem rgba(255, 255, 255, 0.2);
+}
+
+.answer-button:not(:disabled):active {
+  transform: scale(0.97);
+  box-shadow:
+    inset 0 0 0 0.15rem rgba(255, 255, 255, 0.4),
+    inset 0 0 1rem 0 rgba(255, 255, 255, 0.1);
+}
+
+
+.answer-button.correct {
+  background-color: #8bd9a7;
+  color: white;
+  box-shadow:
+    inset 0 0 0 0.15rem rgba(255, 255, 255, 0.4),
+    0 0 1rem rgba(103, 216, 144, 0.6);
+}
+
+.answer-button.incorrect {
+  background-color: #ff4b6f;
+  color: white;
+  box-shadow:
+    inset 0 0 0 0.15rem rgba(255, 255, 255, 0.4),
+    0 0 1rem rgba(255, 75, 111, 0.6);
+}
+
+.answer-button.passive {
+  background-color: #e5e5e5;
+  color: #a0a0a0;
+  cursor: default;
+  box-shadow: none;
+  border: 1px solid transparent;
+  pointer-events: none;
+}
+
+.answer-button:disabled {
+  cursor: default;
+}
