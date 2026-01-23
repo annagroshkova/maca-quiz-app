@@ -71,6 +71,10 @@ export default function Quiz() {
     modifierHotStreak,
     modifierSurvivor,
     modifierTimeLimit,
+    powerUpHint,
+    powerUpShield,
+    setPowerUpHint,
+    setPowerUpShield,
   } = useQuiz();
 
   useEffect(() => {
@@ -132,7 +136,10 @@ export default function Quiz() {
         return newStreak;
       });
     } else {
-      setLives((lostLife) => lostLife - 1);
+      if (!powerUpShield) {
+        setLives((lostLife) => lostLife - 1);
+      }
+
       setCorrectAnswersStreak(0);
     }
   };
@@ -271,11 +278,7 @@ export default function Quiz() {
               </Text>
               <Flex>
                 {[1, 2, 3].map((heartIndex) => (
-                  <Text
-                    key={heartIndex}
-                    size="6"
-                    className="life-heart"
-                  >
+                  <Text key={heartIndex} size="6" className="life-heart">
                     {heartIndex <= 3 - lives ? "🖤" : "❤️"}
                   </Text>
                 ))}
@@ -284,7 +287,7 @@ export default function Quiz() {
           </Flex>
           {question && (
             <>
-              <Card className="quiz__question-container" >
+              <Card className="quiz__question-container">
                 <Text size="5" weight="bold" align="center">
                   {question.question}
                 </Text>
@@ -326,30 +329,35 @@ export default function Quiz() {
                   </Flex>
                 </AnimatePresence>
               </Flex>
-              {(!selectedAnswer) && (
-              <Flex justify="center" gap="5" align="center" className="quiz__powerups">
-                <button className="powerUpButton">
-                  <img
-                    className="powerUpIcon"
-                    alt="Shield Icon"
-                    src="/shield.png"
-                  />
-                </button>
-                <button className="powerUpButton">
-                  <img
-                    className="powerUpIcon"
-                    alt="Skip Icon"
-                    src="/next.png"
-                  />
-                </button>
-                <button className="powerUpButton">
-                  <img
-                    className="powerUpIcon"
-                    alt="Hint Icon"
-                    src="/hint.png"
-                  />
-                </button>
-              </Flex>
+              {!selectedAnswer && (
+                <Flex
+                  justify="center"
+                  gap="5"
+                  align="center"
+                  className="quiz__powerups"
+                >
+                  <button className="powerUpButton">
+                    <img
+                      className="powerUpIcon"
+                      alt="Shield Icon"
+                      src="/shield.png"
+                    />
+                  </button>
+                  <button className="powerUpButton">
+                    <img
+                      className="powerUpIcon"
+                      alt="Skip Icon"
+                      src="/next.png"
+                    />
+                  </button>
+                  <button className="powerUpButton">
+                    <img
+                      className="powerUpIcon"
+                      alt="Hint Icon"
+                      src="/hint.png"
+                    />
+                  </button>
+                </Flex>
               )}
               {/* Reset-knapp (visas bara när man svarat) */}
               <AnimatePresence>
