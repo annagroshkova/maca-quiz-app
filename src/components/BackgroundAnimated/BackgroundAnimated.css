@@ -249,7 +249,7 @@
   animation-duration: 18s;
 }
 
-/*tar väldigt mycket prestanda och batteri tyvärr lol
+tar väldigt mycket prestanda och batteri tyvärr lol
 .blur-overlay {
   position: fixed;
   top: 0;
@@ -260,7 +260,7 @@
   backdrop-filter: blur(40px);
   pointer-events: none;
   z-index: 0;
-}*/
+}
 
 @keyframes rotateWholeSystem {
   from {
