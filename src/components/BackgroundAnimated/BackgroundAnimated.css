@@ -42,7 +42,7 @@
   position: absolute;
   border-radius: 40% 60% 70% 30% / 40% 50% 60% 50%;
   opacity: 0.8;
-  /*  filter: blur(30px); drar förmycket prestanda tyvärr lol */
+  filter: blur(30px);
   top: 0;
   left: 0;
   transform: translate(-50%, -50%);
