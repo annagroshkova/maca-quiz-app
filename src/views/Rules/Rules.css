@@ -5,7 +5,7 @@
   margin: 0 auto;
   flex-grow: 10;
   width: 100%;
-  max-width: 800px;
+  max-width: 1500px;
 }
 
 .rulesInner {
@@ -14,6 +14,7 @@
   align-items: center;
   background-color: rgba(240, 240, 240, 0.9);
   box-shadow: 3px 8px 8px rgba(75, 30, 7, 0.1);
+
   border-radius: 12px;
   gap: 25px;
   padding: 30px 18px;
@@ -34,17 +35,88 @@
   transition: all 0.2s ease;
   background-color: #fcfcfc;
   text-align: center;
-  margin: 12px;
+  /* margin: 10px; */
+  border-radius: 12px;
+  padding: 12px;
+  width: 250px;
+  height: auto;
+}
+.rulesBox h2 {
+  margin-bottom: 14px;
+}
+
+.rulesBox ul {
+  padding-left: 0;
+  list-style-position: inside;
 }
 
 .ruleCardContainer {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  height: auto;
-  overflow: scroll;
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 10px;
 }
 
 .rulesSmallHeadline {
   text-align: center;
+}
+.powerUpWrapper{
+  display:flex;
+  justify-content: center;
+  flex-direction: column;
+  align-items: center;
+  gap: 10px;
+}
+.powerUpBox{
+  width:80%;
+  min-height: 100px;
+  height: auto;
+  display:flex;
+  flex-direction: column;
+}
+.powerUpBox p {
+  margin-top: 0;
+  line-height: 1.4;
+  opacity: 0.85;
+}
+.powerUpHeadline{
+  display:flex;
+  align-items: center;
+  justify-content: center;
+   gap: 10px;
+  margin-bottom: 6px;
+}
+.rulesIcon{
+  height:30px;
+  width:30px;
+  margin-left:10px;
+
+}
+
+.rulesList {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  margin-top: 12px;
+  text-align: left;
+  list-style: none;
+}
+.rulesList li {
+ 
+  border-radius: 8px;
+  padding: 8px 10px;
+  line-height: 1.4;
+  display:flex;
+  align-items: flex-start;
+  gap:8px;
+  background:transparent;
+}
+.rulesList li::before {
+  content: "";
+  width: 15px;
+  height: 15px;
+  background-image: url("/star.png");
+  background-size: contain;
+  background-repeat: no-repeat;
+  flex-shrink: 0;
+  margin-top: 4px; 
 }
