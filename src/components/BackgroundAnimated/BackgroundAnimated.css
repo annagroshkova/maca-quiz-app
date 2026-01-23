@@ -28,46 +28,51 @@
   overflow: visible;
   animation: rotateWholeSystem 140s linear infinite;
 }
+.background-rotate-reverse {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 0;
+  height: 0;
+  overflow: visible;
+  animation: reverseRotateWholeSystem 170s linear infinite;
+}
 
 .background-circle {
   position: absolute;
-  border-radius: 50%;
+  border-radius: 40% 60% 70% 30% / 40% 50% 60% 50%;
   opacity: 0.8;
-  filter: blur(30px);
+/*  filter: blur(30px); drar förmycket prestanda tyvärr lol */
   top: 0;
   left: 0;
   transform: translate(-50%, -50%);
   animation-timing-function: cubic-bezier(0.45, 0, 0.55, 1);
   animation-iteration-count: infinite;
   animation-direction: alternate;
+  mix-blend-mode: overlay;
+  will-change: transform;
 }
+.shape-2 {
+  border-radius: 60% 40% 30% 70% / 50% 60% 40% 50%;
+}
+.shape-3 {
+  border-radius: 70% 30% 40% 60% / 50% 60% 40% 50%;
+}
+
 
 .circle-1 {
   width: 80vmin;
   height: 80vmin;
   background: radial-gradient(
     circle,
-    rgba(255, 222, 204, 1) 0%,
-    rgba(255, 222, 204, 0) 65%
+    rgba(182, 205, 233, 1) 0%,
+    rgba(182, 205, 233, 0.4) 40%,
+    rgba(182, 205, 233, 0) 70%
   );
   margin-left: -50vmin;
   margin-top: -40vmin;
   animation-name: float1;
   animation-duration: 25s;
-}
-
-.circle-2 {
-  width: 70vmin;
-  height: 70vmin;
-  background: radial-gradient(
-    circle,
-    rgba(182, 205, 233, 1) 0%,
-    rgba(182, 205, 233, 0) 65%
-  );
-  margin-left: -60vmin;
-  margin-top: 15vmin;
-  animation-name: float2;
-  animation-duration: 32s;
 }
 
 .circle-3 {
@@ -76,7 +81,8 @@
   background: radial-gradient(
     circle,
     rgba(224, 195, 252, 1) 0%,
-    rgba(224, 195, 252, 0) 65%
+    rgba(224, 195, 252, 0.4) 40%,
+    rgba(224, 195, 252, 0) 70%
   );
   margin-left: -40vmin;
   margin-top: 45vmin;
@@ -85,12 +91,13 @@
 }
 
 .circle-4 {
-  width: 80vmin;
+  width: 65vmin;
   height: 80vmin;
   background: radial-gradient(
     circle,
-    rgba(255, 222, 204, 1) 0%,
-    rgba(255, 222, 204, 0) 65%
+    rgba(182, 205, 233, 1) 0%,
+    rgba(182, 205, 233, 0.4) 40%,
+    rgba(224, 195, 252, 0) 70%
   );
   margin-left: 50vmin;
   margin-top: -40vmin;
@@ -98,13 +105,104 @@
   animation-duration: 28s;
 }
 
-.circle-5 {
-  width: 70vmin;
+.circle-6 {
+  width: 75vmin;
   height: 70vmin;
   background: radial-gradient(
     circle,
     rgba(224, 195, 252, 1) 0%,
-    rgba(224, 195, 252, 0) 65%
+    rgba(224, 195, 252, 0.4) 40%,
+    rgba(182, 205, 233, 0) 70%
+  );
+  margin-left: 40vmin;
+  margin-top: 45vmin;
+  animation-name: float6;
+  animation-duration: 24s;
+}
+
+.circle-7 {
+  width: 68vmin;
+  height: 68vmin;
+  background: radial-gradient(
+    circle,
+    rgba(182, 205, 233, 1) 0%,
+    rgba(182, 205, 233, 0.4) 40%,
+    rgba(182, 205, 233, 0) 70%
+  );
+  margin-left: 60vmin;
+  margin-top: 55vmin;
+  animation-name: float7;
+  animation-duration: 18s;
+}
+
+.circle-9 {
+  width: 80vmin;
+  height: 80vmin;
+  background: radial-gradient(
+    circle,
+    rgba(224, 195, 252, 1) 0%,
+    rgba(224, 195, 252, 0.4) 40%,
+    rgba(182, 205, 233, 0) 70%
+  );
+  margin-left: 45vmin;
+  margin-top: 55vmin;
+  animation-name: float9;
+  animation-duration: 14s;
+}
+
+.circle-10 {
+  width: 75vmin;
+  height: 70vmin;
+  background: radial-gradient(
+    circle,
+    rgba(182, 205, 233, 1) 0%,
+    rgba(182, 205, 233, 0.4) 40%,
+    rgba(182, 205, 233, 0) 70%
+  );
+  margin-left: 40vmin;
+  margin-top: 65vmin;
+  animation-name: float10;
+  animation-duration: 20s;
+}
+
+.circle-12 {
+  width: 85vmin;
+  height: 85vmin;
+  background: radial-gradient(
+    circle,
+    rgba(224, 195, 252, 1) 0%,
+    rgba(224, 195, 252, 0.4) 40%,
+    rgba(182, 205, 233, 0) 70%
+  );
+  margin-left: 50vmin;
+  margin-top: 45vmin;
+  animation-name: float12;
+  animation-duration: 24s;
+}
+
+.circle-2 {
+  width: 78vmin;
+  height: 70vmin;
+  background: radial-gradient(
+    circle,
+    rgba(255, 222, 204, 1) 0%,
+    rgba(255, 222, 204, 0.4) 40%,
+    rgba(255, 222, 204, 0) 70%
+  );
+  margin-left: -60vmin;
+  margin-top: 15vmin;
+  animation-name: float2;
+  animation-duration: 32s;
+}
+
+.circle-5 {
+  width: 72vmin;
+  height: 70vmin;
+  background: radial-gradient(
+    circle,
+    rgba(255, 222, 204, 1) 0%,
+    rgba(255, 222, 204, 0.4) 40%,
+    rgba(255, 222, 204, 0) 70%
   );
   margin-left: 60vmin;
   margin-top: 15vmin;
@@ -112,18 +210,34 @@
   animation-duration: 26s;
 }
 
-.circle-6 {
-  width: 75vmin;
-  height: 75vmin;
+.circle-8 {
+  width: 70vmin;
+  height: 70vmin;
   background: radial-gradient(
     circle,
-    rgba(182, 205, 233, 1) 0%,
-    rgba(182, 205, 233, 0) 65%
+    rgba(255, 222, 204, 1) 0%,
+    rgba(255, 222, 204, 0.4) 40%,
+    rgba(255, 222, 204, 0) 70%
   );
-  margin-left: 40vmin;
-  margin-top: 45vmin;
-  animation-name: float6;
-  animation-duration: 24s;
+  margin-left: 45vmin;
+  margin-top: 50vmin;
+  animation-name: float8;
+  animation-duration: 22s;
+}
+
+.circle-11 {
+  width: 65vmin;
+  height: 65vmin;
+  background: radial-gradient(
+    circle,
+    rgba(255, 222, 204, 1) 0%,
+    rgba(255, 222, 204, 0.4) 40%,
+    rgba(255, 222, 204, 0) 70%
+  );
+  margin-left: 30vmin;
+  margin-top: 35vmin;
+  animation-name: float11;
+  animation-duration: 18s;
 }
 
 .blur-overlay {
@@ -146,33 +260,117 @@
     transform: rotate(360deg);
   }
 }
+@keyframes reverseRotateWholeSystem {
+  from {
+    transform: rotate(360deg);
+  }
+  to {
+    transform: rotate(0deg);
+  }
+}
 
 @keyframes float1 {
-  0% { transform: translate(-80%, -80%) scale(1); } 
-  100% { transform: translate(-30%, -30%) scale(1.4); }
+  0% {
+    transform: translate(-80%, -80%) scale(1);
+  }
+  100% {
+    transform: translate(-30%, -30%) scale(1.4);
+  }
 }
 
 @keyframes float2 {
-  0% { transform: translate(-80%, -50%) scale(0.8); } 
-  100% { transform: translate(-30%, -50%) scale(1.1); }
+  0% {
+    transform: translate(-90%, -60%) scale(0.8);
+  }
+  100% {
+    transform: translate(-20%, -40%) scale(1.1);
+  }
 }
 
 @keyframes float3 {
-  0% { transform: translate(-80%, -20%) scale(1); } 
-  100% { transform: translate(-30%, -60%) scale(1.3); }
+  0% {
+    transform: translate(-90%, -10%) scale(1);
+  }
+  100% {
+    transform: translate(-20%, -50%) scale(1.3);
+  }
 }
 
 @keyframes float4 {
-  0% { transform: translate(-20%, -80%) rotate(0deg) scale(1); } 
-  100% { transform: translate(-60%, -40%) rotate(-45deg) scale(1.35); }
+  0% {
+    transform: translate(-20%, -80%) rotate(0deg) scale(1);
+  }
+  100% {
+    transform: translate(-40%, -20%) rotate(-45deg) scale(1.35);
+  }
 }
 
 @keyframes float5 {
-  0% { transform: translate(-10%, -50%) scale(1); } 
-  100% { transform: translate(-60%, -50%) scale(0.85); }
+  0% {
+    transform: translate(-10%, -50%) scale(1);
+  }
+  100% {
+    transform: translate(-60%, -50%) scale(0.85);
+  }
 }
 
 @keyframes float6 {
-  0% { transform: translate(-20%, -20%) scale(0.9); } 
-  100% { transform: translate(-60%, -60%) scale(1.25); }
+  0% {
+    transform: translate(-20%, -20%) scale(0.9);
+  }
+  100% {
+    transform: translate(-60%, -60%) scale(1.25);
+  }
+}
+@keyframes float7 {
+  0% {
+    transform: translate(-10%, -60%) rotate(0deg) scale(1.6);
+  }
+  100% {
+    transform: translate(-30%, -10%) rotate(-90deg) scale(1.2);
+  }
+}
+
+@keyframes float8 {
+  0% {
+    transform: translate(-10%, -50%) scale(0.6);
+  }
+  100% {
+    transform: translate(-60%, -50%) scale(0.95);
+  }
+}
+
+@keyframes float9 {
+  0% {
+    transform: translate(-30%, -20%) scale(0.7);
+  }
+  100% {
+    transform: translate(-60%, -80%) scale(1.8);
+  }
+}
+@keyframes float10 {
+  0% {
+    transform: translate(-80%, -80%) scale(1);
+  }
+  100% {
+    transform: translate(-30%, -30%) scale(1.4);
+  }
+}
+
+@keyframes float11 {
+  0% {
+    transform: translate(-90%, -60%) scale(0.8);
+  }
+  100% {
+    transform: translate(-20%, -40%) scale(1.1);
+  }
+}
+
+@keyframes float12 {
+  0% {
+    transform: translate(-90%, -10%) scale(1);
+  }
+  100% {
+    transform: translate(-20%, -50%) scale(1.3);
+  }
 }

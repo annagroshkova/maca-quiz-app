@@ -1,7 +1,5 @@
 import { motion } from "motion/react";
 import "./AnswerButton.css";
-import "@radix-ui/themes/styles.css";
-import { Flex, Card, Text } from "@radix-ui/themes";
 
 interface AnswerButtonProps {
   answerText: string;
@@ -23,10 +21,7 @@ export const AnswerButton = ({
   if (state === "incorrect") buttonClass += "incorrect";
   if (state === "idle-round-over") buttonClass += "passive";
 
-  let variantToUse = "idle";
-  if (state === "correct") variantToUse = "correct";
-  if (state === "incorrect") variantToUse = "balloonPop";
-  if (state === "idle-round-over") variantToUse = "stepBack";
+
 
   // let background: "#fcfcfc" | "#8BD9A7" | "#FFB7C5" = "#fcfcfc";
   // let color: "white" | "black" | "#4a4a4aff" = "black";
@@ -46,10 +41,10 @@ export const AnswerButton = ({
     if (!disabled) onClick();
   };
 
-  // let variantToUse = "idle";
-  // if (state === "correct") variantToUse = "correct";
-  // if (state === "incorrect") variantToUse = "balloonPop";
-  // if (state === "idle-round-over") variantToUse = "stepBack";
+  let variantToUse = "idle";
+  if (state === "correct") variantToUse = "correct";
+  if (state === "incorrect") variantToUse = "balloonPop";
+  if (state === "idle-round-over") variantToUse = "stepBack";
 
   return (
     <motion.div
