@@ -119,6 +119,8 @@ export default function Quiz() {
     setQuestion(null);
     setQuestionQueue([]);
     setUsedQuestions(new Set());
+    setLives(3);
+    setScore(0);
   }, [user.category, user.level]);
 
   const activateHint = () => {
@@ -197,6 +199,11 @@ export default function Quiz() {
       );
       const data: ApiResponse = await response.json();
 
+      const currentUsed = new Set([
+        ...usedQuestions,
+        ...questionQueue.map((q) => q.question),
+      ]);
+
       const validQuestions: QuizQuestion[] = data
         .map((q) => ({
           question: q.question.text,
@@ -209,7 +216,7 @@ export default function Quiz() {
         .filter(
           (q) => !q.allAnswers.some((ans) => ans.length > maxAnswerLength),
         )
-        .filter((q) => !usedQuestions.has(q.question));
+        .filter((q) => !currentUsed.has(q.question));
 
       if (validQuestions.length === 0) {
         fetchQuestion();
@@ -218,6 +225,12 @@ export default function Quiz() {
 
       setQuestionQueue((prev) => {
         const newQueue = [...prev, ...validQuestions];
+        setUsedQuestions((prevSet) => {
+          const updatedSet = new Set(prevSet);
+          validQuestions.forEach((q) => updatedSet.add(q.question));
+          return updatedSet;
+        });
+
         return newQueue;
       });
     } catch (error) {
@@ -251,7 +264,6 @@ export default function Quiz() {
       const [nextQuestion, ...restQueue] = questionQueue;
       setQuestion(nextQuestion);
       setQuestionQueue(restQueue);
-      setUsedQuestions((prev) => new Set(prev).add(nextQuestion.question));
 
       if (restQueue.length < prefetchThreshold) {
         fetchQuestion();
