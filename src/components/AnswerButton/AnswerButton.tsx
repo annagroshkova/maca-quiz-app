@@ -1,5 +1,8 @@
 import { motion } from "motion/react";
 import "./AnswerButton.css";
+import "@radix-ui/themes/styles.css";
+import {Text} from "@radix-ui/themes"
+
 
 interface AnswerButtonProps {
   answerText: string;

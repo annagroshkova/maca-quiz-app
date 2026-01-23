@@ -42,7 +42,7 @@
   position: absolute;
   border-radius: 40% 60% 70% 30% / 40% 50% 60% 50%;
   opacity: 0.8;
-/*  filter: blur(30px); drar förmycket prestanda tyvärr lol */
+  /*  filter: blur(30px); drar förmycket prestanda tyvärr lol */
   top: 0;
   left: 0;
   transform: translate(-50%, -50%);
@@ -59,15 +59,16 @@
   border-radius: 70% 30% 40% 60% / 50% 60% 40% 50%;
 }
 
-
 .circle-1 {
   width: 80vmin;
   height: 80vmin;
   background: radial-gradient(
     circle,
     rgba(182, 205, 233, 1) 0%,
-    rgba(182, 205, 233, 0.4) 40%,
-    rgba(182, 205, 233, 0) 70%
+    rgba(182, 205, 233, 0.3) 40%,
+    rgba(182, 205, 233, 0.15) 60%,
+    rgba(182, 205, 233, 0.05) 75%,
+    rgba(182, 205, 233, 0) 85%
   );
   margin-left: -50vmin;
   margin-top: -40vmin;
@@ -96,8 +97,10 @@
   background: radial-gradient(
     circle,
     rgba(182, 205, 233, 1) 0%,
-    rgba(182, 205, 233, 0.4) 40%,
-    rgba(224, 195, 252, 0) 70%
+    rgba(182, 205, 233, 0.3) 40%,
+    rgba(182, 205, 233, 0.15) 60%,
+    rgba(182, 205, 233, 0.05) 75%,
+    rgba(182, 205, 233, 0) 85%
   );
   margin-left: 50vmin;
   margin-top: -40vmin;
@@ -112,6 +115,8 @@
     circle,
     rgba(224, 195, 252, 1) 0%,
     rgba(224, 195, 252, 0.4) 40%,
+    rgba(182, 205, 233, 0.15) 60%,
+    rgba(182, 205, 233, 0.05) 75%,
     rgba(182, 205, 233, 0) 70%
   );
   margin-left: 40vmin;
@@ -126,8 +131,10 @@
   background: radial-gradient(
     circle,
     rgba(182, 205, 233, 1) 0%,
-    rgba(182, 205, 233, 0.4) 40%,
-    rgba(182, 205, 233, 0) 70%
+    rgba(182, 205, 233, 0.3) 40%,
+    rgba(182, 205, 233, 0.15) 60%,
+    rgba(182, 205, 233, 0.05) 75%,
+    rgba(182, 205, 233, 0) 85%
   );
   margin-left: 60vmin;
   margin-top: 55vmin;
@@ -156,8 +163,10 @@
   background: radial-gradient(
     circle,
     rgba(182, 205, 233, 1) 0%,
-    rgba(182, 205, 233, 0.4) 40%,
-    rgba(182, 205, 233, 0) 70%
+    rgba(182, 205, 233, 0.3) 40%,
+    rgba(182, 205, 233, 0.15) 60%,
+    rgba(182, 205, 233, 0.05) 75%,
+    rgba(182, 205, 233, 0) 85%
   );
   margin-left: 40vmin;
   margin-top: 65vmin;
@@ -324,10 +333,10 @@
 }
 @keyframes float7 {
   0% {
-    transform: translate(-10%, -60%) rotate(0deg) scale(1.6);
+    transform: translate(-10%, -60%) rotate(0deg) scale(1.3);
   }
   100% {
-    transform: translate(-30%, -10%) rotate(-90deg) scale(1.2);
+    transform: translate(-30%, -10%) rotate(-90deg) scale(0.9);
   }
 }
 
