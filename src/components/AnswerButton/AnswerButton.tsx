@@ -1,7 +1,7 @@
-import "@radix-ui/themes/styles.css";
-import { Button } from "@radix-ui/themes";
 import { motion } from "motion/react";
 import "./AnswerButton.css";
+import "@radix-ui/themes/styles.css";
+import { Flex, Card, Text } from "@radix-ui/themes";
 
 interface AnswerButtonProps {
   answerText: string;
@@ -18,42 +18,44 @@ export const AnswerButton = ({
   disabled = false,
   index,
 }: AnswerButtonProps) => {
-  let background: "#fcfcfc" | "#8BD9A7" | "#FFB7C5" = "#fcfcfc";
-  let color: "white" | "black" | "#4a4a4aff" = "black";
-  if (state === "correct") {
-    background = "#8BD9A7";
-    color = "white";
-  }
-  if (state === "incorrect") {
-    background = "#FFB7C5";
-    color = "white";
-  }
-
-  // Om knappen är inaktiv (idle-round-over), gör den grå
-  const isPassive = state === "idle-round-over";
-
-  const handleClick = () => {
-    if (!disabled) onClick();
-  };
+  let buttonClass = "answer-button ";
+  if (state === "correct") buttonClass += "correct";
+  if (state === "incorrect") buttonClass += "incorrect";
+  if (state === "idle-round-over") buttonClass += "passive";
 
   let variantToUse = "idle";
   if (state === "correct") variantToUse = "correct";
   if (state === "incorrect") variantToUse = "balloonPop";
   if (state === "idle-round-over") variantToUse = "stepBack";
 
+  // let background: "#fcfcfc" | "#8BD9A7" | "#FFB7C5" = "#fcfcfc";
+  // let color: "white" | "black" | "#4a4a4aff" = "black";
+  // if (state === "correct") {
+  //   background = "#8BD9A7";
+  //   color = "white";
+  // }
+  // if (state === "incorrect") {
+  //   background = "#FFB7C5";
+  //   color = "white";
+  // }
+
+  // // Om knappen är inaktiv (idle-round-over), gör den grå
+  // const isPassive = state === "idle-round-over";
+
+  const handleClick = () => {
+    if (!disabled) onClick();
+  };
+
+  // let variantToUse = "idle";
+  // if (state === "correct") variantToUse = "correct";
+  // if (state === "incorrect") variantToUse = "balloonPop";
+  // if (state === "idle-round-over") variantToUse = "stepBack";
+
   return (
     <motion.div
-      style={{
-        width: "100%",
-        // Vi sätter en fast margin så de inte hoppar
-        margin: "8px 0",
-        position: "relative",
-        // Rätt svar läggs överst (z-index 10) så det kan växa över de andra utan att klippas
-        zIndex: state === "correct" ? 10 : 1,
-      }}
+    className={`answer-button-wrapper ${state === "correct" ? "highlighted" : ""}`}
       initial="entrance"
       animate={variantToUse}
-      // Vi behåller exit, men den körs BARA när listan byts ut (nästa fråga)
       exit="exitPoof"
       transition={{ delay: index * 0.05 }}
       variants={{
@@ -61,15 +63,15 @@ export const AnswerButton = ({
         entrance: {
           opacity: 0,
           x: 0,
-          transition: { duration: 3, ease: "easeOut" },
+          transition: { duration: 0.3, ease: "easeOut" },
         },
 
-        // --- EXIT (Poff vid nästa fråga) ---
+        // --- EXIT ---
         exitPoof: {
           scale: [1, 1.1, 0],
           opacity: [1, 1, 0],
-          filter: "blur(5px)",
-          transition: { duration: 3, ease: "backIn" },
+          filter: "blur(0.3rem)",
+          transition: { duration: 0.3, ease: "backIn" },
         },
 
         // --- IDLE ---
@@ -80,56 +82,44 @@ export const AnswerButton = ({
           x: 0,
           rotate: 0,
           filter: "grayscale(0%)",
-          margin: "8px 0",
+          margin: "0.5rem 0",
         },
 
         correct: {
           scaleX: 1.0,
           scaleY: 1.05,
-          margin: "20px 0",
-          opacity: 1, // <--- LÄGG TILL DENNA! Tvingar knappen att synas.
+          margin: "1.25rem 0",
+          opacity: 1,
           y: 0,
           transition: { type: "spring", stiffness: 200, damping: 15 },
         },
 
         balloonPop: {
           scale: 0.95,
-          margin: "20px 0",
+          margin: "1.25rem 0",
           y: 5,
           rotate: -2,
-          opacity: 0.86, // Denna är okej att ha lite lägre
+          opacity: 0.86,
           transition: { type: "spring", stiffness: 200, damping: 15 },
         },
 
-        // --- ÖVRIGA (Backa undan men var synliga) ---
+        // --- PASSIVE ---
         stepBack: {
           scale: 0.9,
-          opacity: 1, // Lite tydligare än förut så man ser att knappen finns
+          opacity: 1,
           filter: "grayscale(100%)",
           transition: { type: "spring", stiffness: 200, damping: 15 },
         },
       }}
     >
-      <Button
-        size="4"
-        variant="solid"
-        // color={isPassive ? 'gray' : color}
-        radius="full"
+      <button
+      className={buttonClass}
         onClick={handleClick}
-        style={{
-          color: isPassive ? "#4a4a4aff" : color,
-          backgroundColor: isPassive ? "#d7d7d7" : background,
-          width: "100%",
-          cursor: disabled ? "default" : "pointer",
-          borderRadius: "9999px",
-          height: "auto",
-          padding: "1em 1.5em",
-          fontSize: "1rem",
-          transition: "background-color 0.2s",
-        }}
+        disabled={disabled}
+        aria-label={answerText}
       >
         {answerText}
-      </Button>
+      </button>
     </motion.div>
   );
 };
