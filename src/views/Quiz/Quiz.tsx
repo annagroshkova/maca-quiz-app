@@ -284,8 +284,8 @@ export default function Quiz() {
           </Flex>
           {question && (
             <>
-              <Card className="quiz__question-container" style={{}}>
-                <Text size="5" weight="bold">
+              <Card className="quiz__question-container" >
+                <Text size="5" weight="bold" align="center">
                   {question.question}
                 </Text>
               </Card>
@@ -359,7 +359,6 @@ export default function Quiz() {
                     animate={{ opacity: 1, height: "auto", y: 0 }}
                     exit={{ opacity: 0, height: 0, y: 20 }}
                     transition={{ duration: 0.3 }}
-                    style={{ overflow: "hidden" }}
                   >
                     <div className="quiz__footer">
                       <SubmitButton
