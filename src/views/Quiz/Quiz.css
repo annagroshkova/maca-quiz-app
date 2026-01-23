@@ -26,7 +26,7 @@
 
   gap: clamp(1rem, 3vw, 2rem);
   padding: 0;
-  overflow-y: auto
+  overflow: hidden;
 
 }
 .quiz__header {
