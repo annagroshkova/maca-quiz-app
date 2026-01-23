@@ -13,6 +13,12 @@ interface QuizState {
   modifierHotStreak: boolean;
   modifierSurvivor: boolean;
   modifierTimeLimit: boolean;
+  powerUpShieldActive: boolean;
+  powerUpShieldUsed: boolean;
+  powerUpHintActive: boolean;
+  powerUpHintUsed: boolean;
+  powerUpSkipActive: boolean;
+  powerUpSkipUsed: boolean;
 
   setQuestion: (q: QuizQuestion | null) => void;
   setSelectedAnswer: (a: string | null) => void;
@@ -27,6 +33,12 @@ interface QuizState {
   setModifierHotStreak: (value: boolean) => void;
   setModifierSurvivor: (value: boolean) => void;
   setModifierTimeLimit: (value: boolean) => void;
+  setPowerUpShieldActive: (value: boolean) => void;
+  setPowerUpShieldUsed: (value: boolean) => void;
+  setPowerUpHintActive: (value: boolean) => void;
+  setPowerUpHintUsed: (value: boolean) => void;
+  setPowerUpSkipActive: (value: boolean) => void;
+  setPowerUpSkipUsed: (value: boolean) => void;
 }
 
 const QuizContext = createContext<QuizState | null>(null);
@@ -43,6 +55,13 @@ export function QuizProvider({ children }: { children: ReactNode }) {
   const [modifierHotStreak, setModifierHotStreak] = useState<boolean>(false);
   const [modifierSurvivor, setModifierSurvivor] = useState<boolean>(false);
   const [modifierTimeLimit, setModifierTimeLimit] = useState<boolean>(false);
+  const [powerUpShieldActive, setPowerUpShieldActive] =
+    useState<boolean>(false);
+  const [powerUpShieldUsed, setPowerUpShieldUsed] = useState<boolean>(false);
+  const [powerUpHintActive, setPowerUpHintActive] = useState<boolean>(false);
+  const [powerUpHintUsed, setPowerUpHintUsed] = useState<boolean>(false);
+  const [powerUpSkipActive, setPowerUpSkipActive] = useState<boolean>(false);
+  const [powerUpSkipUsed, setPowerUpSkipUsed] = useState<boolean>(false);
 
   const resetQuiz = () => {
     setQuestion(null);
@@ -53,6 +72,15 @@ export function QuizProvider({ children }: { children: ReactNode }) {
     setCorrectAnswersStreak(0);
     setLastRewardedPointCount(0);
     // setLastRewardedLifeCount(0);
+    setModifierHotStreak(false);
+    setModifierSurvivor(false);
+    setModifierTimeLimit(false);
+    setPowerUpHintActive(false);
+    setPowerUpHintUsed(false);
+    setPowerUpShieldUsed(false);
+    setPowerUpShieldActive(false);
+    setPowerUpSkipActive(false);
+    setPowerUpSkipUsed(false);
   };
   const value = useMemo(
     () => ({
@@ -66,6 +94,12 @@ export function QuizProvider({ children }: { children: ReactNode }) {
       modifierHotStreak,
       modifierSurvivor,
       modifierTimeLimit,
+      powerUpHintActive,
+      powerUpHintUsed,
+      powerUpShieldActive,
+      powerUpShieldUsed,
+      powerUpSkipActive,
+      powerUpSkipUsed,
       setQuestion,
       setSelectedAnswer,
       setScore,
@@ -79,6 +113,12 @@ export function QuizProvider({ children }: { children: ReactNode }) {
       setModifierHotStreak,
       setModifierSurvivor,
       setModifierTimeLimit,
+      setPowerUpHintActive,
+      setPowerUpHintUsed,
+      setPowerUpShieldUsed,
+      setPowerUpShieldActive,
+      setPowerUpSkipActive,
+      setPowerUpSkipUsed,
     }),
     [
       question,
@@ -92,6 +132,12 @@ export function QuizProvider({ children }: { children: ReactNode }) {
       modifierHotStreak,
       modifierSurvivor,
       modifierTimeLimit,
+      powerUpHintActive,
+      powerUpHintUsed,
+      powerUpShieldActive,
+      powerUpShieldUsed,
+      powerUpSkipActive,
+      powerUpSkipUsed,
     ],
   );
 

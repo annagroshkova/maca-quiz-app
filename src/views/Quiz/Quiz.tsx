@@ -52,6 +52,8 @@ export default function Quiz() {
   const { resetQuiz } = useQuiz();
   const [questionQueue, setQuestionQueue] = useState<QuizQuestion[]>([]);
   const [timeLeft, setTimeLeft] = useState<number>(10);
+  const [shieldFeedback, setShieldFeedback] = useState<boolean>(false);
+  const [disabledAnswers, setDisabledAnswers] = useState<string[]>([]);
 
   const {
     question,
@@ -71,6 +73,14 @@ export default function Quiz() {
     modifierHotStreak,
     modifierSurvivor,
     modifierTimeLimit,
+    powerUpHintActive,
+    powerUpHintUsed,
+    powerUpShieldActive,
+    powerUpShieldUsed,
+    setPowerUpHintActive,
+    setPowerUpHintUsed,
+    setPowerUpShieldActive,
+    setPowerUpShieldUsed,
   } = useQuiz();
 
   useEffect(() => {
@@ -90,10 +100,44 @@ export default function Quiz() {
   useEffect(() => {
     if (timeLeft === 0 && question && modifierTimeLimit) {
       setSelectedAnswer("TIMEOUT");
-      setLives((prev) => prev - 1);
+      if (powerUpShieldActive) {
+        setPowerUpShieldActive(false);
+        setPowerUpShieldUsed(true);
+      } else {
+        setLives((prev) => prev - 1);
+      }
       setCorrectAnswersStreak(0);
     }
   }, [timeLeft]);
+  useEffect(() => {
+    if (!question) return;
+    setDisabledAnswers([]);
+    setPowerUpHintActive(false);
+  }, [question]);
+
+  useEffect(() => {
+    setQuestion(null);
+    setQuestionQueue([]);
+    setUsedQuestions(new Set());
+    setLives(3);
+    setScore(0);
+  }, [user.category, user.level]);
+
+  const activateHint = () => {
+    if (!question) return;
+    if (powerUpHintUsed || powerUpHintActive) return;
+    if (selectedAnswer) return;
+
+    const wrongAnswers = question.allAnswers.filter(
+      (answer) => answer !== question.correctAnswer,
+    );
+    const answersToDisable = wrongAnswers
+      .sort(() => Math.random() - 0.5)
+      .slice(0, 2);
+    setDisabledAnswers(answersToDisable);
+    setPowerUpHintActive(true);
+    setPowerUpHintUsed(true);
+  };
 
   const handleAnswerClick = (answer: string) => {
     if (selectedAnswer) return;
@@ -132,7 +176,15 @@ export default function Quiz() {
         return newStreak;
       });
     } else {
-      setLives((lostLife) => lostLife - 1);
+      if (powerUpShieldActive) {
+        setPowerUpShieldActive(false);
+        setPowerUpShieldUsed(true);
+        setShieldFeedback(true);
+        setTimeout(() => setShieldFeedback(false), 1200);
+      } else {
+        setLives((lostLife) => lostLife - 1);
+      }
+
       setCorrectAnswersStreak(0);
     }
   };
@@ -147,6 +199,11 @@ export default function Quiz() {
       );
       const data: ApiResponse = await response.json();
 
+      const currentUsed = new Set([
+        ...usedQuestions,
+        ...questionQueue.map((q) => q.question),
+      ]);
+
       const validQuestions: QuizQuestion[] = data
         .map((q) => ({
           question: q.question.text,
@@ -159,7 +216,7 @@ export default function Quiz() {
         .filter(
           (q) => !q.allAnswers.some((ans) => ans.length > maxAnswerLength),
         )
-        .filter((q) => !usedQuestions.has(q.question));
+        .filter((q) => !currentUsed.has(q.question));
 
       if (validQuestions.length === 0) {
         fetchQuestion();
@@ -168,6 +225,12 @@ export default function Quiz() {
 
       setQuestionQueue((prev) => {
         const newQueue = [...prev, ...validQuestions];
+        setUsedQuestions((prevSet) => {
+          const updatedSet = new Set(prevSet);
+          validQuestions.forEach((q) => updatedSet.add(q.question));
+          return updatedSet;
+        });
+
         return newQueue;
       });
     } catch (error) {
@@ -201,7 +264,6 @@ export default function Quiz() {
       const [nextQuestion, ...restQueue] = questionQueue;
       setQuestion(nextQuestion);
       setQuestionQueue(restQueue);
-      setUsedQuestions((prev) => new Set(prev).add(nextQuestion.question));
 
       if (restQueue.length < prefetchThreshold) {
         fetchQuestion();
@@ -222,6 +284,10 @@ export default function Quiz() {
     });
     setLives(3);
     setScore(0);
+    setPowerUpShieldActive(false);
+    setPowerUpShieldUsed(false);
+    setPowerUpHintActive(false);
+    setPowerUpHintUsed(false);
   };
 
   return (
@@ -230,9 +296,8 @@ export default function Quiz() {
         backButton={true}
         backButtonProps={{
           onClick: () => {
-            setLives(3);
-            setScore(0);
             resetQuiz();
+            setQuestionQueue([]);
             goToSettings();
           },
           children: (
@@ -271,11 +336,7 @@ export default function Quiz() {
               </Text>
               <Flex>
                 {[1, 2, 3].map((heartIndex) => (
-                  <Text
-                    key={heartIndex}
-                    size="6"
-                    className="life-heart"
-                  >
+                  <Text key={heartIndex} size="6" className="life-heart">
                     {heartIndex <= 3 - lives ? "🖤" : "❤️"}
                   </Text>
                 ))}
@@ -284,7 +345,7 @@ export default function Quiz() {
           </Flex>
           {question && (
             <>
-              <Card className="quiz__question-container" >
+              <Card className="quiz__question-container">
                 <Text size="5" weight="bold" align="center">
                   {question.question}
                 </Text>
@@ -294,13 +355,18 @@ export default function Quiz() {
                 <AnimatePresence>
                   <Flex direction="column" gap="3">
                     {question.allAnswers.map((answer, index) => {
+                      const isDisabledByHint = disabledAnswers.includes(answer);
+
                       let buttonState:
                         | "idle"
                         | "correct"
                         | "incorrect"
-                        | "idle-round-over" = "idle";
+                        | "idle-round-over"
+                        | "passive" = "idle";
 
-                      if (selectedAnswer) {
+                      if (isDisabledByHint) {
+                        buttonState = "passive";
+                      } else if (selectedAnswer) {
                         if (answer === selectedAnswer) {
                           if (answer === question.correctAnswer) {
                             buttonState = "correct";
@@ -319,38 +385,70 @@ export default function Quiz() {
                           answerText={answer}
                           state={buttonState}
                           onClick={() => handleAnswerClick(answer)}
-                          disabled={!!selectedAnswer}
+                          disabled={!!selectedAnswer || isDisabledByHint}
                         />
                       );
                     })}
                   </Flex>
                 </AnimatePresence>
               </Flex>
-              {(!selectedAnswer) && (
-              <Flex justify="center" gap="5" align="center" className="quiz__powerups">
-                <button className="powerUpButton">
-                  <img
-                    className="powerUpIcon"
-                    alt="Shield Icon"
-                    src="/shield.png"
-                  />
-                </button>
-                <button className="powerUpButton">
-                  <img
-                    className="powerUpIcon"
-                    alt="Skip Icon"
-                    src="/next.png"
-                  />
-                </button>
-                <button className="powerUpButton">
-                  <img
-                    className="powerUpIcon"
-                    alt="Hint Icon"
-                    src="/hint.png"
-                  />
-                </button>
-              </Flex>
+              {!selectedAnswer && (
+                <Flex
+                  justify="center"
+                  gap="5"
+                  align="center"
+                  className="quiz__powerups"
+                >
+                  <button
+                    className="powerUpButton"
+                    disabled={powerUpShieldUsed || powerUpShieldActive}
+                    onClick={() => setPowerUpShieldActive(true)}
+                  >
+                    <img
+                      className="powerUpIcon"
+                      alt="Shield Icon"
+                      src="/shield.png"
+                    />
+                  </button>
+                  <button className="powerUpButton">
+                    <img
+                      className="powerUpIcon"
+                      alt="Skip Icon"
+                      src="/next.png"
+                    />
+                  </button>
+                  <button
+                    className="powerUpButton"
+                    disabled={powerUpHintUsed}
+                    onClick={activateHint}
+                  >
+                    <img
+                      className="powerUpIcon"
+                      alt="Hint Icon"
+                      src="/hint.png"
+                    />
+                  </button>
+                </Flex>
               )}
+
+              <AnimatePresence>
+                {shieldFeedback && (
+                  <motion.div
+                    initial={{ opacity: 0, scale: 0.9 }}
+                    animate={{ opacity: 1, scale: 1 }}
+                    exit={{ opacity: 0, scale: 0.9 }}
+                    transition={{ duration: 0.25 }}
+                    className="shield-feedback"
+                  >
+                    <img
+                      src="/shield.png"
+                      alt="Shield Icon"
+                      className="powerUpIcon"
+                    />{" "}
+                    Shield Saved You!
+                  </motion.div>
+                )}
+              </AnimatePresence>
               {/* Reset-knapp (visas bara när man svarat) */}
               <AnimatePresence>
                 {(selectedAnswer || timeLeft === 0) && (
