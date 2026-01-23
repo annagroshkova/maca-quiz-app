@@ -38,6 +38,10 @@ export default function useQuizNavigation() {
       navigate(fallback);
     }
   };
+  const goToStart = () => {
+    resetQuiz();
+    navigate("/");
+  };
 
   return {
     restartQuiz,
@@ -48,5 +52,6 @@ export default function useQuizNavigation() {
     goToLevels,
     goBack,
     goToRules,
+    goToStart,
   };
 }

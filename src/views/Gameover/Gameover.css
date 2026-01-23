@@ -8,11 +8,21 @@
   gap: 40px;
   padding: 45px 18px;
 }
+@keyframes bounceOnce {
+  0% { transform: translateY(-50px); opacity: 0; }
+  60% { transform: translateY(10px); opacity: 1; }
+  80% { transform: translateY(-5px); }
+  100% { transform: translateY(0); }
+}
 
 .gameover__heading {
   margin: 5px 0;
-  color: #b60055;
-  font-size: 28px;
+ margin: 5px 0;
+  color: #382B76;
+  font-size: 2rem;
+  text-shadow: 2px 2px 4px rgba(0,0,0,0.2);
+
+  animation: bounceOnce 0.8s ease forwards;
 }
 
 .gameover__score-container,
@@ -25,9 +35,13 @@
 }
 
 .gameover__score {
-  font-size: 1.2rem;
+  font-size: 1.5rem;
   line-height: auto;
   margin: 2px 0;
+  background: linear-gradient(90deg, #F2B94C, #E68CA7, #6158B8);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  
 }
 
 .gameover__score span {

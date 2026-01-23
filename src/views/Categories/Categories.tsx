@@ -10,8 +10,12 @@ import RadioOption from "../../components/RadioOption/RadioOption";
 import Header from "../../components/Header/Header";
 import SubmitButton from "../../components/SubmitButton/SubmitButton";
 import MainWrapper from "../MainWrapper";
+import useQuizNavigation from "../../hooks/useQuizNavigation";
+import { useQuiz } from "../../context/QuizContext";
 
 export default function Categories() {
+  const { goToStart } = useQuizNavigation();
+  const { resetQuiz } = useQuiz();
   function useTwoRowHeight(deps: unknown[] = []) {
     const ref = useRef<HTMLDivElement>(null);
 
@@ -53,7 +57,7 @@ export default function Categories() {
 
   const gridRef = useTwoRowHeight([categories.length]);
   const user: UserSettings = getUserSettings();
-  const greeting: string = `Greetings, ${user.name}!`;
+  const greeting: string = `Hello, ${user.name}!`;
   const navigate = useNavigate();
 
   const [category, setCategory] = useState<string | null>(null);
@@ -71,17 +75,32 @@ export default function Categories() {
 
   return (
     <>
-      <Header backButton={false} />
+      <Header
+        backButton={true}
+        backButtonProps={{
+          onClick: () => {
+            resetQuiz();
+            goToStart();
+          },
+          children: (
+            <img
+              src="go-back-icon-192-solid.svg"
+              alt="Go back icon"
+              style={{ height: "100%" }}
+            />
+          ),
+        }}
+      />
       <MainWrapper>
-        <p className='categories__greeting'>{greeting}</p>
-        <form className='categories__form' onSubmit={handleCategoriesSubmit}>
-          <fieldset className='categories__fieldset'>
+        <p className="categories__greeting">{greeting}</p>
+        <form className="categories__form" onSubmit={handleCategoriesSubmit}>
+          <fieldset className="categories__fieldset">
             <legend>Select a subject</legend>
-            <div ref={gridRef} className='categories-container'>
+            <div ref={gridRef} className="categories-container">
               {categories.map((c) => (
                 <RadioOption
                   key={c.apiQuery}
-                  name='category'
+                  name="category"
                   text={c.quizSubject}
                   value={c.apiQuery}
                   imageUrl={`${c.apiQuery}.png`}

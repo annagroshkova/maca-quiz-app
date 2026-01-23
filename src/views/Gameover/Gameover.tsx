@@ -26,7 +26,7 @@ export default function GameOver() {
       />
       <MainWrapper>
         <section className="gameover">
-          <h1 className="gameover__heading">You've done well</h1>
+          <h1 className="gameover__heading">Game Over!</h1>
           <div className="gameover__score-container">
             <p className="gameover__score">
               Score: <span>{user.lastScore}</span>

@@ -36,7 +36,7 @@ export default function Rules() {
             <div className="rulesBox">
               <h2 className="rulesSmallHeadline">How to Play</h2>
               <ul className="rulesList">
-                <li>Click “Start Quiz” to begin.</li>
+                <li>Enter your name and press Let's Begin!</li>
                 <li>
                   Answer each question by selecting one of the four options.
                 </li>
