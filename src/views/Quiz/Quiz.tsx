@@ -52,6 +52,8 @@ export default function Quiz() {
   const { resetQuiz } = useQuiz();
   const [questionQueue, setQuestionQueue] = useState<QuizQuestion[]>([]);
   const [timeLeft, setTimeLeft] = useState<number>(10);
+  const [shieldFeedback, setShieldFeedback] = useState<boolean>(false);
+  const [disabledAnswers, setDisabledAnswers] = useState<string[]>([]);
 
   const {
     question,
@@ -71,10 +73,14 @@ export default function Quiz() {
     modifierHotStreak,
     modifierSurvivor,
     modifierTimeLimit,
-    powerUpHint,
-    powerUpShield,
-    setPowerUpHint,
-    setPowerUpShield,
+    powerUpHintActive,
+    powerUpHintUsed,
+    powerUpShieldActive,
+    powerUpShieldUsed,
+    setPowerUpHintActive,
+    setPowerUpHintUsed,
+    setPowerUpShieldActive,
+    setPowerUpShieldUsed,
   } = useQuiz();
 
   useEffect(() => {
@@ -94,10 +100,36 @@ export default function Quiz() {
   useEffect(() => {
     if (timeLeft === 0 && question && modifierTimeLimit) {
       setSelectedAnswer("TIMEOUT");
-      setLives((prev) => prev - 1);
+      if (powerUpShieldActive) {
+        setPowerUpShieldActive(false);
+        setPowerUpShieldUsed(true);
+      } else {
+        setLives((prev) => prev - 1);
+      }
       setCorrectAnswersStreak(0);
     }
   }, [timeLeft]);
+  useEffect(() => {
+    if (!question) return;
+    setDisabledAnswers([]);
+    setPowerUpHintActive(false);
+  }, [question]);
+
+  const activateHint = () => {
+    if (!question) return;
+    if (powerUpHintUsed || powerUpHintActive) return;
+    if (selectedAnswer) return;
+
+    const wrongAnswers = question.allAnswers.filter(
+      (answer) => answer !== question.correctAnswer,
+    );
+    const answersToDisable = wrongAnswers
+      .sort(() => Math.random() - 0.5)
+      .slice(0, 2);
+    setDisabledAnswers(answersToDisable);
+    setPowerUpHintActive(true);
+    setPowerUpHintUsed(true);
+  };
 
   const handleAnswerClick = (answer: string) => {
     if (selectedAnswer) return;
@@ -136,7 +168,12 @@ export default function Quiz() {
         return newStreak;
       });
     } else {
-      if (!powerUpShield) {
+      if (powerUpShieldActive) {
+        setPowerUpShieldActive(false);
+        setPowerUpShieldUsed(true);
+        setShieldFeedback(true);
+        setTimeout(() => setShieldFeedback(false), 1200);
+      } else {
         setLives((lostLife) => lostLife - 1);
       }
 
@@ -229,6 +266,10 @@ export default function Quiz() {
     });
     setLives(3);
     setScore(0);
+    setPowerUpShieldActive(false);
+    setPowerUpShieldUsed(false);
+    setPowerUpHintActive(false);
+    setPowerUpHintUsed(false);
   };
 
   return (
@@ -297,13 +338,18 @@ export default function Quiz() {
                 <AnimatePresence>
                   <Flex direction="column" gap="3">
                     {question.allAnswers.map((answer, index) => {
+                      const isDisabledByHint = disabledAnswers.includes(answer);
+
                       let buttonState:
                         | "idle"
                         | "correct"
                         | "incorrect"
-                        | "idle-round-over" = "idle";
+                        | "idle-round-over"
+                        | "passive" = "idle";
 
-                      if (selectedAnswer) {
+                      if (isDisabledByHint) {
+                        buttonState = "passive";
+                      } else if (selectedAnswer) {
                         if (answer === selectedAnswer) {
                           if (answer === question.correctAnswer) {
                             buttonState = "correct";
@@ -322,7 +368,7 @@ export default function Quiz() {
                           answerText={answer}
                           state={buttonState}
                           onClick={() => handleAnswerClick(answer)}
-                          disabled={!!selectedAnswer}
+                          disabled={!!selectedAnswer || isDisabledByHint}
                         />
                       );
                     })}
@@ -336,7 +382,11 @@ export default function Quiz() {
                   align="center"
                   className="quiz__powerups"
                 >
-                  <button className="powerUpButton">
+                  <button
+                    className="powerUpButton"
+                    disabled={powerUpShieldUsed || powerUpShieldActive}
+                    onClick={() => setPowerUpShieldActive(true)}
+                  >
                     <img
                       className="powerUpIcon"
                       alt="Shield Icon"
@@ -350,7 +400,11 @@ export default function Quiz() {
                       src="/next.png"
                     />
                   </button>
-                  <button className="powerUpButton">
+                  <button
+                    className="powerUpButton"
+                    disabled={powerUpHintUsed}
+                    onClick={activateHint}
+                  >
                     <img
                       className="powerUpIcon"
                       alt="Hint Icon"
@@ -359,6 +413,25 @@ export default function Quiz() {
                   </button>
                 </Flex>
               )}
+
+              <AnimatePresence>
+                {shieldFeedback && (
+                  <motion.div
+                    initial={{ opacity: 0, scale: 0.9 }}
+                    animate={{ opacity: 1, scale: 1 }}
+                    exit={{ opacity: 0, scale: 0.9 }}
+                    transition={{ duration: 0.25 }}
+                    className="shield-feedback"
+                  >
+                    <img
+                      src="/shield.png"
+                      alt="Shield Icon"
+                      className="powerUpIcon"
+                    />{" "}
+                    Shield Saved You!
+                  </motion.div>
+                )}
+              </AnimatePresence>
               {/* Reset-knapp (visas bara när man svarat) */}
               <AnimatePresence>
                 {(selectedAnswer || timeLeft === 0) && (

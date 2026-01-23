@@ -5,7 +5,7 @@ import { Flex, Card, Text } from "@radix-ui/themes";
 
 interface AnswerButtonProps {
   answerText: string;
-  state: "idle" | "correct" | "incorrect" | "idle-round-over";
+  state: "idle" | "correct" | "incorrect" | "idle-round-over" | "passive";
   onClick: () => void;
   disabled?: boolean;
   index: number;
@@ -21,12 +21,14 @@ export const AnswerButton = ({
   let buttonClass = "answer-button ";
   if (state === "correct") buttonClass += "correct";
   if (state === "incorrect") buttonClass += "incorrect";
-  if (state === "idle-round-over") buttonClass += "passive";
+  if (state === "idle-round-over" || state === "passive")
+    buttonClass += "passive";
 
   let variantToUse = "idle";
   if (state === "correct") variantToUse = "correct";
   if (state === "incorrect") variantToUse = "balloonPop";
-  if (state === "idle-round-over") variantToUse = "stepBack";
+  if (state === "idle-round-over" || state === "passive")
+    variantToUse = "stepBack";
 
   // let background: "#fcfcfc" | "#8BD9A7" | "#FFB7C5" = "#fcfcfc";
   // let color: "white" | "black" | "#4a4a4aff" = "black";
@@ -53,7 +55,7 @@ export const AnswerButton = ({
 
   return (
     <motion.div
-    className={`answer-button-wrapper ${state === "correct" ? "highlighted" : ""}`}
+      className={`answer-button-wrapper ${state === "correct" ? "highlighted" : ""}`}
       initial="entrance"
       animate={variantToUse}
       exit="exitPoof"
@@ -113,7 +115,7 @@ export const AnswerButton = ({
       }}
     >
       <button
-      className={buttonClass}
+        className={buttonClass}
         onClick={handleClick}
         disabled={disabled}
         aria-label={answerText}
