@@ -9,19 +9,20 @@
 }
 
 .levels__category-container {
-  padding: 8px 0;
+  /* padding: 8px 0; */
   display: grid;
   justify-items: center;
 }
 
 .levels__category-image {
-  height: 50px;
+  width: 35%;
   object-fit: contain;
 }
 
 .levels__category-name {
   font-weight: 600;
- color: #5348b9;
+  font-size:1.3rem;
+  color: #6158B8;
 }
 
 .levels__form {
@@ -53,7 +54,7 @@
   line-height: 16px;
   padding: 0;
   margin-bottom: 14px;
-  color: rgb(96, 96, 96);
+  color: #382B76;
 }
 
 .levels-container {
@@ -67,14 +68,24 @@
 .modifierButton {
   background-color: #e68ca7;
   border: none;
-  padding: 10px;
-  border-radius: 20px;
+ 
+  border-radius: 30px;
   color: white;
-  width: 100px;
+  width: 130px
+  
 }
 .modifierButton:hover {
   background-color: #b04464;
 }
 .modifierButton.active {
   background-color: #b04464;
+}
+.modifierIcon{
+  height: 25px;
+  margin-right:10px;
+}
+.buttonContent{
+  display:flex;
+  justify-content: center;
+  align-items: center;
 }

@@ -9,22 +9,28 @@
   flex-direction: column;
   align-items: center;
   margin: 0 auto;
-  flex-grow: 10;
+  flex-grow: 1;
   width: 100%;
   max-width: 800px;
 }
 
 .userContainer .avatar {
   position: absolute;
-  top: 100px;
+  top: 20px;
   z-index: 10;
+}
+
+.userName{
+  color:#352872;
+  margin:0;
+  margin-top:60px;
 }
 .userColors {
   display: grid;
   grid-template-columns: repeat(3, 1fr);
   gap: 10px;
   justify-items: center;
-  margin: 20px 0;
+  margin: 6px 0 12px;
 }
 .userColors button:hover {
   transform: scale(1.1);
@@ -38,9 +44,9 @@
   box-shadow: 3px 8px 8px rgba(75, 30, 7, 0.1);
   border-radius: 12px;
   gap: 25px;
-  padding: 120px 30px 30px;
+  padding: 40px 30px 30px;
   margin-bottom: 30px;
-  margin-top: 200px;
+  margin-top: 100px;
 
   width: 80%;
 }
@@ -56,8 +62,9 @@
   align-items: center;
   justify-content: center;
   background-color: white;
-  width: 300px;
-  height: 250px;
+  width: 250px;
+  /* height: 200px; */
+  min-height:180px;
   border-radius: 12px;
   margin: 10px;
 }
@@ -67,11 +74,21 @@
   align-items: center;
   justify-content: center;
   background-color: white;
-  width: 300px;
-  height: 250px;
+  width: 250px;
+  /* height: 200px; */
+  min-height:180px;
   border-radius: 12px;
   margin: 10px;
 }
+.scoreDisplay{
+  font-size: 1.5rem;
+  font-weight: bold;
+  background: linear-gradient(90deg, #F2B94C, #E68CA7, #6158B8);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  
+}
+
 .userButtons {
   display: flex;
   flex-direction: column;

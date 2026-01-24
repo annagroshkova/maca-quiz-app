@@ -58,8 +58,8 @@
 }
 
 .submit-button:disabled {
-  background-color: #e6e6e6;
-  color: #a0a0a0;
+  background-color: #D8D3F9;
+  color: #F3F1FF;
   cursor: not-allowed;
   transform: scale(1);
   box-shadow: none;

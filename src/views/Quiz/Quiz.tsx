@@ -325,15 +325,9 @@ export default function Quiz() {
         <Flex className="quiz__inner">
           <Flex justify="between" align="center" className="quiz__header">
             <Flex direction="column">
-              <Text size="5" weight="bold">
-                SCORE
-              </Text>
+              <h3 className="scoreText">SCORE</h3>
               <Flex justify="center" align="center">
-                <img
-                  className="scoreLifeIcon"
-                  alt="Star Icon"
-                  src="/star.png"
-                />
+                <img className="scoreIcon" alt="Star Icon" src="/star.png" />
                 <div className="quiz__score-number">{score}</div>
               </Flex>
             </Flex>
@@ -343,24 +337,26 @@ export default function Quiz() {
               </Text>
             )}
             <Flex direction="column">
-              <Text size="5" weight="bold" align="right">
-                LIFE
-              </Text>
+              <h3 className="lifeText">LIFE</h3>
               <Flex>
-                {[1, 2, 3].map((heartIndex) => (
-                  <Text key={heartIndex} size="6" className="life-heart">
-                    {heartIndex <= 3 - lives ? "🖤" : "❤️"}
-                  </Text>
-                ))}
+                {[1, 2, 3].map((heartIndex) => {
+                  const isLost = heartIndex <= 3 - lives;
+                  return (
+                    <img
+                      key={heartIndex}
+                      src={isLost ? "/greyheart.png" : "/redheart.png"}
+                      alt={isLost ? "Lost Life" : "Life"}
+                      className="lifeIcon"
+                    />
+                  );
+                })}
               </Flex>
             </Flex>
           </Flex>
           {question && (
             <>
               <Card className="quiz__question-container">
-                <Text size="5" weight="bold" align="center">
-                  {question.question}
-                </Text>
+                <h3 className="questionText">{question.question}</h3>
               </Card>
 
               <Flex direction="column" className="quiz__answers-container">
