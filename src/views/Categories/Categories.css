@@ -1,5 +1,6 @@
 
 .categories__greeting {
+  color:#6158B8;
   font-weight: 600;
   font-size: 1.6rem;
   margin: 30px 0;
@@ -13,6 +14,7 @@
   border-radius: 12px;
   display: flex;
   flex-direction: column;
+  justify-content: center;
   gap: 30px;
   padding: 30px 18px;
 }
@@ -34,6 +36,7 @@
 .categories-container {
   display: grid;
   grid-template-columns: repeat(2, 1fr);
+  justify-content: center;
   gap: 14px;
   overflow-y: auto;
   scroll-snap-type: y mandatory;
@@ -44,4 +47,20 @@
 .categories-container > .category {
   scroll-snap-align: start;
   scroll-snap-stop: always;
+}
+
+/* @media screen and (width >= 425px) {
+  .categories-container {
+    grid-template-columns: repeat(3, 1fr);
+  }
+} */
+
+@media screen and (width >= 1024px) and (orientation : landscape){
+
+  .categories__form{
+    min-height: 60vh;
+  }
+  .categories-container {
+    grid-template-columns: repeat(5, 1fr);
+  }
 }

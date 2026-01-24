@@ -19,7 +19,7 @@ const BackgroundAnimated = () => {
       <div className="background-circle circle-11"></div>
       <div className="background-circle circle-12 shape-3"></div>
       </div>
-      {/* <div className="blur-overlay"></div> drar förmycket prestanda och batteri tyvärr lol*/}
+      {/*<div className="blur-overlay"></div>  drar förmycket prestanda och batteri tyvärr lol*/}
     </div>
   );
 };

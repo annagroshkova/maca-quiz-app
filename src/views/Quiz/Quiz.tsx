@@ -11,6 +11,7 @@ import useQuizNavigation from "../../hooks/useQuizNavigation";
 import "./Quiz.css";
 import MainWrapper from "../MainWrapper";
 
+
 type ApiResponse = ApiQuestion[];
 
 interface ApiQuestion {
@@ -77,14 +78,18 @@ export default function Quiz() {
     powerUpHintUsed,
     powerUpShieldActive,
     powerUpShieldUsed,
+    powerUpSkipActive,
+    powerUpSkipUsed,
     setPowerUpHintActive,
     setPowerUpHintUsed,
     setPowerUpShieldActive,
     setPowerUpShieldUsed,
+    setPowerUpSkipActive,
+    setPowerUpSkipUsed,
   } = useQuiz();
 
   useEffect(() => {
-    if (!modifierTimeLimit || !question || selectedAnswer) return;
+    if (!modifierTimeLimit || !question || selectedAnswer || powerUpSkipActive) return;
 
     setTimeLeft(10);
     const timer = setInterval(() => {
@@ -95,7 +100,7 @@ export default function Quiz() {
     }, 1000);
 
     return () => clearInterval(timer);
-  }, [modifierTimeLimit, question, selectedAnswer]);
+  }, [modifierTimeLimit, question, selectedAnswer, powerUpSkipActive]);
 
   useEffect(() => {
     if (timeLeft === 0 && question && modifierTimeLimit) {
@@ -113,6 +118,7 @@ export default function Quiz() {
     if (!question) return;
     setDisabledAnswers([]);
     setPowerUpHintActive(false);
+    setPowerUpSkipActive(false);
   }, [question]);
 
   useEffect(() => {
@@ -290,6 +296,12 @@ export default function Quiz() {
     setPowerUpHintUsed(false);
   };
 
+    const activateSkip = () => {
+    setPowerUpSkipActive(true);
+    setPowerUpSkipUsed(true);
+    setCorrectAnswersStreak(0);
+  };
+
   return (
     <>
       <Header
@@ -360,7 +372,9 @@ export default function Quiz() {
                         | "idle-round-over"
                         | "passive" = "idle";
 
-                      if (isDisabledByHint) {
+                        if (powerUpSkipActive) {
+                          buttonState = "passive";
+                        } else if (isDisabledByHint) {
                         buttonState = "passive";
                       } else if (selectedAnswer) {
                         if (answer === selectedAnswer) {
@@ -381,7 +395,7 @@ export default function Quiz() {
                           answerText={answer}
                           state={buttonState}
                           onClick={() => handleAnswerClick(answer)}
-                          disabled={!!selectedAnswer || isDisabledByHint}
+                          disabled={!!selectedAnswer || isDisabledByHint || powerUpSkipActive}
                         />
                       );
                     })}
@@ -406,7 +420,11 @@ export default function Quiz() {
                       src="/shield.png"
                     />
                   </button>
-                  <button className="powerUpButton">
+                  <button
+                    className="powerUpButton"
+                    disabled={powerUpSkipUsed}
+                    onClick={activateSkip}
+                  >
                     <img
                       className="powerUpIcon"
                       alt="Skip Icon"
@@ -447,7 +465,7 @@ export default function Quiz() {
               </AnimatePresence>
               {/* Reset-knapp (visas bara när man svarat) */}
               <AnimatePresence>
-                {(selectedAnswer || timeLeft === 0) && (
+                {(selectedAnswer || timeLeft === 0 || powerUpSkipActive) && (
                   <motion.div
                     initial={{ opacity: 0, height: 0, y: 20 }}
                     animate={{ opacity: 1, height: "auto", y: 0 }}

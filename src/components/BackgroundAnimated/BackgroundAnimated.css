@@ -42,7 +42,7 @@
   position: absolute;
   border-radius: 40% 60% 70% 30% / 40% 50% 60% 50%;
   opacity: 0.8;
-  filter: blur(30px);
+  filter: blur(15px);
   top: 0;
   left: 0;
   transform: translate(-50%, -50%);
@@ -249,6 +249,7 @@
   animation-duration: 18s;
 }
 
+/*tar väldigt mycket prestanda och batteri tyvärr lol 
 .blur-overlay {
   position: fixed;
   top: 0;
@@ -259,7 +260,7 @@
   backdrop-filter: blur(40px);
   pointer-events: none;
   z-index: 0;
-}
+} */
 
 @keyframes rotateWholeSystem {
   from {
