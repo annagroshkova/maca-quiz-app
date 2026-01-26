@@ -12,5 +12,6 @@
   border-radius: 50%;
   color: white;
   font-weight: 600;
+  -webkit-user-select: none;
   user-select: none;
 }

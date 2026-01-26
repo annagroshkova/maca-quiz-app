@@ -63,6 +63,7 @@
   cursor: not-allowed;
   transform: scale(1);
   box-shadow: none;
+  cursor: default;
 }
 
 .submit-button--game-over {
