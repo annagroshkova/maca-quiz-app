@@ -29,9 +29,9 @@ export default function UserProfile() {
   return (
     <section className="startpage">
       <header></header>
-      <div>
+      <div >
         <motion.div
-          className="userContainer shared-container"
+        className="userContainer "
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
           exit={{ opacity: 0 }}
