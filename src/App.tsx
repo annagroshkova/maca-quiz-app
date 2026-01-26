@@ -1,5 +1,5 @@
 import type { ReactNode } from "react";
-import { BrowserRouter, Routes, Route } from "react-router-dom";
+import { BrowserRouter, Routes, Route, useLocation } from "react-router-dom";
 import "./App.css";
 import StartPage from "./views/StartPage/StartPage";
 import Categories from "./views/Categories/Categories";
@@ -9,12 +9,13 @@ import GameOver from "./views/Gameover/Gameover";
 import UserProfile from "./views/UserProfile/UserProfile";
 import Rules from "./views/Rules/Rules";
 import BackgroundAnimated from "./components/BackgroundAnimated/BackgroundAnimated";
+import { AnimatePresence } from "motion/react";
 
-export default function App(): ReactNode {
+const AnimatedRoutes = () => {
+  const location = useLocation();
   return (
-    <BrowserRouter>
-    <BackgroundAnimated />
-      <Routes>
+    <AnimatePresence mode='wait' initial={false}>
+      <Routes location={location} key={location.pathname}>
         <Route path="/" element={<StartPage />} />
         <Route path="/categories" element={<Categories />} />
         <Route path="/levels" element={<Levels />} />
@@ -23,6 +24,17 @@ export default function App(): ReactNode {
         <Route path="/gameover" element={<GameOver />} />
         <Route path="/rules" element={<Rules />} />
       </Routes>
-    </BrowserRouter>
+      </AnimatePresence>
   );
+};
+
+export default function App(): ReactNode {
+  return (
+    <BrowserRouter>
+    <BackgroundAnimated />
+    <div className="app-content-wrapper">
+      <AnimatedRoutes />
+      </div>
+    </BrowserRouter>
+  )
 }

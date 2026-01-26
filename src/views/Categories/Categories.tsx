@@ -10,6 +10,7 @@ import RadioOption from "../../components/RadioOption/RadioOption";
 import Header from "../../components/Header/Header";
 import SubmitButton from "../../components/SubmitButton/SubmitButton";
 import MainWrapper from "../MainWrapper";
+import { motion } from "motion/react";
 
 export default function Categories() {
   function useTwoRowHeight(deps: unknown[] = []) {
@@ -73,15 +74,22 @@ export default function Categories() {
     <>
       <Header backButton={false} />
       <MainWrapper>
-        <p className='categories__greeting'>{greeting}</p>
-        <form className='categories__form' onSubmit={handleCategoriesSubmit}>
-          <fieldset className='categories__fieldset'>
+        <p className="categories__greeting">{greeting}</p>
+        <motion.form
+          className="categories__form shared-container"
+          initial={{ opacity: 0 }}
+          animate={{ opacity: 1 }}
+          exit={{ opacity: 0 }}
+          transition={{ duration: 0.3 }}
+          onSubmit={handleCategoriesSubmit}
+        >
+          <fieldset className="categories__fieldset">
             <legend>Select a subject</legend>
-            <div ref={gridRef} className='categories-container'>
+            <div ref={gridRef} className="categories-container">
               {categories.map((c) => (
                 <RadioOption
                   key={c.apiQuery}
-                  name='category'
+                  name="category"
                   text={c.quizSubject}
                   value={c.apiQuery}
                   imageUrl={`${c.apiQuery}.png`}
@@ -94,7 +102,7 @@ export default function Categories() {
           <SubmitButton disabled={category === null}>
             <span>Continue</span>
           </SubmitButton>
-        </form>
+        </motion.form>
       </MainWrapper>
     </>
   );

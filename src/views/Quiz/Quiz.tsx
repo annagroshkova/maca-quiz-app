@@ -11,7 +11,6 @@ import useQuizNavigation from "../../hooks/useQuizNavigation";
 import "./Quiz.css";
 import MainWrapper from "../MainWrapper";
 
-
 type ApiResponse = ApiQuestion[];
 
 interface ApiQuestion {
@@ -89,7 +88,8 @@ export default function Quiz() {
   } = useQuiz();
 
   useEffect(() => {
-    if (!modifierTimeLimit || !question || selectedAnswer || powerUpSkipActive) return;
+    if (!modifierTimeLimit || !question || selectedAnswer || powerUpSkipActive)
+      return;
 
     setTimeLeft(10);
     const timer = setInterval(() => {
@@ -294,9 +294,12 @@ export default function Quiz() {
     setPowerUpShieldUsed(false);
     setPowerUpHintActive(false);
     setPowerUpHintUsed(false);
+    setPowerUpSkipActive(false);
+    setPowerUpSkipUsed(false);
+    setCorrectAnswersStreak(0);
   };
 
-    const activateSkip = () => {
+  const activateSkip = () => {
     setPowerUpSkipActive(true);
     setPowerUpSkipUsed(true);
     setCorrectAnswersStreak(0);
@@ -322,7 +325,13 @@ export default function Quiz() {
         }}
       />
       <MainWrapper>
-        <Flex className="quiz__inner">
+        <motion.div
+          className="shared-container"
+          initial={{ opacity: 0 }}
+          animate={{ opacity: 1 }}
+          exit={{ opacity: 0 }}
+          transition={{ duration: 0.3 }}
+        >
           <Flex justify="between" align="center" className="quiz__header">
             <Flex direction="column">
               <Text size="5" weight="bold">
@@ -376,9 +385,9 @@ export default function Quiz() {
                         | "idle-round-over"
                         | "passive" = "idle";
 
-                        if (powerUpSkipActive) {
-                          buttonState = "passive";
-                        } else if (isDisabledByHint) {
+                      if (powerUpSkipActive) {
+                        buttonState = "passive";
+                      } else if (isDisabledByHint) {
                         buttonState = "passive";
                       } else if (selectedAnswer) {
                         if (answer === selectedAnswer) {
@@ -399,77 +408,100 @@ export default function Quiz() {
                           answerText={answer}
                           state={buttonState}
                           onClick={() => handleAnswerClick(answer)}
-                          disabled={!!selectedAnswer || isDisabledByHint || powerUpSkipActive}
+                          disabled={
+                            !!selectedAnswer ||
+                            isDisabledByHint ||
+                            powerUpSkipActive
+                          }
                         />
                       );
                     })}
                   </Flex>
                 </AnimatePresence>
               </Flex>
-              {!selectedAnswer && (
-                <Flex
-                  justify="center"
-                  gap="5"
-                  align="center"
-                  className="quiz__powerups"
-                >
-                  <button
-                    className="powerUpButton"
-                    disabled={powerUpShieldUsed || powerUpShieldActive}
-                    onClick={() => setPowerUpShieldActive(true)}
-                  >
-                    <img
-                      className="powerUpIcon"
-                      alt="Shield Icon"
-                      src="/shield.png"
-                    />
-                  </button>
-                  <button
-                    className="powerUpButton"
-                    disabled={powerUpSkipUsed}
-                    onClick={activateSkip}
-                  >
-                    <img
-                      className="powerUpIcon"
-                      alt="Skip Icon"
-                      src="/next.png"
-                    />
-                  </button>
-                  <button
-                    className="powerUpButton"
-                    disabled={powerUpHintUsed}
-                    onClick={activateHint}
-                  >
-                    <img
-                      className="powerUpIcon"
-                      alt="Hint Icon"
-                      src="/hint.png"
-                    />
-                  </button>
-                </Flex>
-              )}
+              <Flex direction="column">
+                <AnimatePresence>
+                  {!selectedAnswer && !powerUpSkipActive && (
+                    <motion.div
+                      initial={{ opacity: 0, height: 0 }}
+                      animate={{
+                        opacity: 1,
+                        height: "auto",
+                        marginBottom: "1rem",
+                      }}
+                      exit={{
+                        opacity: 0,
+                        height: 0,
+                        overflow: "hidden",
+                        marginBottom: 0,
+                      }}
+                      transition={{ duration: 0.3 }}
+                    >
+                      <Flex
+                        justify="center"
+                        gap="5"
+                        align="center"
+                        className="quiz__powerups"
+                      >
+                        <button
+                          className="powerUpButton"
+                          disabled={powerUpShieldUsed || powerUpShieldActive}
+                          onClick={() => setPowerUpShieldActive(true)}
+                        >
+                          <img
+                            className="powerUpIcon"
+                            alt="Shield Icon"
+                            src="/shield.png"
+                          />
+                        </button>
+                        <button
+                          className="powerUpButton"
+                          disabled={powerUpSkipUsed}
+                          onClick={activateSkip}
+                        >
+                          <img
+                            className="powerUpIcon"
+                            alt="Skip Icon"
+                            src="/next.png"
+                          />
+                        </button>
+                        <button
+                          className="powerUpButton"
+                          disabled={powerUpHintUsed}
+                          onClick={activateHint}
+                        >
+                          <img
+                            className="powerUpIcon"
+                            alt="Hint Icon"
+                            src="/hint.png"
+                          />
+                        </button>
+                      </Flex>
+                    </motion.div>
+                  )}
+                </AnimatePresence>
 
-              <AnimatePresence>
-                {shieldFeedback && (
-                  <motion.div
-                    initial={{ opacity: 0, scale: 0.9 }}
-                    animate={{ opacity: 1, scale: 1 }}
-                    exit={{ opacity: 0, scale: 0.9 }}
-                    transition={{ duration: 0.25 }}
-                    className="shield-feedback"
-                  >
-                    <img
-                      src="/shield.png"
-                      alt="Shield Icon"
-                      className="powerUpIcon"
-                    />{" "}
-                    Shield Saved You!
-                  </motion.div>
-                )}
-              </AnimatePresence>
-              {/* Reset-knapp (visas bara när man svarat) */}
-              <AnimatePresence>
-                {(selectedAnswer || timeLeft === 0 || powerUpSkipActive) && (
+                <AnimatePresence>
+                  {shieldFeedback && (
+                    <motion.div
+                      initial={{ opacity: 0, scale: 0.9 }}
+                      animate={{ opacity: 1, scale: 1 }}
+                      exit={{ opacity: 0, scale: 0.9 }}
+                      transition={{ duration: 0.25 }}
+                      className="shield-feedback"
+                    >
+                      <img
+                        src="/shield.png"
+                        alt="Shield Icon"
+                        className="powerUpIcon"
+                      />{" "}
+                      Shield Saved You!
+                    </motion.div>
+                  )}
+                </AnimatePresence>
+                {/* Reset-knapp (visas bara när man svarat) */}
+                <AnimatePresence>
+                  {/* {(selectedAnswer || timeLeft === 0 || powerUpSkipActive) && ( */}
                   <motion.div
                     initial={{ opacity: 0, height: 0, y: 20 }}
                     animate={{ opacity: 1, height: "auto", y: 0 }}
@@ -479,6 +511,7 @@ export default function Quiz() {
                     <div className="quiz__footer">
                       <SubmitButton
                         onClick={handleNextStep}
+                        disabled={!selectedAnswer && !powerUpSkipActive}
                         variant={lives === 0 ? "game-over" : "default"}
                       >
                         <span>
@@ -487,11 +520,12 @@ export default function Quiz() {
                       </SubmitButton>
                     </div>
                   </motion.div>
-                )}
-              </AnimatePresence>
+                  {/* )} */}
+                </AnimatePresence>
+              </Flex>
             </>
           )}
-        </Flex>
+        </motion.div>
       </MainWrapper>
     </>
   );

@@ -12,6 +12,7 @@ import Header from "../../components/Header/Header";
 import SubmitButton from "../../components/SubmitButton/SubmitButton";
 import MainWrapper from "../MainWrapper";
 import { useQuiz } from "../../context/QuizContext";
+import { motion } from "motion/react";
 
 export default function Levels() {
   const user: UserSettings = getUserSettings();
@@ -20,7 +21,6 @@ export default function Levels() {
   const { modifierHotStreak, setModifierHotStreak } = useQuiz();
   const { modifierSurvivor, setModifierSurvivor } = useQuiz();
   const { modifierTimeLimit, setModifierTimeLimit } = useQuiz();
-
 
   const [level, setLevel] = useState<
     "easy" | "medium" | "hard" | undefined | null
@@ -60,7 +60,13 @@ export default function Levels() {
       />
 
       <MainWrapper>
-        <div className="levels">
+        <motion.div
+          className="levels shared-container"
+          initial={{ opacity: 0 }}
+          animate={{ opacity: 1 }}
+          exit={{ opacity: 0 }}
+          transition={{ duration: 0.3 }}
+        >
           <div className="levels__category-container">
             {/* <div className='levels__image-container'> */}
             <img
@@ -117,7 +123,7 @@ export default function Levels() {
               <span>Let's play!</span>
             </SubmitButton>
           </form>
-        </div>
+        </motion.div>
       </MainWrapper>
     </>
   );
