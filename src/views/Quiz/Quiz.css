@@ -42,6 +42,7 @@
 .quiz__score-number {
   font-weight: 700;
   font-size: clamp(1.1rem, 1.5vw, 1.3rem);
+  color:#382B76;
 }
 
 .quiz__question-container {
@@ -102,15 +103,33 @@
   margin-top: 0rem;
   margin-bottom: 1rem;
 }
-.scoreLifeIcon {
+.lifeText {
+  color:#6158B8;
+  text-align: right;
+}
+.scoreText{
+  color:#6158B8;
+  text-align: left;
+}
+.scoreIcon {
   width: 2.2rem;
   height: 2.2rem;
   object-fit: contain;
   margin-right: 0.5rem;
   display: block;
 }
+.lifeIcon{
+  width: 2rem;
+  height:2rem;
+  object-fit:contain;
+  margin-left: 0.5rem;
+  display:block;
+}
 .scoreText {
   display: flex;
+}
+.questionText{
+  color:#352872;
 }
 .powerUpButton {
   border: none;

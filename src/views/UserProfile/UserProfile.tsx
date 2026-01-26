@@ -4,11 +4,14 @@ import { useState, useEffect } from "react";
 import Avatar from "../../components/Avatar/Avatar";
 import useQuizNavigation from "../../hooks/useQuizNavigation";
 import { motion } from "motion/react";
+import Header from "../../components/Header/Header";
+import { useQuiz } from "../../context/QuizContext";
 
 export default function UserProfile() {
   const { user, setUserName, setUserBgColor } = useUser();
   const { returnToQuiz } = useQuizNavigation();
   const { goToRules } = useQuizNavigation();
+  const { resetQuiz } = useQuiz();
 
   const [displayName, setDisplayName] = useState(user.name ?? "");
 
@@ -28,7 +31,21 @@ export default function UserProfile() {
 
   return (
     <section className="startpage">
-      <header></header>
+      <Header
+        backButton={true}
+        backButtonProps={{
+          onClick: () => {
+            returnToQuiz();
+          },
+          children: (
+            <img
+              src="go-back-icon-192-solid.svg"
+              alt="Go back icon"
+              style={{ height: "100%" }}
+            />
+          ),
+        }}
+      />
       <div >
         <motion.div
         className="userContainer "
@@ -38,23 +55,22 @@ export default function UserProfile() {
           transition={{ duration: 0.3 }}
         >
           {user.name ? (
-            <Avatar name={user.name} size={200} bgColor={user.bgColor} />
+            <Avatar name={user.name} size={175} bgColor={user.bgColor} />
           ) : null}
           <div className="userInner">
-            <h1 className="startpage__headning">{user.name}</h1>
+            <h1 className="userName">{user.name}</h1>
             <div className="userColors">
               {avatarColors.map((color) => (
                 <button
                   key={color}
                   style={{
                     backgroundColor: color,
-                    width: "50px",
-                    height: "50px",
+                    width: "40px",
+                    height: "40px",
                     borderRadius: "50%",
                     cursor: "pointer",
                     border: "none",
-                    margin: "5px",
-                  }}
+                    }}
                   aria-label={`Select color ${color}`}
                   onClick={() => handleColorClick(color)}
                 />
@@ -66,7 +82,12 @@ export default function UserProfile() {
                 <h3 className="scoreDisplay">Best Score: {user.bestScore}</h3>
               </div>
               <form className="nameChangeForm" onSubmit={handleNameSubmit}>
-                <label htmlFor="name">Change name?</label>
+                <label
+                htmlFor="name"
+                style={{ color: "#382B76", fontWeight: "bold" }}
+              >
+                Change name?
+              </label>
                 <input
                   id="name"
                   type="text"

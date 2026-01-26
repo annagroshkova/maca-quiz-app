@@ -85,21 +85,38 @@ export default function Levels() {
               className={`modifierButton ${modifierHotStreak ? "active" : ""}`}
               onClick={() => setModifierHotStreak(!modifierHotStreak)}
             >
-              Hot Streak
+              <div className="buttonContent">
+                <img src="/fire.png" alt="Fire Icon" className="modifierIcon" />
+                <p> Hot Streak</p>
+              </div>
             </button>
             <button
               type="button"
               className={`modifierButton ${modifierSurvivor ? "active" : ""}`}
               onClick={() => setModifierSurvivor(!modifierSurvivor)}
             >
-              Survivor
+              <div className="buttonContent">
+                <img
+                  src="/skull.png"
+                  alt="Skull Icon"
+                  className="modifierIcon"
+                />
+                <p>Survivor</p>
+              </div>
             </button>
             <button
               type="button"
               className={`modifierButton ${modifierTimeLimit ? "active" : ""}`}
               onClick={() => setModifierTimeLimit(!modifierTimeLimit)}
             >
-              Time Limit
+              <div className="buttonContent">
+                <img
+                  src="/hourglass.png"
+                  alt="Hourglass Icon"
+                  className="modifierIcon"
+                />
+                <p>Time Limit</p>
+              </div>
             </button>
           </div>
 

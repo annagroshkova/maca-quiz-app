@@ -58,9 +58,9 @@
 }
 
 .submit-button:disabled {
-  background-color: hsla(0, 0%, 0%, 0.05);
-  color: #a0a0a0;
-  cursor:default;
+  background-color: #D8D3F9;
+  color: #F3F1FF;
+  cursor: not-allowed;
   transform: scale(1);
   box-shadow: none;
 }
