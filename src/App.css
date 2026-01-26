@@ -9,7 +9,7 @@
   box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
   border: 1px solid rgba(255, 255, 255, 0.5);
   border-radius: clamp(2rem, 4vh, 3rem);
-  overflow:hidden;
+  overflow: hidden;
   justify-content: center;
   display: flex;
   flex-direction: column;
@@ -18,9 +18,8 @@
 transform-origin: center top;*/
 }
 .app-content-wrapper {
-width:100vw;
-
-justify-content: center;
-display: flex;
-flex-direction: column
+  width: 100vw;
+  justify-content: center;
+  display: flex;
+  flex-direction: column;
 }
