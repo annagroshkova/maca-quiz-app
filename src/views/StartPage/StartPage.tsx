@@ -36,14 +36,15 @@ export default function StartPage() {
           src="/mindpoplogo.png"
         />
       </div>
-      <motion.div
-        className="startpage__form-container shared-container"
-        initial={{ opacity: 0 }}
-        animate={{ opacity: 1 }}
-        exit={{ opacity: 0 }}
-        transition={{ duration: 0.3 }}
-      >
-        <form className="startpage__form" onSubmit={handleNameSubmit}>
+      <div className="startpage__form-container">
+        <motion.form
+          className="startpage__form shared-container"
+          initial={{ opacity: 0 }}
+          animate={{ opacity: 1 }}
+          exit={{ opacity: 0 }}
+          transition={{ duration: 0.3 }}
+          onSubmit={handleNameSubmit}
+        >
           <label htmlFor="name">Enter your name to start</label>
           <input
             id="name"
@@ -62,8 +63,8 @@ export default function StartPage() {
           {/* <button type='submit' disabled={!name.trim()}>
             <span>Let's begin!</span>
           </button> */}
-        </form>
-      </motion.div>
+        </motion.form>
+      </div>
     </section>
   );
 }

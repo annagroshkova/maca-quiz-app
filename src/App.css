@@ -17,3 +17,10 @@
   /*  overflow: hidden;
 transform-origin: center top;*/
 }
+.app-content-wrapper {
+width:100vw;
+
+justify-content: center;
+display: flex;
+flex-direction: column
+}
