@@ -1,4 +1,4 @@
-import { useState, useEffect } from "react";
+import { useState, useEffect, useRef } from "react";
 import { Flex, Card, Text } from "@radix-ui/themes";
 import { AnswerButton } from "../../components/AnswerButton/AnswerButton";
 import { AnimatePresence, motion } from "motion/react";
@@ -124,16 +124,33 @@ export default function Quiz() {
     setPowerUpSkipActive(false);
   }, [question]);
 
+  const prevSettingsRef = useRef({
+    category: user.category,
+    level: user.level,
+    modifierSurvivor,
+  });
+
   useEffect(() => {
+    const prev = prevSettingsRef.current;
+
+    const changed =
+      prev.category !== user.category ||
+      prev.level !== user.level ||
+      prev.modifierSurvivor !== modifierSurvivor;
+
+    if (!changed) return;
+
     setQuestion(null);
     setQuestionQueue([]);
     setUsedQuestions(new Set());
-    if (modifierSurvivor) {
-      setLives(1);
-    } else {
-      setLives(3);
-    }
+    setLives(modifierSurvivor ? 1 : 3);
     setScore(0);
+
+    prevSettingsRef.current = {
+      category: user.category,
+      level: user.level,
+      modifierSurvivor,
+    };
   }, [user.category, user.level, modifierSurvivor]);
 
   const activateHint = () => {
@@ -203,7 +220,7 @@ export default function Quiz() {
   };
 
   const fetchQuestion = async (retryCount = 0) => {
-    if (retryCount>3) {
+    if (retryCount > 3) {
       return;
     }
     try {
@@ -242,11 +259,10 @@ export default function Quiz() {
       setQuestionQueue((prev) => [...prev, ...validQuestions]);
 
       setUsedQuestions((prevSet) => {
-          const updatedSet = new Set(prevSet);
-          validQuestions.forEach((q) => updatedSet.add(q.question));
-          return updatedSet;
-        });
-
+        const updatedSet = new Set(prevSet);
+        validQuestions.forEach((q) => updatedSet.add(q.question));
+        return updatedSet;
+      });
     } catch (error) {
       console.error("Error fetching question:", error);
     }
