@@ -80,13 +80,13 @@ export const AnswerButton = ({
           x: 0,
           rotate: 0,
           filter: "grayscale(0%)",
-          margin: "0.5rem 0",
+          /* margin: "0.5rem 0", */
         },
 
         correct: {
           scaleX: 1.0,
           scaleY: 1.05,
-          margin: "1.25rem 0",
+         /* margin: "1.25rem 0", */
           opacity: 1,
           y: 0,
           transition: { type: "spring", stiffness: 200, damping: 15 },
@@ -94,7 +94,7 @@ export const AnswerButton = ({
 
         balloonPop: {
           scale: 0.95,
-          margin: "1.25rem 0",
+          /*margin: "1.25rem 0", */
           y: 5,
           rotate: -2,
           opacity: 0.86,
