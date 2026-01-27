@@ -1,4 +1,4 @@
-import { Flex, Text } from "@radix-ui/themes";
+import { Flex, } from "@radix-ui/themes";
 import Header from "../../components/Header/Header";
 
 import useQuizNavigation from "../../hooks/useQuizNavigation";

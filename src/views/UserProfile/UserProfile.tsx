@@ -5,13 +5,13 @@ import Avatar from "../../components/Avatar/Avatar";
 import useQuizNavigation from "../../hooks/useQuizNavigation";
 import { motion } from "motion/react";
 import Header from "../../components/Header/Header";
-import { useQuiz } from "../../context/QuizContext";
+
 
 export default function UserProfile() {
   const { user, setUserName, setUserBgColor } = useUser();
   const { returnToQuiz } = useQuizNavigation();
   const { goToRules } = useQuizNavigation();
-  const { resetQuiz } = useQuiz();
+
 
   const [displayName, setDisplayName] = useState(user.name ?? "");
 
