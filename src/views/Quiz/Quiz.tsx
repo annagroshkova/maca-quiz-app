@@ -376,7 +376,7 @@ export default function Quiz() {
           {question && (
             <>
               <Card className="quiz__question-container">
-                <h3 className="questionText">{question.question}</h3>
+                <h2 className="questionText">{question.question}</h2>
               </Card>
 
               <Flex direction="column" className="quiz__answers-container">

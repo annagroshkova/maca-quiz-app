@@ -104,10 +104,16 @@
 .lifeText {
   color: #6158b8;
   text-align: right;
+
 }
 .scoreText {
+  display: flex;
   color: #6158b8;
   text-align: left;
+
+}
+h3 {
+
 }
 .scoreIcon {
   width: 2.2rem;
@@ -117,15 +123,13 @@
   display: block;
 }
 .lifeIcon {
-  width: 2rem;
-  height: 2rem;
+  width: 1.6rem;
+  height: 1.6rem;
   object-fit: contain;
   margin-left: 0.5rem;
   display: block;
 }
-.scoreText {
-  display: flex;
-}
+  
 .questionText {
   color: #352872;
   font-size: inherit;

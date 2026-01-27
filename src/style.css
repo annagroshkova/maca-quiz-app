@@ -79,10 +79,7 @@ body {
   width: 100%;
   min-height: 100dvh;
   display: flex;
-  padding-top: env(safe-area-inset-top);
-  padding-right: env(safe-area-inset-right);
-  padding-bottom: env(safe-area-inset-bottom);
-  padding-left: env(safe-area-inset-left);
+
 }
 
 .main {
@@ -93,7 +90,7 @@ body {
   display: flex;
   flex-direction: column;
   justify-content: center;
-  padding: 2vh clamp(1rem, 5vw, 2rem) 2vh clamp(1rem, 5vw, 2rem);
+  padding: 2vh clamp(1rem, 5vw, 2rem) 40px clamp(1rem, 5vw, 2rem);
 }
 
 .no-scrollbar::-webkit-scrollbar {
