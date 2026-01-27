@@ -108,6 +108,7 @@
   margin-bottom: 0.2rem;
 }
 .scoreText {
+  display: flex;
   color: #6158b8;
   text-align: left;
   font-size: 0.9rem;
@@ -127,9 +128,7 @@
   margin-left: 0.5rem;
   display: block;
 }
-.scoreText {
-  display: flex;
-}
+  
 .questionText {
   color: #352872;
   font-size: 1.3rem;
