@@ -5,12 +5,14 @@ interface SubmitButtonProps {
   onClick?: () => void;
   disabled?: boolean;
   variant?: "default" | "game-over";
+  type?: "button" | "submit";
 }
 export default function SubmitButton({
   children,
   onClick,
   disabled,
   variant = "default",
+  type = "submit",
 }: SubmitButtonProps) {
   const className = `submit-button ${
     variant === "game-over" ? "submit-button--game-over" : ""
@@ -18,7 +20,7 @@ export default function SubmitButton({
   return (
     <button
       className={className}
-      type="submit"
+      type={type}
       // props
       onClick={onClick}
       disabled={disabled}
