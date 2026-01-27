@@ -72,7 +72,7 @@
 }
 
 .answer-button.correct {
-  background-color: #8bd9a7;
+  background-color: #02795b;
   color: white;
   box-shadow:
     inset 0 0 0 0.15rem rgba(255, 255, 255, 0.4),
@@ -83,7 +83,7 @@
 }
 
 .answer-button.incorrect {
-  background-color: #ff4b6f;
+  background-color: #ce2e4e;
   color: white;
   box-shadow:
     inset 0 0 0 0.15rem rgba(255, 255, 255, 0.4),
