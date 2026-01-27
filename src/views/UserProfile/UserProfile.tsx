@@ -6,12 +6,10 @@ import useQuizNavigation from "../../hooks/useQuizNavigation";
 import { motion } from "motion/react";
 import Header from "../../components/Header/Header";
 
-
 export default function UserProfile() {
   const { user, setUserName, setUserBgColor } = useUser();
-  const { returnToQuiz } = useQuizNavigation();
   const { goToRules } = useQuizNavigation();
-
+  const { goBack } = useQuizNavigation();
 
   const [displayName, setDisplayName] = useState(user.name ?? "");
 
@@ -35,7 +33,7 @@ export default function UserProfile() {
         backButton={true}
         backButtonProps={{
           onClick: () => {
-            returnToQuiz();
+            goBack();
           },
           children: (
             <img
@@ -46,9 +44,9 @@ export default function UserProfile() {
           ),
         }}
       />
-      <div >
+      <div>
         <motion.div
-        className="userContainer "
+          className="userContainer "
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
           exit={{ opacity: 0 }}
@@ -70,7 +68,7 @@ export default function UserProfile() {
                     borderRadius: "50%",
                     cursor: "pointer",
                     border: "none",
-                    }}
+                  }}
                   aria-label={`Select color ${color}`}
                   onClick={() => handleColorClick(color)}
                 />
@@ -83,11 +81,11 @@ export default function UserProfile() {
               </div>
               <form className="nameChangeForm" onSubmit={handleNameSubmit}>
                 <label
-                htmlFor="name"
-                style={{ color: "#382B76", fontWeight: "bold" }}
-              >
-                Change name?
-              </label>
+                  htmlFor="name"
+                  style={{ color: "#382B76", fontWeight: "bold" }}
+                >
+                  Change name?
+                </label>
                 <input
                   id="name"
                   type="text"
@@ -109,9 +107,6 @@ export default function UserProfile() {
             <SubmitButton variant="default" onClick={goToRules}>
               Rules
             </SubmitButton>
-          </div>
-          <div className="userButtons">
-            <SubmitButton onClick={returnToQuiz}>Return</SubmitButton>
           </div>
         </motion.div>
       </div>

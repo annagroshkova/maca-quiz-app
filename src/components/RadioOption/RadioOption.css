@@ -11,6 +11,9 @@
   background-color: #fcfcfc;
   text-align: center;
 }
+.level {
+  border-radius: 9999px;
+}
 
 .level__text,
 .category__text {
@@ -32,7 +35,7 @@ category:hover {
 /* Checked state */
 .level:has(input[type="radio"]:checked),
 .category:has(input[type="radio"]:checked) {
-  border-color: #E68CA7;
+  border-color: #e68ca7;
 }
 
 .category {
@@ -62,5 +65,5 @@ category:hover {
 
 .level__text {
   font-weight: 600;
-  color:#352872;
+  color: #352872;
 }
