@@ -73,8 +73,8 @@ export default function Rules() {
                     <h3>Survivor</h3>
                   </div>
                   <p>
-                    One life. That’s it. Earn an extra life every 10 correct
-                    answers—up to the usual 3.
+                    One life. That’s it. Earn an extra life every 5 correct
+                    answers —up to the usual 3.
                   </p>
                 </div>
                 <div className="powerUpBox">
