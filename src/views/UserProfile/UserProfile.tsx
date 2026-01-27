@@ -4,7 +4,6 @@ import { useState, useEffect } from "react";
 import Avatar from "../../components/Avatar/Avatar";
 import MainWrapper from "../MainWrapper";
 import useQuizNavigation from "../../hooks/useQuizNavigation";
-import { motion } from "motion/react";
 import Header from "../../components/Header/Header";
 
 export default function UserProfile() {
