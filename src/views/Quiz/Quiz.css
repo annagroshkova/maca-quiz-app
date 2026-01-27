@@ -128,6 +128,7 @@
 }
 .questionText {
   color: #352872;
+  font-size: inherit;
 }
 .powerUpButton {
   border: none;

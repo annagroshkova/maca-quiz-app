@@ -93,7 +93,7 @@ body {
   display: flex;
   flex-direction: column;
   justify-content: center;
-  padding: 2vh clamp(1rem, 5vw, 2rem) 40px clamp(1rem, 5vw, 2rem);
+  padding: 2vh clamp(1rem, 5vw, 2rem) 2vh clamp(1rem, 5vw, 2rem);
 }
 
 .no-scrollbar::-webkit-scrollbar {

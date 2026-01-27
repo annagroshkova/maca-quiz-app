@@ -50,7 +50,7 @@
   animation-iteration-count: infinite;
   animation-direction: alternate;
   mix-blend-mode: overlay;
-  will-change: transform;
+
 }
 .shape-2 {
   border-radius: 60% 40% 30% 70% / 50% 60% 40% 50%;
