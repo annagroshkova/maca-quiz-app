@@ -1,4 +1,3 @@
-
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { useUser } from "../../context/UserContext";
@@ -52,6 +51,9 @@ export default function StartPage() {
             placeholder="Write your name..."
           ></input>
           {/* knapp disabled om det inte finns ett namn */}
+          <SubmitButton type="button" onClick={goToRules}>
+            Rules
+          </SubmitButton>
           <SubmitButton
             onClick={() => handleNameSubmit}
             disabled={!name.trim()}
@@ -61,9 +63,6 @@ export default function StartPage() {
           {/* <button type='submit' disabled={!name.trim()}>
             <span>Let's begin!</span>
           </button> */}
-          <SubmitButton type="button" onClick={goToRules}>
-            Rules
-          </SubmitButton>
         </motion.form>
       </div>
     </section>

@@ -1,5 +1,6 @@
 import { Flex } from "@radix-ui/themes";
 import Header from "../../components/Header/Header";
+import { motion } from "motion/react";
 
 import useQuizNavigation from "../../hooks/useQuizNavigation";
 
@@ -21,7 +22,13 @@ export default function Rules() {
         }}
       />
       <div className="rulesContainer">
-        <Flex className="rulesInner">
+        <motion.div
+          className="rulesInner shared-container"
+          initial={{ opacity: 0 }}
+          animate={{ opacity: 1 }}
+          exit={{ opacity: 0 }}
+          transition={{ duration: 0.3 }}
+        >
           <h1 className="rulesHeading">Rules</h1>
           <div className="rulesChallenge">
             <h3 className="rulesChallengeText">
@@ -145,7 +152,7 @@ export default function Rules() {
               </ul>
             </div>
           </div>
-        </Flex>
+        </motion.div>
       </div>
     </>
   );
