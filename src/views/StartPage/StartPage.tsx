@@ -8,11 +8,13 @@ import { useNavigate } from "react-router-dom";
 import { useUser } from "../../context/UserContext";
 import SubmitButton from "../../components/SubmitButton/SubmitButton";
 import { motion } from "motion/react";
+import useQuizNavigation from "../../hooks/useQuizNavigation";
 
 export default function StartPage() {
   const navigate = useNavigate();
   const { setUserName } = useUser();
   const [name, setName] = useState("");
+  const { goToRules } = useQuizNavigation();
 
   const handleNameSubmit = (e: React.FormEvent) => {
     e.preventDefault();
@@ -63,6 +65,9 @@ export default function StartPage() {
           {/* <button type='submit' disabled={!name.trim()}>
             <span>Let's begin!</span>
           </button> */}
+          <SubmitButton type="button" onClick={goToRules}>
+            Rules
+          </SubmitButton>
         </motion.form>
       </div>
     </section>
