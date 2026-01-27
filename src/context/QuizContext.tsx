@@ -9,7 +9,6 @@ interface QuizState {
   lives: number;
   correctAnswersStreak: number;
   lastRewardedPointCount: number;
-  // lastRewardedLifeCount: number;
   modifierHotStreak: boolean;
   modifierSurvivor: boolean;
   modifierTimeLimit: boolean;
@@ -29,7 +28,6 @@ interface QuizState {
   usedQuestions: Set<string>;
   setUsedQuestions: React.Dispatch<React.SetStateAction<Set<string>>>;
   setLastRewardedPointCount: React.Dispatch<React.SetStateAction<number>>;
-  // setLastRewardedLifeCount: React.Dispatch<React.SetStateAction<number>>;
   setModifierHotStreak: (value: boolean) => void;
   setModifierSurvivor: (value: boolean) => void;
   setModifierTimeLimit: (value: boolean) => void;
@@ -51,7 +49,6 @@ export function QuizProvider({ children }: { children: ReactNode }) {
   const [usedQuestions, setUsedQuestions] = useState<Set<string>>(new Set());
   const [correctAnswersStreak, setCorrectAnswersStreak] = useState(0);
   const [lastRewardedPointCount, setLastRewardedPointCount] = useState(0);
-  // const [lastRewardedLifeCount, setLastRewardedLifeCount] = useState(0);
   const [modifierHotStreak, setModifierHotStreak] = useState<boolean>(false);
   const [modifierSurvivor, setModifierSurvivor] = useState<boolean>(false);
   const [modifierTimeLimit, setModifierTimeLimit] = useState<boolean>(false);
@@ -71,7 +68,6 @@ export function QuizProvider({ children }: { children: ReactNode }) {
     setUsedQuestions(new Set());
     setCorrectAnswersStreak(0);
     setLastRewardedPointCount(0);
-    // setLastRewardedLifeCount(0);
     setModifierHotStreak(false);
     setModifierSurvivor(false);
     setModifierTimeLimit(false);
@@ -90,7 +86,6 @@ export function QuizProvider({ children }: { children: ReactNode }) {
       lives,
       correctAnswersStreak,
       lastRewardedPointCount,
-      // lastRewardedLifeCount,
       modifierHotStreak,
       modifierSurvivor,
       modifierTimeLimit,
@@ -109,7 +104,6 @@ export function QuizProvider({ children }: { children: ReactNode }) {
       setUsedQuestions,
       setCorrectAnswersStreak,
       setLastRewardedPointCount,
-      // setLastRewardedLifeCount,
       setModifierHotStreak,
       setModifierSurvivor,
       setModifierTimeLimit,
@@ -128,7 +122,6 @@ export function QuizProvider({ children }: { children: ReactNode }) {
       usedQuestions,
       correctAnswersStreak,
       lastRewardedPointCount,
-      // lastRewardedLifeCount,
       modifierHotStreak,
       modifierSurvivor,
       modifierTimeLimit,
