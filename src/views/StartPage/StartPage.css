@@ -78,30 +78,6 @@
     outline: 2px solid #E68CA7;
 }
 
-/* .startpage__form > button {
-    width: 200px;
-    height: 65px;
-    margin-top: 3rem;
-    padding: 1rem 1.5px;
-    border: none;
-    border-radius: 30px;
-    box-shadow: 2px 2px 8px rgba(0, 0, 0, 0.1);
-    font-size: 1.25rem;
-    color: white;
-    background-color: #6158B8;
-    transition: background-color 0.1s ease-out;
-    cursor: pointer;
-} 
-
-.startpage__form > button:hover {
-    background-color: #382B76;
-}
-
-.startpage__form > button:disabled {
-    background-color: #D8D3F9;
-    color: #F3F1FF;
-} */
-
 .gameLogo{
     width: 400px;
 }

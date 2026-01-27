@@ -13,10 +13,19 @@ export default function UserProfile() {
   const { goBack } = useQuizNavigation();
 
   const [displayName, setDisplayName] = useState(user.name ?? "");
+  const [avatarSize, setAvatarSize] = useState(window.innerWidth < 768 ? 80 : 120);
 
   useEffect(() => {
     setDisplayName(user.name ?? "");
   }, [user.name]);
+
+  useEffect(() => {
+    const handleResize = () => {
+      setAvatarSize(window.innerWidth >= 768 ? 120 : 80);
+    };
+    window.addEventListener("resize", handleResize);
+    return () => window.removeEventListener("resize", handleResize);
+  }, []);
 
   const handleNameSubmit = (e: React.FormEvent) => {
     e.preventDefault();
@@ -45,24 +54,19 @@ export default function UserProfile() {
           ),
         }}
       />
-      ;
       <MainWrapper>
         <div className='userInner'>
           {user.name ? (
-            <Avatar name={user.name} size={120} bgColor={user.bgColor} />
+            <Avatar name={user.name} size={avatarSize} bgColor={user.bgColor} />
           ) : null}
           <h1 className='userName'>{user.name}</h1>
           <div className='userColors'>
             {avatarColors.map((color) => (
               <button
                 key={color}
+                className="user__color-button"
                 style={{
-                  backgroundColor: color,
-                  width: "40px",
-                  height: "40px",
-                  borderRadius: "50%",
-                  cursor: "pointer",
-                  border: "none",
+                  backgroundColor: color
                 }}
                 aria-label={`Select color ${color}`}
                 onClick={() => handleColorClick(color)}
@@ -70,11 +74,11 @@ export default function UserProfile() {
             ))}
           </div>
           <div className='userWrapper'>
-            <div className='userScore'>
+            <div className='user__info userScore'>
               <h3 className='scoreDisplay'>Last Score: {user.lastScore}</h3>
               <h3 className='scoreDisplay'>Best Score: {user.bestScore}</h3>
             </div>
-            <form className='nameChangeForm' onSubmit={handleNameSubmit}>
+            <form className='user__info nameChangeForm' onSubmit={handleNameSubmit}>
               <label
                 htmlFor='name'
                 style={{ color: "#382B76", fontWeight: "bold" }}
