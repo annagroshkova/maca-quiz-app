@@ -1,5 +1,6 @@
 
 .categories__greeting {
+  align-self: flex-start;
   color:#6158B8;
   font-weight: 600;
   font-size: 1.6rem;
