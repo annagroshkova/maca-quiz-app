@@ -195,7 +195,10 @@ export default function Quiz() {
     }
   };
 
-  const fetchQuestion = async () => {
+  const fetchQuestion = async (retryCount = 0) => {
+    if (retryCount>3) {
+      return;
+    }
     try {
       const currentParams = new URLSearchParams(params);
       currentParams.set("limit", questionBatch.toString());
@@ -225,20 +228,18 @@ export default function Quiz() {
         .filter((q) => !currentUsed.has(q.question));
 
       if (validQuestions.length === 0) {
-        fetchQuestion();
+        fetchQuestion(retryCount + 1);
         return;
       }
 
-      setQuestionQueue((prev) => {
-        const newQueue = [...prev, ...validQuestions];
-        setUsedQuestions((prevSet) => {
+      setQuestionQueue((prev) => [...prev, ...validQuestions]);
+
+      setUsedQuestions((prevSet) => {
           const updatedSet = new Set(prevSet);
           validQuestions.forEach((q) => updatedSet.add(q.question));
           return updatedSet;
         });
 
-        return newQueue;
-      });
     } catch (error) {
       console.error("Error fetching question:", error);
     }
