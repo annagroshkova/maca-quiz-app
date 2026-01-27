@@ -15,18 +15,18 @@
 }
 
 .levels__category-image {
-  width: 35%;
+  width: 27%;
   object-fit: contain;
 }
 
 .levels__category-name {
   font-weight: 600;
-  font-size:1.3rem;
-  color: #6158B8;
+  font-size: 1.1rem;
+  color: #6158b8;
 }
 
 .levels__form {
-  margin-top: 22px;
+  margin-top: 17px;
 
   display: flex;
   flex-direction: column;
@@ -45,15 +45,15 @@
   display: flex;
   justify-content: center;
   gap: 16px;
-  margin: 8px;
+  margin: 0;
 }
 
 .levels__fieldset > legend {
-  font-size: 16px;
+  font-size: 1rem;
   line-height: 16px;
   padding: 0;
   margin-bottom: 14px;
-  color: #382B76;
+  color: #382b76;
 }
 
 .levels-container {
@@ -65,26 +65,46 @@
 }
 
 .modifierButton {
-  background-color: #e68ca7;
-  border: none;
- 
+  background-color: #e7a2b7;
+  border: 2px solid #e7a2b7;
   border-radius: 30px;
-  color: white;
-  width: 130px
-  
+  color: #352872;
+  max-width: 130px;
+  font-weight: 600;
 }
 .modifierButton:hover {
-  background-color: #b04464;
+  border: 2px solid #6158b8;
 }
 .modifierButton.active {
-  background-color: #b04464;
+  background-color: #6158b8;
+  border: 2px solid #6158b8;
+  color: white;
 }
-.modifierIcon{
+.modifierIcon {
   height: 25px;
-  margin-right:10px;
 }
-.buttonContent{
-  display:flex;
+.buttonContent {
+  display: flex;
   justify-content: center;
   align-items: center;
+  padding: 5px;
+}
+.buttonContent p {
+  display: none;
+}
+
+@media (min-width: 768px) {
+  .modifierButton {
+    width: 130px;
+  }
+  .modifierIcon {
+    height: 25px;
+    margin-right: 10px;
+  }
+  .buttonContent p {
+    display: block;
+  }
+  .buttonContent {
+    padding: 0;
+  }
 }

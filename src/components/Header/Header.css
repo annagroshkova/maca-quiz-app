@@ -8,14 +8,17 @@
   padding: 22px;
   background-color: transparent;
   box-sizing: border-box;
-  transition: background-color 0.15s ease, box-shadow 0.15s ease;
+  transition:
+    background-color 0.15s ease,
+    box-shadow 0.15s ease;
 }
 
 .header--scrolled {
   background: linear-gradient(
     211deg,
-    rgb(255 222 204) 0%,
-    rgb(182 205 233) 100%
+    rgb(224, 195, 252) 0%,
+    /* first color */ rgb(248, 234, 227) 50%,
+    /* middle color */ rgb(182, 205, 233) 100% /* last color */
   );
   box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
 }
