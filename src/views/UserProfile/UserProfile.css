@@ -92,6 +92,7 @@
   font-size: 1.5rem;
   font-weight: bold;
   background: linear-gradient(90deg, #f2b94c, #e68ca7, #6158b8);
+  background-clip: text;
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
 }
