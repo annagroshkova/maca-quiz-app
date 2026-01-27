@@ -1,4 +1,4 @@
-import { Flex, } from "@radix-ui/themes";
+import { Flex } from "@radix-ui/themes";
 import Header from "../../components/Header/Header";
 
 import useQuizNavigation from "../../hooks/useQuizNavigation";
@@ -21,14 +21,12 @@ export default function Rules() {
         }}
       />
       <div className="rulesContainer">
-        <h1 className="rulesHeading">Rules</h1>
-
         <Flex className="rulesInner">
+          <h1 className="rulesHeading">Rules</h1>
           <div className="rulesChallenge">
             <h3 className="rulesChallengeText">
-              Test your knowledge across different topics! Answer questions
-              correctly to score points, earn streak rewards, and keep your
-              lives. Can you get the highest score?
+              Test your knowledge across a variety of topics! Can you get the
+              highest score?
             </h3>
           </div>
 
@@ -40,7 +38,7 @@ export default function Rules() {
                 <li>
                   Answer each question by selecting one of the four options.
                 </li>
-                <li>Easy: +1 • Medium: +2 • Hard: +3</li>
+                <li>Easy: +1 point • Medium: +2 points • Hard: +3 points</li>
                 <li>Each incorrect answer costs one life.</li>
               </ul>
             </div>
