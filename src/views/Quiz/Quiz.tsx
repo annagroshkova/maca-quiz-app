@@ -85,6 +85,9 @@ export default function Quiz() {
     setPowerUpShieldUsed,
     setPowerUpSkipActive,
     setPowerUpSkipUsed,
+    setModifierSurvivor,
+    setModifierHotStreak,
+    setModifierTimeLimit,
   } = useQuiz();
 
   useEffect(() => {
@@ -125,9 +128,13 @@ export default function Quiz() {
     setQuestion(null);
     setQuestionQueue([]);
     setUsedQuestions(new Set());
-    setLives(3);
+    if (modifierSurvivor) {
+      setLives(1);
+    } else {
+      setLives(3);
+    }
     setScore(0);
-  }, [user.category, user.level]);
+  }, [user.category, user.level, modifierSurvivor]);
 
   const activateHint = () => {
     if (!question) return;
@@ -168,7 +175,7 @@ export default function Quiz() {
 
         setScore((prevScore) => prevScore + scorePoint);
         if (modifierSurvivor) {
-          if (newStreak > 0 && newStreak % 3 === 0) {
+          if (newStreak > 0 && newStreak % 5 === 0) {
             setLives((prev) => (prev < 3 ? prev + 1 : prev));
           }
         }
@@ -296,6 +303,9 @@ export default function Quiz() {
     setPowerUpHintUsed(false);
     setPowerUpSkipActive(false);
     setPowerUpSkipUsed(false);
+    setModifierSurvivor(false);
+    setModifierHotStreak(false);
+    setModifierTimeLimit(false);
     setCorrectAnswersStreak(0);
   };
 
@@ -489,9 +499,11 @@ export default function Quiz() {
                       <img
                         src="/shield.png"
                         alt="Shield Icon"
-                        className="powerUpIcon"
+                        className="shieldFeedbackIcon"
                       />{" "}
-                      Shield Saved You!
+                      <div className="shieldFeedbackText">
+                        Shield Saved You!
+                      </div>
                     </motion.div>
                   )}
                 </AnimatePresence>

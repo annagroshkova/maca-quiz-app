@@ -10,15 +10,14 @@
 .quiz__inner {
   display: flex;
   flex-direction: column;
-  background-color: rgba(240, 240, 240, 0.60);
+  background-color: rgba(240, 240, 240, 0.6);
   /*   background-color: rgba(240, 240, 240, 0.85); 
   -webkit-backdrop-filter: blur(12px);
   backdrop-filter: blur(12px); 
   will-change: backdrop-filter;
   transform: translateZ(0);*/
-  
+
   box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
-  
 
   border: 1px solid rgba(255, 255, 255, 0.5);
   border-radius: clamp(2rem, 4vh, 3rem);
@@ -30,7 +29,6 @@
   gap: clamp(1rem, 3vw, 2rem);
   padding: 0;
   overflow: hidden;
-
 }
 .quiz__header {
   padding-inline: clamp(1.5rem, 4vw, 2rem);
@@ -42,7 +40,7 @@
 .quiz__score-number {
   font-weight: 700;
   font-size: clamp(1.1rem, 1.5vw, 1.3rem);
-  color:#382B76;
+  color: #382b76;
 }
 
 .quiz__question-container {
@@ -74,8 +72,8 @@
 
 .quiz__content {
   flex: 1;
-  padding: clamp(1rem, 5vw, 2rem) clamp(1rem, 5vw, 2rem)
-    clamp(1rem, 5vw, 2rem) clamp(1rem, 5vw, 2rem);
+  padding: clamp(1rem, 5vw, 2rem) clamp(1rem, 5vw, 2rem) clamp(1rem, 5vw, 2rem)
+    clamp(1rem, 5vw, 2rem);
 
   display: flex;
   flex-direction: column;
@@ -104,11 +102,11 @@
   margin-bottom: 1rem;
 }
 .lifeText {
-  color:#6158B8;
+  color: #6158b8;
   text-align: right;
 }
-.scoreText{
-  color:#6158B8;
+.scoreText {
+  color: #6158b8;
   text-align: left;
 }
 .scoreIcon {
@@ -118,18 +116,18 @@
   margin-right: 0.5rem;
   display: block;
 }
-.lifeIcon{
+.lifeIcon {
   width: 2rem;
-  height:2rem;
-  object-fit:contain;
+  height: 2rem;
+  object-fit: contain;
   margin-left: 0.5rem;
-  display:block;
+  display: block;
 }
 .scoreText {
   display: flex;
 }
-.questionText{
-  color:#352872;
+.questionText {
+  color: #352872;
 }
 .powerUpButton {
   border: none;
@@ -188,13 +186,35 @@
   }
 }
 .shield-feedback {
-  margin-top: 12px;
-  padding: 10px 16px;
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.5rem;
+
+  padding: 1.25rem 1.5rem;
   background: #e6e3ff;
   color: #5b4fb3;
-  border-radius: 12px;
+
+  border-radius: 16px;
   font-weight: 600;
   text-align: center;
+
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.15);
+  z-index: 1000;
+}
+
+.shieldFeedbackIcon {
+  width: 3rem;
+  height: 3rem;
+  object-fit: contain;
+}
+.shieldFeedbackText {
+  font-size: 1rem;
 }
 .answer-button--disabled {
   opacity: 0.45;
