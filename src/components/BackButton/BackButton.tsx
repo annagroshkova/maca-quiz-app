@@ -25,14 +25,11 @@ export default function BackButton({ children, onClick }: BackButtonProps) {
     <button
       className="back-button"
       onClick={onClick}
-      style={{
-        height: "40px",
-        border: "none",
-        backgroundColor: "transparent",
-        outline: "none",
-      }}
     >
-      {children}
+      <div className="back-button__bg">
+        {children}
+      </div>
+      
     </button>
   );
 }

@@ -16,15 +16,24 @@ interface Props {
 export default function Header({ backButton, backButtonProps = {} }: Props) {
   const { onClick, children } = backButtonProps;
   const { user } = useUser();
-  const [isScrolled, setIsScrolled] = useState(false);
+  const [isScrolled, setIsScrolled] = useState<boolean>(false);
+  const [avatarSize, setAvatarSize] = useState<number>(window.innerWidth >= 768 ? 50 : 40);
 
   useEffect(() => {
     const handleScroll = () => {
       setIsScrolled(window.scrollY > 0);
     };
 
+    const handleResize = () => {
+      setAvatarSize(window.innerWidth < 768 ? 40 : 50);
+    };
+
     window.addEventListener("scroll", handleScroll);
-    return () => window.removeEventListener("scroll", handleScroll);
+    window.addEventListener("resize", handleResize);
+    return () => {
+      window.removeEventListener("scroll", handleScroll);
+      window.removeEventListener("resize", handleResize);
+    };
   }, []);
 
   return (
@@ -43,7 +52,7 @@ export default function Header({ backButton, backButtonProps = {} }: Props) {
       />
       <Link to="/userProfile" style={{ textDecoration: "none" }}>
         {user.name && (
-          <Avatar name={user.name} size={40} bgColor={user.bgColor} />
+          <Avatar name={user.name} size={avatarSize} bgColor={user.bgColor} />
         )}
       </Link>
       </div>

@@ -85,9 +85,9 @@ export default function Categories() {
           },
           children: (
             <img
-              src="go-back-icon-192-solid.svg"
+              src="go-back-icon-white.svg"
               alt="Go back icon"
-              style={{ height: "100%" }}
+              style={{ height: "100%", display: "block" }}
             />
           ),
         }}
