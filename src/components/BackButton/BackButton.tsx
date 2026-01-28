@@ -16,18 +16,22 @@
 // }
 
 interface BackButtonProps {
-  children?: React.ReactNode;
+  src?: string
   onClick?: () => void;
 }
 
-export default function BackButton({ children, onClick }: BackButtonProps) {
+export default function BackButton({ src="go-back-icon-white.svg", onClick }: BackButtonProps) {
   return (
     <button
       className="back-button"
       onClick={onClick}
     >
       <div className="back-button__bg">
-        {children}
+                    <img
+              src={src}
+              alt="Go back icon"
+              style={{ height: "100%", display: "block" }}
+            />
       </div>
       
     </button>

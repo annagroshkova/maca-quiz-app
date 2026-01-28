@@ -9,12 +9,12 @@ interface Props {
   backButton: boolean;
   backButtonProps?: {
     onClick?: VoidFunction;
-    children?: ReactNode;
+    src?: string;
   };
 }
 
 export default function Header({ backButton, backButtonProps = {} }: Props) {
-  const { onClick, children } = backButtonProps;
+  const { onClick, src } = backButtonProps;
   const { user } = useUser();
   const [isScrolled, setIsScrolled] = useState<boolean>(false);
   const [avatarSize, setAvatarSize] = useState<number>(window.innerWidth >= 768 ? 50 : 40);
@@ -40,7 +40,7 @@ export default function Header({ backButton, backButtonProps = {} }: Props) {
     <header className={`header ${isScrolled ? "header--scrolled" : ""}`}>
       <div className="header__inner">
               {backButton ? (
-        <BackButton onClick={onClick} children={children} />
+        <BackButton onClick={onClick} src={src} />
       ) : (
         <div className="header__placeholder"></div>
       )}

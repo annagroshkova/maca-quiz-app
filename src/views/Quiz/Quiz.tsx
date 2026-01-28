@@ -159,7 +159,7 @@ export default function Quiz() {
     if (selectedAnswer) return;
 
     const wrongAnswers = question.allAnswers.filter(
-      (answer) => answer !== question.correctAnswer,
+      (answer) => answer !== question.correctAnswer
     );
     const answersToDisable = wrongAnswers
       .sort(() => Math.random() - 0.5)
@@ -228,7 +228,7 @@ export default function Quiz() {
       currentParams.set("limit", questionBatch.toString());
 
       const response = await fetch(
-        `${baseUrl}/questions?${currentParams.toString()}`,
+        `${baseUrl}/questions?${currentParams.toString()}`
       );
       const data: ApiResponse = await response.json();
 
@@ -242,12 +242,12 @@ export default function Quiz() {
           question: q.question.text,
           correctAnswer: q.correctAnswer,
           allAnswers: [...q.incorrectAnswers, q.correctAnswer].sort(
-            () => Math.random() - 0.5,
+            () => Math.random() - 0.5
           ),
           difficulty: q.difficulty,
         }))
         .filter(
-          (q) => !q.allAnswers.some((ans) => ans.length > maxAnswerLength),
+          (q) => !q.allAnswers.some((ans) => ans.length > maxAnswerLength)
         )
         .filter((q) => !currentUsed.has(q.question));
 
@@ -342,38 +342,32 @@ export default function Quiz() {
             setQuestionQueue([]);
             goToSettings();
           },
-          children: (
-            <img
-              src="go-back-icon-192-solid.svg"
-              alt="Go back icon"
-              style={{ height: "100%" }}
-            />
-          ),
+          src: "reload-icon.svg",
         }}
       />
       <MainWrapper>
         <motion.div
-          className="shared-container"
+          className='shared-container'
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
           exit={{ opacity: 0 }}
           transition={{ duration: 0.3 }}
         >
-          <Flex justify="between" align="center" className="quiz__header">
-            <Flex direction="column">
-              <h3 className="scoreText">SCORE</h3>
-              <Flex justify="center" align="center">
-                <img className="scoreIcon" alt="Star Icon" src="/star.png" />
-                <div className="quiz__score-number">{score}</div>
+          <Flex justify='between' align='center' className='quiz__header'>
+            <Flex direction='column'>
+              <h3 className='scoreText'>SCORE</h3>
+              <Flex justify='center' align='center'>
+                <img className='scoreIcon' alt='Star Icon' src='/star.png' />
+                <div className='quiz__score-number'>{score}</div>
               </Flex>
             </Flex>
             {modifierTimeLimit && (
-              <Text size="5" weight="bold">
-                <span className="quiz__score-number">{timeLeft}</span>
+              <Text size='5' weight='bold'>
+                <span className='quiz__score-number'>{timeLeft}</span>
               </Text>
             )}
-            <Flex direction="column">
-              <h3 className="lifeText">LIFE</h3>
+            <Flex direction='column'>
+              <h3 className='lifeText'>LIFE</h3>
               <Flex>
                 {[1, 2, 3].map((heartIndex) => {
                   const isLost = heartIndex <= 3 - lives;
@@ -382,7 +376,7 @@ export default function Quiz() {
                       key={heartIndex}
                       src={isLost ? "/greyheart.png" : "/redheart.png"}
                       alt={isLost ? "Lost Life" : "Life"}
-                      className="lifeIcon"
+                      className='lifeIcon'
                     />
                   );
                 })}
@@ -391,13 +385,13 @@ export default function Quiz() {
           </Flex>
           {question && (
             <>
-              <Card className="quiz__question-container">
-                <h2 className="questionText">{question.question}</h2>
+              <Card className='quiz__question-container'>
+                <h2 className='questionText'>{question.question}</h2>
               </Card>
 
-              <Flex direction="column" className="quiz__answers-container">
+              <Flex direction='column' className='quiz__answers-container'>
                 <AnimatePresence>
-                  <Flex direction="column" gap="3">
+                  <Flex direction='column' gap='3'>
                     {question.allAnswers.map((answer, index) => {
                       const isDisabledByHint = disabledAnswers.includes(answer);
 
@@ -442,7 +436,7 @@ export default function Quiz() {
                   </Flex>
                 </AnimatePresence>
               </Flex>
-              <Flex direction="column">
+              <Flex direction='column'>
                 <AnimatePresence>
                   {!selectedAnswer && !powerUpSkipActive && (
                     <motion.div
@@ -461,42 +455,42 @@ export default function Quiz() {
                       transition={{ duration: 0.3 }}
                     >
                       <Flex
-                        justify="center"
-                        gap="5"
-                        align="center"
-                        className="quiz__powerups"
+                        justify='center'
+                        gap='5'
+                        align='center'
+                        className='quiz__powerups'
                       >
                         <button
-                          className="powerUpButton"
+                          className='powerUpButton'
                           disabled={powerUpShieldUsed || powerUpShieldActive}
                           onClick={() => setPowerUpShieldActive(true)}
                         >
                           <img
-                            className="powerUpIcon"
-                            alt="Shield Icon"
-                            src="/shield.png"
+                            className='powerUpIcon'
+                            alt='Shield Icon'
+                            src='/shield.png'
                           />
                         </button>
                         <button
-                          className="powerUpButton"
+                          className='powerUpButton'
                           disabled={powerUpSkipUsed}
                           onClick={activateSkip}
                         >
                           <img
-                            className="powerUpIcon"
-                            alt="Skip Icon"
-                            src="/next.png"
+                            className='powerUpIcon'
+                            alt='Skip Icon'
+                            src='/next.png'
                           />
                         </button>
                         <button
-                          className="powerUpButton"
+                          className='powerUpButton'
                           disabled={powerUpHintUsed}
                           onClick={activateHint}
                         >
                           <img
-                            className="powerUpIcon"
-                            alt="Hint Icon"
-                            src="/hint.png"
+                            className='powerUpIcon'
+                            alt='Hint Icon'
+                            src='/hint.png'
                           />
                         </button>
                       </Flex>
@@ -511,14 +505,14 @@ export default function Quiz() {
                       animate={{ opacity: 1, scale: 1 }}
                       exit={{ opacity: 0, scale: 0.9 }}
                       transition={{ duration: 0.25 }}
-                      className="shield-feedback"
+                      className='shield-feedback'
                     >
                       <img
-                        src="/shield.png"
-                        alt="Shield Icon"
-                        className="shieldFeedbackIcon"
+                        src='/shield.png'
+                        alt='Shield Icon'
+                        className='shieldFeedbackIcon'
                       />{" "}
-                      <div className="shieldFeedbackText">
+                      <div className='shieldFeedbackText'>
                         Shield Saved You!
                       </div>
                     </motion.div>
@@ -533,7 +527,7 @@ export default function Quiz() {
                     exit={{ opacity: 0, height: 0, y: 20 }}
                     transition={{ duration: 0.3 }}
                   >
-                    <div className="quiz__footer">
+                    <div className='quiz__footer'>
                       <SubmitButton
                         onClick={handleNextStep}
                         disabled={!selectedAnswer && !powerUpSkipActive}
