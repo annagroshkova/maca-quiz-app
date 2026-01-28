@@ -60,16 +60,13 @@ export default function Quiz() {
     selectedAnswer,
     score,
     lives,
-    //correctAnswersStreak,
 
-    // lastRewardedLifeCount,
     setQuestion,
     setSelectedAnswer,
     setScore,
     setLives,
     setCorrectAnswersStreak,
 
-    // setLastRewardedLifeCount,
     modifierHotStreak,
     modifierSurvivor,
     modifierTimeLimit,
@@ -196,12 +193,6 @@ export default function Quiz() {
             setLives((prev) => (prev < 3 ? prev + 1 : prev));
           }
         }
-
-        // const rewardLifeEarned = Math.floor(newStreak / 10);
-        // if (rewardLifeEarned > lastRewardedLifeCount) {
-        //   setLives((prev) => prev + 1);
-        //   setLastRewardedLifeCount(rewardLifeEarned);
-        // }
 
         return newStreak;
       });
