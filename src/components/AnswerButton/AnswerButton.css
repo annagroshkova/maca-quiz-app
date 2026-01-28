@@ -17,13 +17,13 @@
   text-align: center;
   width: 95%;
   min-height: clamp(3.1rem, 6.5vh, 4rem);
-  /*padding: 0.5em clamp(0.4rem, 1.5vw, 2rem); */
+
   margin: auto;
 
   border: none;
   border-radius: 9999px;
   cursor: pointer;
-  /*background-color: #6158b8;*/
+
   background-color: hsla(248, 64%, 50%, 0.702);
   color: white;
 
@@ -52,7 +52,6 @@
 }
 
 .answer-button:not(:disabled):hover {
-  /*background-color: #7a6ed6;*/
   background-color: hsla(247, 64%, 50%, 0.9);
   transform: scale(1.05);
   box-shadow:
@@ -78,7 +77,6 @@
     inset 0 0 0 0.15rem rgba(255, 255, 255, 0.4),
     0 0 2rem hsla(158, 60%, 60%, 0.2);
   z-index: 2;
-
 }
 
 .answer-button.incorrect {
@@ -88,7 +86,6 @@
     inset 0 0 0 0.15rem rgba(255, 255, 255, 0.4),
     0 0 1rem hsla(338, 64%, 60%, 0.2);
   z-index: 2;
-
 }
 
 .answer-button.passive {
