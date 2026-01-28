@@ -13,6 +13,7 @@
   justify-content: center;
   display: flex;
   flex-direction: column;
+  width: 100%;
 
   /*  overflow: hidden;
 transform-origin: center top;*/
