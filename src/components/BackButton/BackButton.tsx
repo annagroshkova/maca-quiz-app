@@ -1,38 +1,22 @@
-// export default function BackButton({ fallback = "/" }) {
-//   const navigate = useNavigate();
-
-//   const handleBack = () => {
-//     if (globalThis.history.length > 1) {
-//       navigate(-1);
-//     } else {
-//       navigate(fallback);
-//     }
-//   };
-//   return (
-//     <button className="backButton" onClick={handleBack}>
-//       Back
-//     </button>
-//   );
-// }
-
 interface BackButtonProps {
-  children?: React.ReactNode;
+  src?: string
   onClick?: () => void;
 }
 
-export default function BackButton({ children, onClick }: BackButtonProps) {
+export default function BackButton({ src="go-back-icon-white.svg", onClick }: BackButtonProps) {
   return (
     <button
       className="back-button"
       onClick={onClick}
-      style={{
-        height: "40px",
-        border: "none",
-        backgroundColor: "transparent",
-        outline: "none",
-      }}
     >
-      {children}
+      <div className="back-button__bg">
+                    <img
+              src={src}
+              alt="Go back icon"
+              style={{ height: "100%", display: "block" }}
+            />
+      </div>
+      
     </button>
   );
 }

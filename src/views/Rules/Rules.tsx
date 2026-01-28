@@ -1,4 +1,3 @@
-import { Flex } from "@radix-ui/themes";
 import Header from "../../components/Header/Header";
 import { motion } from "motion/react";
 
@@ -12,35 +11,28 @@ export default function Rules() {
         backButton
         backButtonProps={{
           onClick: () => goBack(),
-          children: (
-            <img
-              src="go-back-icon-192-solid.svg"
-              alt="Go back icon"
-              style={{ height: "100%" }}
-            />
-          ),
         }}
       />
-      <div className="rulesContainer">
+      <div className='rulesContainer'>
         <motion.div
-          className="rulesInner shared-container"
+          className='rulesInner shared-container'
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
           exit={{ opacity: 0 }}
           transition={{ duration: 0.3 }}
         >
-          <h1 className="rulesHeading">Rules</h1>
-          <div className="rulesChallenge">
-            <h3 className="rulesChallengeText">
+          <h1 className='rulesHeading'>Rules</h1>
+          <div className='rulesChallenge'>
+            <h3 className='rulesChallengeText'>
               Test your knowledge across a variety of topics! Can you get the
               highest score?
             </h3>
           </div>
 
-          <div className="ruleCardContainer">
-            <div className="rulesBox">
-              <h2 className="rulesSmallHeadline">How to Play</h2>
-              <ul className="rulesList">
+          <div className='ruleCardContainer'>
+            <div className='rulesBox'>
+              <h2 className='rulesSmallHeadline'>How to Play</h2>
+              <ul className='rulesList'>
                 <li>Enter your name and press Let's Begin!</li>
                 <li>
                   Answer each question by selecting one of the four options.
@@ -50,15 +42,15 @@ export default function Rules() {
               </ul>
             </div>
 
-            <div className="rulesBox">
-              <h2 className="rulesSmallHeadline">Modifiers</h2>
-              <div className="powerUpWrapper">
-                <div className="powerUpBox">
-                  <div className="powerUpHeadline">
+            <div className='rulesBox'>
+              <h2 className='rulesSmallHeadline'>Modifiers</h2>
+              <div className='powerUpWrapper'>
+                <div className='powerUpBox'>
+                  <div className='powerUpHeadline'>
                     <img
-                      className="rulesIcon"
-                      alt="Fire Icon"
-                      src="/fire.png"
+                      className='rulesIcon'
+                      alt='Fire Icon'
+                      src='/fire.png'
                     ></img>
                     <h3>Hot Streak</h3>
                   </div>
@@ -67,12 +59,12 @@ export default function Rules() {
                     multiplier (x2, x4, x8…)
                   </p>
                 </div>
-                <div className="powerUpBox">
-                  <div className="powerUpHeadline">
+                <div className='powerUpBox'>
+                  <div className='powerUpHeadline'>
                     <img
-                      className="rulesIcon"
-                      alt="Skull Icon"
-                      src="/skull.png"
+                      className='rulesIcon'
+                      alt='Skull Icon'
+                      src='/skull.png'
                     ></img>
 
                     <h3>Survivor</h3>
@@ -82,12 +74,12 @@ export default function Rules() {
                     answers —up to the usual 3.
                   </p>
                 </div>
-                <div className="powerUpBox">
-                  <div className="powerUpHeadline">
+                <div className='powerUpBox'>
+                  <div className='powerUpHeadline'>
                     <img
-                      className="rulesIcon"
-                      alt="Hourglass Icon"
-                      src="/hourglass.png"
+                      className='rulesIcon'
+                      alt='Hourglass Icon'
+                      src='/hourglass.png'
                     ></img>
                     <h3>Time Limit</h3>
                   </div>
@@ -99,37 +91,37 @@ export default function Rules() {
               </div>
             </div>
 
-            <div className="rulesBox">
-              <h2 className="rulesSmallHeadline">Power-Ups</h2>
-              <div className="powerUpWrapper">
-                <div className="powerUpBox">
-                  <div className="powerUpHeadline">
+            <div className='rulesBox'>
+              <h2 className='rulesSmallHeadline'>Power-Ups</h2>
+              <div className='powerUpWrapper'>
+                <div className='powerUpBox'>
+                  <div className='powerUpHeadline'>
                     <img
-                      alt="Shield Icon"
-                      className="rulesIcon"
-                      src="/shield.png"
+                      alt='Shield Icon'
+                      className='rulesIcon'
+                      src='/shield.png'
                     />
                     <h3>Shield</h3>
                   </div>
                   <p>Guess safely! No life lost if you get it wrong.</p>
                 </div>
-                <div className="powerUpBox">
-                  <div className="powerUpHeadline">
+                <div className='powerUpBox'>
+                  <div className='powerUpHeadline'>
                     <img
-                      alt="Skip Icon"
-                      className="rulesIcon"
-                      src="/next.png"
+                      alt='Skip Icon'
+                      className='rulesIcon'
+                      src='/next.png'
                     />
                     <h3>Skip</h3>
                   </div>
                   <p>Not feeling it? Jump straight to the next question.</p>
                 </div>
-                <div className="powerUpBox">
-                  <div className="powerUpHeadline">
+                <div className='powerUpBox'>
+                  <div className='powerUpHeadline'>
                     <img
-                      alt="Hint Icon"
-                      className="rulesIcon"
-                      src="/hint.png"
+                      alt='Hint Icon'
+                      className='rulesIcon'
+                      src='/hint.png'
                     />
                     <h3>Hint</h3>
                   </div>
@@ -141,9 +133,9 @@ export default function Rules() {
               </div>
             </div>
 
-            <div className="rulesBox">
-              <h2 className="rulesSmallHeadline">Tips & Tricks</h2>
-              <ul className="rulesList">
+            <div className='rulesBox'>
+              <h2 className='rulesSmallHeadline'>Tips & Tricks</h2>
+              <ul className='rulesList'>
                 <li>Focus on building streaks to maximize rewards.</li>
                 <li>Hard questions give more points!</li>
                 <li>

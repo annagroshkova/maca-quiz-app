@@ -49,13 +49,6 @@ export default function Levels() {
         backButton={true}
         backButtonProps={{
           onClick: goToSettings,
-          children: (
-            <img
-              src="go-back-icon-192-solid.svg"
-              alt="Go back icon"
-              style={{ height: "100%" }}
-            />
-          ),
         }}
       />
 

@@ -1,7 +1,6 @@
 .avatar {
-  height: 100%;
   padding: 1px 6px;
-  box-sizing: border-box;
+  box-sizing: content-box;
 }
 
 .avatar__icon {
