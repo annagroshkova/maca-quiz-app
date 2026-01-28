@@ -6,6 +6,7 @@
   border-radius: 12px;
   cursor: pointer;
   -webkit-user-select: none;
+  -webkit-tap-highlight-color: transparent;
   user-select: none;
   transition: all 0.2s ease;
   background-color: #fcfcfc;

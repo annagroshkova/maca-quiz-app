@@ -47,7 +47,7 @@
   text-align: center;
   margin-bottom: 20px;
   border-radius: 12px;
-  padding: 12px;
+  padding: 12px 12px 20px;
   width: 300px;
   height: auto;
 }
@@ -68,6 +68,7 @@
 
 .rulesSmallHeadline {
   text-align: center;
+  
 }
 
 .powerUpWrapper {
@@ -139,7 +140,7 @@
   .ruleCardContainer {
     display: grid;
     grid-template-columns: repeat(2, 1fr);
-    gap: 10px;
+    gap: 20px;
   }
   .rulesChallengeText {
     font-size: 1.1rem;

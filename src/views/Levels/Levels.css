@@ -9,36 +9,38 @@
 }
 
 .levels__category-container {
-  /* padding: 8px 0; */
   display: grid;
   justify-items: center;
+  gap: 5px;
 }
 
 .levels__category-image {
   width: 27%;
+  max-width: 100px;
   object-fit: contain;
 }
 
 .levels__category-name {
   font-weight: 600;
-  font-size: 1.1rem;
+  font-size: 1.6rem;
   color: #6158b8;
+  margin-top: 0;
+  margin-bottom: 22px;
 }
 
 .levels__form {
-  margin-top: 17px;
-
+  margin-top: 14px;
   display: flex;
   flex-direction: column;
   gap: 20px;
 }
 
 .levels__fieldset {
-  border: none;
-  margin: 0 auto;
-  padding: 0;
-  width: 100%;
-  margin-bottom: 20px;
+    border: none;
+    margin: 10px auto;
+    max-width: 570px;
+    padding: 0;
+    width: 100%;
 }
 
 .levels__modifiers-container {
@@ -46,6 +48,7 @@
   justify-content: center;
   gap: 16px;
   margin: 0;
+  padding: 10px;
 }
 
 .levels__fieldset > legend {
@@ -87,6 +90,7 @@
   display: flex;
   justify-content: center;
   align-items: center;
+  gap: 6px;
   padding: 5px;
 }
 .buttonContent p {
@@ -99,7 +103,6 @@
   }
   .modifierIcon {
     height: 25px;
-    margin-right: 10px;
   }
   .buttonContent p {
     display: block;
