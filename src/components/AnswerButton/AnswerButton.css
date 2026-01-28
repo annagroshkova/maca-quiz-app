@@ -24,7 +24,7 @@
   border-radius: 9999px;
   cursor: pointer;
   /*background-color: #6158b8;*/
-  background-color: hsla(248, 64%, 50%, 0.7);
+  background-color: hsla(248, 64%, 50%, 0.702);
   color: white;
 
   font-family: inherit;
@@ -72,21 +72,21 @@
 }
 
 .answer-button.correct {
-  background-color: #02795b;
+  background-color: hsl(158, 64%, 50%);
   color: white;
   box-shadow:
     inset 0 0 0 0.15rem rgba(255, 255, 255, 0.4),
-    0 0 1rem rgba(103, 216, 144, 0.6);
+    0 0 2rem hsla(158, 60%, 60%, 0.2);
   z-index: 2;
 
 }
 
 .answer-button.incorrect {
-  background-color: #ce2e4e;
+  background-color: hsl(338, 64%, 50%);
   color: white;
   box-shadow:
     inset 0 0 0 0.15rem rgba(255, 255, 255, 0.4),
-    0 0 1rem rgba(255, 75, 111, 0.6);
+    0 0 1rem hsla(338, 64%, 60%, 0.2);
   z-index: 2;
 
 }
