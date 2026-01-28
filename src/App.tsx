@@ -1,5 +1,5 @@
 import type { ReactNode } from "react";
-import { BrowserRouter, Routes, Route, useLocation } from "react-router-dom";
+import { BrowserRouter, Routes, Route, useLocation, Navigate } from "react-router-dom";
 import "./App.css";
 import StartPage from "./views/StartPage/StartPage";
 import Categories from "./views/Categories/Categories";
@@ -10,13 +10,16 @@ import UserProfile from "./views/UserProfile/UserProfile";
 import Rules from "./views/Rules/Rules";
 import BackgroundAnimated from "./components/BackgroundAnimated/BackgroundAnimated";
 import { AnimatePresence } from "motion/react";
+import {useUser } from "./context/UserContext"
+
 
 const AnimatedRoutes = () => {
+  const {user} = useUser()
   const location = useLocation();
   return (
     <AnimatePresence mode='wait' initial={false}>
       <Routes location={location} key={location.pathname}>
-        <Route path="/" element={<StartPage />} />
+        <Route path="/" element={user.name ? <StartPage /> : <Navigate to="/categories" />} />
         <Route path="/categories" element={<Categories />} />
         <Route path="/levels" element={<Levels />} />
         <Route path="/quiz" element={<Quiz />} />

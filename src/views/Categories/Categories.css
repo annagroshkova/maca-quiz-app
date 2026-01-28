@@ -1,12 +1,11 @@
-
 .categories__greeting {
   align-self: flex-start;
-  color:#6158B8;
+  color: #6158b8;
   font-weight: 600;
   font-size: 1.6rem;
   margin-top: 22px;
   margin-bottom: 30px;
-
+  margin-left: 6px; /* compensation margin */
 }
 
 .categories__form {
@@ -31,7 +30,7 @@
   line-height: 16px;
   padding: 0;
   margin-bottom: 14px;
-  color: #382B76;
+  color: #382b76;
 }
 
 .categories-container {
@@ -56,9 +55,8 @@
   }
 }
 
-@media screen and (width >= 1024px) and (orientation : landscape){
-
-  .categories__form{
+@media screen and (width >= 1024px) and (orientation: landscape) {
+  .categories__form {
     min-height: 60vh;
   }
   .categories-container {
