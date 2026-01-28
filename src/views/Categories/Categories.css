@@ -4,8 +4,8 @@
   color:#6158B8;
   font-weight: 600;
   font-size: 1.6rem;
-  margin: 30px 0;
-  color:#6158B8;
+  margin-top: 22px;
+  margin-bottom: 30px;
 
 }
 
@@ -50,11 +50,11 @@
   scroll-snap-stop: always;
 }
 
-/* @media screen and (width >= 425px) {
+@media screen and (width >= 768px) {
   .categories-container {
     grid-template-columns: repeat(3, 1fr);
   }
-} */
+}
 
 @media screen and (width >= 1024px) and (orientation : landscape){
 
