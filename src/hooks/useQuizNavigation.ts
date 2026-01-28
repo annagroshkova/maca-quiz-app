@@ -40,7 +40,7 @@ export default function useQuizNavigation() {
   };
   const goToStart = () => {
     resetQuiz();
-    navigate("/");
+    navigate("/start");
   };
 
   return {
