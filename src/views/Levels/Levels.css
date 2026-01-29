@@ -15,8 +15,8 @@
 }
 
 .levels__category-image {
-  width: 27%;
-  max-width: 100px;
+  width: 40%;
+  max-width: 150px;
   object-fit: contain;
 }
 
@@ -36,11 +36,11 @@
 }
 
 .levels__fieldset {
-    border: none;
-    margin: 10px auto;
-    max-width: 570px;
-    padding: 0;
-    width: 100%;
+  border: none;
+  margin: 10px auto;
+  max-width: 570px;
+  padding: 0;
+  width: 100%;
 }
 
 .levels__modifiers-container {
