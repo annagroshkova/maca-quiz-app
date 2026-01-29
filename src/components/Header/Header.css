@@ -2,15 +2,14 @@
   position: sticky;
   top: 0;
   z-index: 1000;
-  height: 100px;
+  height: calc(100px + env(safe-area-inset-top, 0px));
   width: 100%;
   margin: 0 auto;
   padding: 18px;
+  padding-top: calc(6px + env(safe-area-inset-top, 0px));
   background-color: transparent;
   box-sizing: border-box;
-  transition:
-    background-color 0.15s ease,
-    box-shadow 0.15s ease;
+  transition: background-color 0.15s ease, box-shadow 0.15s ease;
 }
 
 .header--scrolled {
@@ -54,4 +53,3 @@
     padding-inline: 22px;
   }
 }
-
