@@ -52,7 +52,12 @@
 }
 
 .answer-button:not(:disabled):hover {
+<<<<<<< HEAD
+  /*background-color: #7a6ed6;*/
+  background-color: hsla(247, 64%, 50%, 0.902);
+=======
   background-color: hsla(247, 64%, 50%, 0.9);
+>>>>>>> main
   transform: scale(1.05);
   box-shadow:
     inset 0 0 2rem 0.2rem rgba(255, 255, 255, 0.2),
@@ -71,20 +76,20 @@
 }
 
 .answer-button.correct {
-  background-color: hsl(158, 64%, 50%);
+  background-color: hsl(157, 64%, 50%, 0.9);
   color: white;
   box-shadow:
     inset 0 0 0 0.15rem rgba(255, 255, 255, 0.4),
-    0 0 2rem hsla(158, 60%, 60%, 0.2);
+    0 0 2rem hsla(157, 60%, 60%, 0.2);
   z-index: 2;
 }
 
 .answer-button.incorrect {
-  background-color: hsl(338, 64%, 50%);
+  background-color: hsl(337, 64%, 50%, 0.9);
   color: white;
   box-shadow:
     inset 0 0 0 0.15rem rgba(255, 255, 255, 0.4),
-    0 0 1rem hsla(338, 64%, 60%, 0.2);
+    0 0 1rem hsla(337, 64%, 60%, 0.2);
   z-index: 2;
 }
 
