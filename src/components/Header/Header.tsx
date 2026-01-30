@@ -51,7 +51,7 @@ export default function Header({ backButton, backButtonProps = {} }: Props) {
         <img
           className="header__gamelogo"
           alt="MindPop Logo"
-          src="/mindpoplogo.png"
+          src="/mindpop_logo_text_only.png"
         />
         <Link to="/userProfile" style={{ textDecoration: "none" }}>
           {user.name && (
