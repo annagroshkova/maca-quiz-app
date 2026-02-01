@@ -14,12 +14,10 @@
   display: flex;
   flex-direction: column;
   width: 100%;
-
-  /*  overflow: hidden;
-transform-origin: center top;*/
 }
 .app-content-wrapper {
   width: 100vw;
+  min-height: 100dvh;
   justify-content: center;
   display: flex;
   flex-direction: column;
