@@ -4,6 +4,7 @@
     text-align: center;
     min-height: 100dvh;
     padding-inline: 22px;
+     padding-top: calc(1 * env(safe-area-inset-top, 20px));
 }
 
 .startpage__heading {
