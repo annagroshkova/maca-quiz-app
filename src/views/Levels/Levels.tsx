@@ -61,12 +61,6 @@ export default function Levels() {
           transition={{ duration: 0.3 }}
         >
           <div className="levels__category-container">
-            {/* <img
-              src={`${categoryObj.apiQuery}.png`}
-              alt={categoryObj.quizSubject}
-              className="levels__category-image"
-            /> */}
-
             <p className="levels__category-name">{categoryObj.quizSubject}</p>
           </div>
 
