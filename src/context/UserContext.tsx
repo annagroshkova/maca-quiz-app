@@ -6,12 +6,17 @@ interface User {
   lastScore?: number;
   bestScore?: number;
   bgColor?: string;
+  category?: string;
+  level?: string;
 }
 
 interface UserContextType {
   user: User;
   setUserName: (name: string) => void;
   setUserBgColor: (color: string) => void;
+  setUserCategory: (category: string) => void;
+  setUserLevel: (level: string) => void;
+  updateScores: (score: number) => void;
 }
 
 export const avatarColors = [
@@ -75,8 +80,42 @@ export function UserProvider({ children }: { children: React.ReactNode }) {
     });
   };
 
+  const setUserCategory = (category: string) => {
+    setUser((prevUser) => {
+      const updatedUser = { ...prevUser, category };
+      updateUserSettings(updatedUser);
+      return updatedUser;
+    });
+  };
+
+  const setUserLevel = (level: string) => {
+    setUser((prevUser) => {
+      const updatedUser = { ...prevUser, level };
+      updateUserSettings(updatedUser);
+      return updatedUser;
+    });
+  };
+
+  const updateScores = (score: number) => {
+    setUser((prevUser) => {
+      const bestScore = Math.max(prevUser.bestScore ?? 0, score);
+      const updatedUser = { ...prevUser, lastScore: score, bestScore };
+      updateUserSettings(updatedUser);
+      return updatedUser;
+    });
+  };
+
   return (
-    <UserContext.Provider value={{ user, setUserName, setUserBgColor }}>
+    <UserContext.Provider
+      value={{
+        user,
+        setUserName,
+        setUserBgColor,
+        setUserCategory,
+        setUserLevel,
+        updateScores,
+      }}
+    >
       {children}
     </UserContext.Provider>
   );

@@ -1,10 +1,11 @@
+// Internal module - use useUser() hook from UserContext instead of importing directly
 export interface UserSettings {
   name?: string;
   lastScore?: number;
   bestScore?: number;
   category?: string;
   level?: string;
-  bgColor: string;
+  bgColor?: string;
 }
 
 const key = "userSettings";
