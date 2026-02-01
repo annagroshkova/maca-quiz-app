@@ -6,7 +6,6 @@
   box-shadow: 3px 8px 8px rgba(75, 30, 7, 0.1);
   border-radius: 12px;
   gap: 40px;
-  padding: 45px 18px;
 }
 @keyframes bounceOnce {
   0% { transform: translateY(-50px); opacity: 0; }
@@ -46,4 +45,10 @@
 
 .gameover__score span {
   font-weight: 600;
+}
+
+@media screen and (width >= 1024px) and (orientation: landscape) {
+  .gameover {
+    min-height: 60vh;
+  }
 }

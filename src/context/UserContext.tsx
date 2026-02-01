@@ -1,17 +1,17 @@
-import { createContext, useContext, useState, useEffect } from "react";
-import { getUserSettings, updateUserSettings } from "../userSettings";
-
-interface User {
-  name?: string;
-  lastScore?: number;
-  bestScore?: number;
-  bgColor?: string;
-}
+import { createContext, useContext, useState } from "react";
+import {
+  getUserSettings,
+  updateUserSettings,
+  type User,
+} from "../userSettings";
 
 interface UserContextType {
   user: User;
   setUserName: (name: string) => void;
   setUserBgColor: (color: string) => void;
+  setUserCategory: (category: string) => void;
+  setUserLevel: (level: string) => void;
+  updateScores: (score: number) => void;
 }
 
 export const avatarColors = [
@@ -25,31 +25,19 @@ export const avatarColors = [
 const UserContext = createContext<UserContextType | null>(null);
 
 export function UserProvider({ children }: { children: React.ReactNode }) {
-  const [user, setUser] = useState<User>(() => {
-    const savedUser = getUserSettings() || {};
-    if (!savedUser.bgColor) {
-      const randomColor =
-        avatarColors[Math.floor(Math.random() * avatarColors.length)];
+  const [user, setUser] = useState<User>(getInitialUser);
 
-      const updatedUser = {
-        ...savedUser,
-        bgColor: randomColor,
-      };
-      return updatedUser;
-    }
-    return savedUser;
-  });
-  useEffect(() => {
-    const handleStorageChange = () => {
-      const freshData = getUserSettings();
-      if (!freshData) {
-        setUser({});
-      }
-    };
+  // useEffect(() => {
+  //   const handleStorageChange = () => {
+  //     const freshData = getUserSettings();
+  //     if (!freshData) {
+  //       setUser({});
+  //     }
+  //   };
 
-    window.addEventListener("storage", handleStorageChange);
-    return () => window.removeEventListener("storage", handleStorageChange);
-  }, []);
+  //   window.addEventListener("storage", handleStorageChange);
+  //   return () => window.removeEventListener("storage", handleStorageChange);
+  // }, []);
 
   const setUserName = (name: string) => {
     const trimmedName = name.trim();
@@ -59,27 +47,59 @@ export function UserProvider({ children }: { children: React.ReactNode }) {
       const updatedUser: User = {
         ...prevUser,
         name: trimmedName,
-        lastScore: prevUser.lastScore ?? 0,
-        bestScore: prevUser.bestScore ?? 0,
+        // lastScore: prevUser.lastScore ?? 0,
+        // bestScore: prevUser.bestScore ?? 0,
       };
       updateUserSettings(updatedUser);
       return updatedUser;
     });
   };
 
-  const setUserBgColor = (color: string) => {
+  const updateScores = (score: number) => {
     setUser((prevUser) => {
-      const updatedUser = { ...prevUser, bgColor: color };
+      const bestScore = Math.max(prevUser.bestScore ?? 0, score);
+      const updatedUser: User = {
+        ...prevUser,
+        lastScore: score,
+        bestScore,
+      };
+      updateUserSettings(updatedUser);
+      return updatedUser;
+    });
+  };
+
+  const patchUser = (prop: keyof User, value: string | number | undefined) => {
+    setUser((prevUser) => {
+      const updatedUser = { ...prevUser, [prop]: value };
       updateUserSettings(updatedUser);
       return updatedUser;
     });
   };
 
   return (
-    <UserContext.Provider value={{ user, setUserName, setUserBgColor }}>
+    <UserContext.Provider
+      value={{
+        user,
+        setUserName,
+        setUserBgColor: (value) => patchUser("bgColor", value),
+        setUserCategory: (value) => patchUser("category", value),
+        setUserLevel: (value) => patchUser("level", value),
+        updateScores,
+      }}
+    >
       {children}
     </UserContext.Provider>
   );
+}
+
+function getInitialUser(): User {
+  const user = getUserSettings();
+  user.bgColor = user.bgColor || getRandomColor();
+  return user;
+}
+
+function getRandomColor(): string {
+  return avatarColors[Math.floor(Math.random() * avatarColors.length)];
 }
 
 export function useUser() {
