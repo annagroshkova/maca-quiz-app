@@ -2,10 +2,7 @@
   background-color: rgba(240, 240, 240, 0.9);
   box-shadow: 3px 8px 8px rgba(75, 30, 7, 0.1);
   border-radius: 12px;
-  width: 100%;
   box-sizing: border-box;
-  max-width: 800px;
-  padding: 30px 18px;
 }
 
 .levels__category-container {

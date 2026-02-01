@@ -1,11 +1,5 @@
 .shared-container {
   background-color: rgba(240, 240, 240, 0.6);
-  /*   background-color: rgba(240, 240, 240, 0.85); 
-  -webkit-backdrop-filter: blur(12px);
-  backdrop-filter: blur(12px); 
-  will-change: backdrop-filter;
-  transform: translateZ(0);*/
-
   box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
   border: 1px solid rgba(255, 255, 255, 0.5);
   border-radius: clamp(2rem, 4vh, 3rem);
@@ -14,6 +8,8 @@
   display: flex;
   flex-direction: column;
   width: 100%;
+  max-width: 800px;
+  padding: clamp(1.875rem, .5547vw + 1.745rem, 2.1rem) clamp(1.125rem, 4vw, 3rem);
 }
 .app-content-wrapper {
   width: 100vw;
