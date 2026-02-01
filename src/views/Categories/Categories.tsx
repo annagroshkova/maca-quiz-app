@@ -1,10 +1,5 @@
 import { useState, useEffect, useRef } from "react";
 import { useNavigate } from "react-router-dom";
-import {
-  type UserSettings,
-  getUserSettings,
-  updateUserSettings,
-} from "../../userSettings";
 import { categories } from "../../data";
 import RadioOption from "../../components/RadioOption/RadioOption";
 import Header from "../../components/Header/Header";
@@ -13,6 +8,7 @@ import MainWrapper from "../MainWrapper";
 import { motion } from "motion/react";
 import useQuizNavigation from "../../hooks/useQuizNavigation";
 import { useQuiz } from "../../context/QuizContext";
+import { useUser } from "../../context/UserContext";
 
 export default function Categories() {
   const { goToStart } = useQuizNavigation();
@@ -57,7 +53,7 @@ export default function Categories() {
   }
 
   const gridRef = useTwoRowHeight([categories.length]);
-  const user: UserSettings = getUserSettings();
+  const { user, setUserCategory } = useUser();
   const greeting: string = `Hello, ${user.name}!`;
   const navigate = useNavigate();
 
@@ -69,7 +65,7 @@ export default function Categories() {
     if (category === null) {
       return;
     }
-    updateUserSettings({ category });
+    setUserCategory(category);
     setCategory(null);
     navigate("/levels");
   };

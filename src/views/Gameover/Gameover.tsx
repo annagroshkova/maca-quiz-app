@@ -1,12 +1,12 @@
-import { getUserSettings } from "../../userSettings";
 import SubmitButton from "../../components/SubmitButton/SubmitButton";
 import useQuizNavigation from "../../hooks/useQuizNavigation";
 import MainWrapper from "../MainWrapper";
 import Header from "../../components/Header/Header";
+import { useUser } from "../../context/UserContext";
 import { motion } from "motion/react";
 
 export default function GameOver() {
-  const user = getUserSettings();
+  const { user } = useUser();
   const { returnToQuiz, goToSettings } = useQuizNavigation();
 
   return (

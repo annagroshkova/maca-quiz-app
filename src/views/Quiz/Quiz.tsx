@@ -3,10 +3,10 @@ import { Flex, Card, Text } from "@radix-ui/themes";
 import { AnswerButton } from "../../components/AnswerButton/AnswerButton";
 import { AnimatePresence, motion } from "motion/react";
 import { useNavigate } from "react-router-dom";
-import { getUserSettings, updateUserSettings } from "../../userSettings";
 import SubmitButton from "../../components/SubmitButton/SubmitButton";
 import Header from "../../components/Header/Header";
 import { useQuiz } from "../../context/QuizContext";
+import { useUser } from "../../context/UserContext";
 import useQuizNavigation from "../../hooks/useQuizNavigation";
 import "./Quiz.css";
 import MainWrapper from "../MainWrapper";
@@ -37,7 +37,7 @@ const prefetchThreshold = 3;
 
 export default function Quiz() {
   const baseUrl = "https://the-trivia-api.com/v2";
-  const user = getUserSettings();
+  const { user, updateScores } = useUser();
   const { usedQuestions, setUsedQuestions } = useQuiz();
   const params = new URLSearchParams({
     categories: user.category ?? "",
@@ -296,13 +296,7 @@ export default function Quiz() {
   };
 
   const finalizeGame = () => {
-    const user = getUserSettings();
-    const lastScore = score;
-    const bestScore = Math.max(user.bestScore ?? 0, score);
-    updateUserSettings({
-      lastScore,
-      bestScore,
-    });
+    updateScores(score);
     setLives(3);
     setScore(0);
     setPowerUpShieldActive(false);

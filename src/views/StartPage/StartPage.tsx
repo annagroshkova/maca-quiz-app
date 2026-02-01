@@ -25,44 +25,41 @@ export default function StartPage() {
   };
 
   return (
-    <section className="startpage">
-      <div className="startpage__heading">
+    <section className='startpage'>
+      <div className='startpage__heading'>
         <img
-          className="startpage__gamelogo"
-          alt="MindPop logo"
-          src="/mindpoplogo.png"
+          className='startpage__gamelogo'
+          alt='MindPop logo'
+          src='/mindpop_logo_text_only.png'
         />
       </div>
-      <div className="startpage__form-container">
+      <div className='startpage__form-container'>
         <motion.form
-          className="startpage__form shared-container"
+          className='startpage__form shared-container'
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
           exit={{ opacity: 0 }}
           transition={{ duration: 0.3 }}
           onSubmit={handleNameSubmit}
         >
-          <label htmlFor="name">Enter your name to start</label>
+          <label htmlFor='name'>Enter your name to start</label>
           <input
-            id="name"
-            type="text"
+            id='name'
+            type='text'
             value={name}
             onChange={(e) => setName(e.target.value)}
-            placeholder="Write your name..."
+            placeholder='Write your name...'
           ></input>
           {/* knapp disabled om det inte finns ett namn */}
-          <SubmitButton type="button" onClick={goToRules}>
-            Rules
-          </SubmitButton>
           <SubmitButton
             onClick={() => handleNameSubmit}
             disabled={!name.trim()}
           >
             <span>Let's begin!</span>
           </SubmitButton>
-          {/* <button type='submit' disabled={!name.trim()}>
-            <span>Let's begin!</span>
-          </button> */}
+          <SubmitButton type='button' onClick={goToRules}>
+            Rules
+          </SubmitButton>
         </motion.form>
       </div>
     </section>

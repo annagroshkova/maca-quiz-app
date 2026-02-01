@@ -108,6 +108,11 @@
   color: white;
   width: 150px;
 }
+.profile-avatar-size {
+  --avatar-size: clamp(4.5rem, 8vw, 6.5rem);
+  width: var(--avatar-size);
+  height: var(--avatar-size);
+}
 
 @media screen and (min-width: 768px) {
   .userName {

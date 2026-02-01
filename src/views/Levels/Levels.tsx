@@ -1,21 +1,17 @@
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import useQuizNavigation from "../../hooks/useQuizNavigation";
-import {
-  type UserSettings,
-  getUserSettings,
-  updateUserSettings,
-} from "../../userSettings";
 import { type Category, categories, levels } from "../../data";
 import RadioOption from "../../components/RadioOption/RadioOption";
 import Header from "../../components/Header/Header";
 import SubmitButton from "../../components/SubmitButton/SubmitButton";
 import MainWrapper from "../MainWrapper";
 import { useQuiz } from "../../context/QuizContext";
+import { useUser } from "../../context/UserContext";
 import { motion } from "motion/react";
 
 export default function Levels() {
-  const user: UserSettings = getUserSettings();
+  const { user, setUserLevel } = useUser();
   const navigate = useNavigate();
   const { goToSettings } = useQuizNavigation();
   const { modifierHotStreak, setModifierHotStreak } = useQuiz();
@@ -35,10 +31,10 @@ export default function Levels() {
   const handleLevelsSubmit = (e: React.FormEvent) => {
     e.preventDefault();
 
-    if (level === null) {
+    if (level === null || level === undefined) {
       return;
     }
-    updateUserSettings({ level });
+    setUserLevel(level);
     setLevel(null);
     navigate("/quiz");
   };
@@ -61,12 +57,6 @@ export default function Levels() {
           transition={{ duration: 0.3 }}
         >
           <div className="levels__category-container">
-            <img
-              src={`${categoryObj.apiQuery}.png`}
-              alt={categoryObj.quizSubject}
-              className="levels__category-image"
-            />
-
             <p className="levels__category-name">{categoryObj.quizSubject}</p>
           </div>
 

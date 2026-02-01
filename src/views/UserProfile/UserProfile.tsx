@@ -12,19 +12,19 @@ export default function UserProfile() {
   const { goBack } = useQuizNavigation();
 
   const [displayName, setDisplayName] = useState(user.name ?? "");
-  const [avatarSize, setAvatarSize] = useState(window.innerWidth < 768 ? 80 : 120);
+  /* const [avatarSize, setAvatarSize] = useState(window.innerWidth < 768 ? 80 : 120); */
 
   useEffect(() => {
     setDisplayName(user.name ?? "");
   }, [user.name]);
 
-  useEffect(() => {
+  /*useEffect(() => {
     const handleResize = () => {
       setAvatarSize(window.innerWidth >= 768 ? 120 : 80);
     };
     window.addEventListener("resize", handleResize);
     return () => window.removeEventListener("resize", handleResize);
-  }, []);
+  }, []); */
 
   const handleNameSubmit = (e: React.FormEvent) => {
     e.preventDefault();
@@ -54,9 +54,9 @@ export default function UserProfile() {
         }}
       />
       <MainWrapper>
-        <div className='userInner'>
+        <div className="userInner">
           {user.name ? (
-            <Avatar name={user.name} size={avatarSize} bgColor={user.bgColor} />
+            <Avatar name={user.name} /* size={avatarSize} */ bgColor={user.bgColor} className="profile-avatar-size"/>
           ) : null}
           <h1 className='userName'>{user.name}</h1>
           <div className='userColors'>
