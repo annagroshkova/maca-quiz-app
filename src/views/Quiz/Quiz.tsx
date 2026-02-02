@@ -340,17 +340,24 @@ export default function Quiz() {
           transition={{ duration: 0.3 }}
         >
           <Flex justify='between' align='center' className='quiz__header'>
-            <Flex direction='column'>
+            <Flex direction='column' className="quiz__header-cell">
               <h3 className='scoreText'>SCORE</h3>
               <Flex justify='center' align='center'>
-                <img className='scoreIcon' alt='Star Icon' src={asset("star.png")} />
+                <img
+                  className='scoreIcon'
+                  alt='Star Icon'
+                  src={asset("star.png")}
+                />
                 <div className='quiz__score-number'>{score}</div>
               </Flex>
             </Flex>
             {modifierTimeLimit && (
-              <Text size='5' weight='bold'>
-                <span className='quiz__score-number'>{timeLeft}</span>
-              </Text>
+              <Flex className="self-center" direction='column'>
+                <h3 className='timerText'>TIMER</h3>
+                <Text align='center' size='5' weight='bold'>
+                  <span className='quiz__timer-number'>{timeLeft}</span>
+                </Text>
+              </Flex>
             )}
             <Flex direction='column'>
               <h3 className='lifeText'>LIFE</h3>
@@ -360,7 +367,9 @@ export default function Quiz() {
                   return (
                     <img
                       key={heartIndex}
-                      src={isLost ? asset("greyheart.png") : asset("redheart.png")}
+                      src={
+                        isLost ? asset("greyheart.png") : asset("redheart.png")
+                      }
                       alt={isLost ? "Lost Life" : "Life"}
                       className='lifeIcon'
                     />
