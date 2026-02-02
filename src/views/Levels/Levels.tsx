@@ -9,6 +9,7 @@ import MainWrapper from "../MainWrapper";
 import { useQuiz } from "../../context/QuizContext";
 import { useUser } from "../../context/UserContext";
 import { motion } from "motion/react";
+import { asset } from "../../utils/asset";
 
 export default function Levels() {
   const { user, setUserLevel } = useUser();
@@ -67,7 +68,7 @@ export default function Levels() {
               onClick={() => setModifierHotStreak(!modifierHotStreak)}
             >
               <div className="buttonContent">
-                <img src="/fire.png" alt="Fire Icon" className="modifierIcon" />
+                <img src={asset("fire.png")} alt="Fire Icon" className="modifierIcon" />
                 <p> Hot Streak</p>
               </div>
             </button>
@@ -78,7 +79,7 @@ export default function Levels() {
             >
               <div className="buttonContent">
                 <img
-                  src="/skull.png"
+                  src={asset("skull.png")}
                   alt="Skull Icon"
                   className="modifierIcon"
                 />
@@ -92,7 +93,7 @@ export default function Levels() {
             >
               <div className="buttonContent">
                 <img
-                  src="/hourglass.png"
+                  src={asset("hourglass.png")}
                   alt="Hourglass Icon"
                   className="modifierIcon"
                 />

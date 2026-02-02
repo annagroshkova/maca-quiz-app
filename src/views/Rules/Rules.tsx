@@ -1,7 +1,7 @@
 import Header from "../../components/Header/Header";
 import { motion } from "motion/react";
-
 import useQuizNavigation from "../../hooks/useQuizNavigation";
+import { asset } from "../../utils/asset";
 
 export default function Rules() {
   const { goBack } = useQuizNavigation();
@@ -50,7 +50,7 @@ export default function Rules() {
                     <img
                       className='rulesIcon'
                       alt='Fire Icon'
-                      src='/fire.png'
+                      src={asset("fire.png")}
                     ></img>
                     <h3>Hot Streak</h3>
                   </div>
@@ -64,7 +64,7 @@ export default function Rules() {
                     <img
                       className='rulesIcon'
                       alt='Skull Icon'
-                      src='/skull.png'
+                      src={asset("skull.png")}
                     ></img>
 
                     <h3>Survivor</h3>
@@ -79,7 +79,7 @@ export default function Rules() {
                     <img
                       className='rulesIcon'
                       alt='Hourglass Icon'
-                      src='/hourglass.png'
+                      src={asset("hourglass.png")}
                     ></img>
                     <h3>Time Limit</h3>
                   </div>
@@ -99,7 +99,7 @@ export default function Rules() {
                     <img
                       alt='Shield Icon'
                       className='rulesIcon'
-                      src='/shield.png'
+                      src={asset("shield.png")}
                     />
                     <h3>Shield</h3>
                   </div>
@@ -110,7 +110,7 @@ export default function Rules() {
                     <img
                       alt='Skip Icon'
                       className='rulesIcon'
-                      src='/next.png'
+                      src={asset("next.png")}
                     />
                     <h3>Skip</h3>
                   </div>
@@ -121,7 +121,7 @@ export default function Rules() {
                     <img
                       alt='Hint Icon'
                       className='rulesIcon'
-                      src='/hint.png'
+                      src={asset("hint.png")}
                     />
                     <h3>Hint</h3>
                   </div>

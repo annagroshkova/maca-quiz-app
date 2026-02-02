@@ -4,6 +4,7 @@ import { Link } from "react-router-dom";
 import { useUser } from "../../context/UserContext";
 import "./Header.css";
 import { useState, useEffect, type ReactNode } from "react";
+import { asset } from "../../utils/asset";
 
 interface Props {
   backButton: boolean;
@@ -51,7 +52,7 @@ export default function Header({ backButton, backButtonProps = {} }: Props) {
         <img
           className="header__gamelogo"
           alt="MindPop Logo"
-          src="/mindpop_logo_text_only.png"
+          src={asset("mindpop_logo_text_only.png")}
         />
         <Link to="/userProfile" style={{ textDecoration: "none" }}>
           {user.name && (

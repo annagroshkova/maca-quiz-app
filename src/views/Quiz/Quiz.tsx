@@ -10,6 +10,7 @@ import { useUser } from "../../context/UserContext";
 import useQuizNavigation from "../../hooks/useQuizNavigation";
 import "./Quiz.css";
 import MainWrapper from "../MainWrapper";
+import { asset } from "../../utils/asset";
 
 type ApiResponse = ApiQuestion[];
 
@@ -342,7 +343,7 @@ export default function Quiz() {
             <Flex direction='column'>
               <h3 className='scoreText'>SCORE</h3>
               <Flex justify='center' align='center'>
-                <img className='scoreIcon' alt='Star Icon' src='/star.png' />
+                <img className='scoreIcon' alt='Star Icon' src={asset("star.png")} />
                 <div className='quiz__score-number'>{score}</div>
               </Flex>
             </Flex>
@@ -359,7 +360,7 @@ export default function Quiz() {
                   return (
                     <img
                       key={heartIndex}
-                      src={isLost ? "/greyheart.png" : "/redheart.png"}
+                      src={isLost ? asset("greyheart.png") : asset("redheart.png")}
                       alt={isLost ? "Lost Life" : "Life"}
                       className='lifeIcon'
                     />
@@ -453,7 +454,7 @@ export default function Quiz() {
                           <img
                             className='powerUpIcon'
                             alt='Shield Icon'
-                            src='/shield.png'
+                            src={asset("shield.png")}
                           />
                         </button>
                         <button
@@ -464,7 +465,7 @@ export default function Quiz() {
                           <img
                             className='powerUpIcon'
                             alt='Skip Icon'
-                            src='/next.png'
+                            src={asset("next.png")}
                           />
                         </button>
                         <button
@@ -475,7 +476,7 @@ export default function Quiz() {
                           <img
                             className='powerUpIcon'
                             alt='Hint Icon'
-                            src='/hint.png'
+                            src={asset("hint.png")}
                           />
                         </button>
                       </Flex>
@@ -493,7 +494,7 @@ export default function Quiz() {
                       className='shield-feedback'
                     >
                       <img
-                        src='/shield.png'
+                        src={asset("shield.png")}
                         alt='Shield Icon'
                         className='shieldFeedbackIcon'
                       />{" "}

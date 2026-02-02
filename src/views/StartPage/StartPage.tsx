@@ -4,6 +4,7 @@ import { useUser } from "../../context/UserContext";
 import SubmitButton from "../../components/SubmitButton/SubmitButton";
 import { motion } from "motion/react";
 import useQuizNavigation from "../../hooks/useQuizNavigation";
+import { asset } from "../../utils/asset";
 
 export default function StartPage() {
   const navigate = useNavigate();
@@ -30,7 +31,7 @@ export default function StartPage() {
         <img
           className='startpage__gamelogo'
           alt='MindPop logo'
-          src='/mindpop_logo_text_only.png'
+          src={asset("mindpop_logo_text_only.png")}
         />
       </div>
       <div className='startpage__form-container'>
