@@ -48,7 +48,7 @@ const AnimatedRoutes = () => {
 
 export default function App(): ReactNode {
   return (
-    <BrowserRouter>
+    <BrowserRouter basename={import.meta.env.BASE_URL}>
       <BackgroundAnimated />
       <div className='app-content-wrapper'>
         <AnimatedRoutes />
