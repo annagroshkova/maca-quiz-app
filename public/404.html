@@ -1,0 +1,18 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title>MindPop</title>
+    <script>
+      // Single Page App redirect for GitHub Pages
+      // Stores the path and redirects to index.html
+      const path = window.location.pathname;
+      const search = window.location.search;
+      const hash = window.location.hash;
+      sessionStorage.setItem('redirectPath', path + search + hash);
+      window.location.replace('/maca-quiz-app/');
+    </script>
+  </head>
+  <body>
+  </body>
+</html>
