@@ -43,6 +43,7 @@ category:hover {
   display: grid;
   grid-template-rows: auto;
   justify-items: center;
+  align-content: center;
   width: 100%;
   aspect-ratio: 1 / 1;
   gap: 10px;
