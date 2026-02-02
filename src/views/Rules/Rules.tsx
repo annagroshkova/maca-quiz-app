@@ -55,7 +55,7 @@ export default function Rules() {
                     <h3>Hot Streak</h3>
                   </div>
                   <p>
-                    Stay sharp! Every 5 correct answers boosts your score
+                    Stay sharp! 5 correct answers in a row boosts your score
                     multiplier (x2, x4, x8…)
                   </p>
                 </div>
@@ -71,7 +71,7 @@ export default function Rules() {
                   </div>
                   <p>
                     One life. That’s it. Earn an extra life every 5 correct
-                    answers —up to the usual 3.
+                    answers — up to the usual 3.
                   </p>
                 </div>
                 <div className='powerUpBox'>
@@ -127,7 +127,7 @@ export default function Rules() {
                   </div>
                   <p>
                     Narrow it down! Two wrong answers disappear, leaving just
-                    two choices.
+                    two options.
                   </p>
                 </div>
               </div>
